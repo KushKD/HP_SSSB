@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">HPSSSB</string>
+
+    <!-- Menu names -->
+    <string name="business_card">Ration Card</string>
+    <string name="calendar">Info</string>
+    <string name="cloud">About ePDS</string>
+    <string name="facebook">Facebook</string>
+    <string name="key">Inspectors Data</string>
+    <string name="mail">Mail</string>
+    <string name="profile">DFSC</string>
+    <string name="tag">Call Us</string>
+    <string name="voice_search">Voice Search</string>
+
+    <!-- Toasts -->
+    <string name="start_app">Starting application:</string>
+    <string name="center_click">Center has been clicked</string>
+    <string name="title_activity_dfsc">DFSC</string>
+    <string name="title_activity_details__dfsc">Details_DFSC</string>
+    <string name="title_activity_inspectors">Inspectors</string>
+    <string name="title_activity_dfsc__data__detals">DFSC_Data_Detals</string>
+    <string name="title_activity_inspectors__data_details">Inspectors_Data_details</string>
+</resources>
