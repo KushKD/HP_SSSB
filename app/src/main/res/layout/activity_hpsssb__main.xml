@@ -26,6 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F2F2F2"
+        android:orientation="vertical"
         android:layout_weight="3.5">
 
         <FrameLayout
@@ -71,6 +72,13 @@
                 android:layout_centerHorizontal="true"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </FrameLayout>
+
+     <Button
+         android:layout_width="match_parent"
+         android:background="#345355"
+         android:layout_height="wrap_content"
+         android:text="Selection"/>
+
     </LinearLayout>
 
     <LinearLayout
