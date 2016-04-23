@@ -45,26 +45,26 @@ public class HPSSSB_MAIN extends TestRun implements CircleLayout.OnItemSelectedL
         selectedTextView.setText(name);
 
         switch (view.getId()) {
-            case R.id.main_info:
+            case R.id.main_interviews:
                 // Handle calendar selection
                 break;
-            case R.id.main_cloud_image:
+            case R.id.main_dashboard:
                 // Handle cloud selection
                 break;
-            case R.id.main_facebook_image:
+            case R.id.main_information:
                 // Handle facebook selection
                 break;
-            case R.id.main_key_image:
+           /* case R.id.main_notification:
                 // Handle key selection
-                break;
-            case R.id.main_profile_image:
+                break;*/
+            case R.id.main_notifications:
                 // Handle profile selection
                 break;
-            case R.id.main_tap_phone:
+            case R.id.main_admitcard:
                 // Handle tap selection
                 break;
 
-            case R.id.main_ration_card_image:
+            case R.id.main_vacancies:
                 //Handle Tab Selection
                 break;
         }
@@ -75,30 +75,30 @@ public class HPSSSB_MAIN extends TestRun implements CircleLayout.OnItemSelectedL
         // Toast.makeText(getApplicationContext(), getResources().getString(R.string.start_app) + " " + name, Toast.LENGTH_SHORT).show();
 
         switch (view.getId()) {
-            case R.id.main_info:
+            case R.id.main_interviews:
                 /*Intent i = new Intent(HPSSSB_MAIN.this, Info.class);
                 startActivity(i);*/
                 break;
-            case R.id.main_cloud_image:
+            case R.id.main_dashboard:
                /* Intent i2 = new Intent(HPSSSB_MAIN.this, Cloud.class);
                 startActivity(i2);*/
                 break;
-            case R.id.main_facebook_image:
+            case R.id.main_information:
                 /*Intent i1 = new Intent(HPSSSB_MAIN.this, FaceBook_WebView.class);
                 startActivity(i1);*/
                 break;
-            case R.id.main_key_image:
+          /*  case R.id.m:
                 // Handle key click
-               /* Intent i4 = new Intent(HPSSSB_MAIN.this , Inspectors.class);
-                startActivity(i4);*/
-                break;
-            case R.id.main_profile_image:
+               *//* Intent i4 = new Intent(HPSSSB_MAIN.this , Inspectors.class);
+                startActivity(i4);*//*
+                break;*/
+            case R.id.main_notifications:
                 // Handle profile click DFSC Data
                 /*Intent i3 = new Intent(HPSSSB_MAIN.this , DFSC.class);
                 startActivity(i3);*/
 
                 break;
-            case R.id.main_tap_phone:
+            case R.id.main_admitcard:
                 // Handle tap click  //call epds Toll Free
                 // Intent i = new Intent(CircularMenu.this , Phone_Call_Activity.class);
                 // startActivity(i);
@@ -139,7 +139,7 @@ public class HPSSSB_MAIN extends TestRun implements CircleLayout.OnItemSelectedL
 
                 break;
 
-            case R.id.main_ration_card_image:
+            case R.id.main_vacancies:
                 //Handle Tab Selection //Find Your Ration Card
                 break;
         }

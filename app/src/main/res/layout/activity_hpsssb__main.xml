@@ -2,32 +2,31 @@
     xmlns:circle="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#867454"
     android:orientation="vertical"
     android:weightSum="5">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="1">
+        android:layout_height="80dp"
+        android:layout_weight="0.5">
 
         <TextView
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_height="match_parent"
-            android:text="ePDS HIMACHAL PRADESH"
+            android:text="Subordinate Services Selection Board"
             android:textStyle="bold"
-            android:textSize="22dp"
+            android:textSize="20dp"
             android:textColor="#ffffff"
-            android:background="#867454"/>
+            android:background="#366988"/>
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        android:layout_weight="3">
+        android:background="#F2F2F2"
+        android:layout_weight="3.5">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -35,7 +34,8 @@
             <RelativeLayout
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:background="#f2f2f2">
 
 
 
@@ -66,23 +66,27 @@
                 android:layout_gravity="center|center_horizontal|center_vertical"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textColor="#2dc3e8"
+                android:textColor="#366988"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
         </FrameLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="1">
+        android:layout_height="70dp"
+        android:gravity="center|center_vertical|center_horizontal"
+        android:background="#366988"
+        android:layout_weight="0.5">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
+            android:text="Copyright © 2016 Department Of Ingomation Technology HP"
             android:textStyle="bold"
-            android:background="#2dc3e8"/>
+            android:gravity="center|center_horizontal|center_vertical"
+            android:textColor="#FFFFFF"/>
     </LinearLayout>
 
 </LinearLayout>

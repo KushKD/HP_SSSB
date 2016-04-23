@@ -5,53 +5,53 @@
     android:layout_height="match_parent" >
 
     <hp.dit.hpsssb.aadhaar.com.presentation.CircleImageView
-        android:id="@+id/main_info"
-        circle:name="@string/calendar"
+        android:id="@+id/main_interviews"
+        circle:name="@string/interview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/icon_info" />
+        android:src="@mipmap/interviewsch" />
 
     <hp.dit.hpsssb.aadhaar.com.presentation.CircleImageView
-        android:id="@+id/main_cloud_image"
-        circle:name="@string/cloud"
+        android:id="@+id/main_dashboard"
+        circle:name="@string/dashboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/icon_cloud" />
+        android:src="@mipmap/dashboard" />
 
     <hp.dit.hpsssb.aadhaar.com.presentation.CircleImageView
-        android:id="@+id/main_ration_card_image"
-        circle:name="@string/business_card"
+        android:id="@+id/main_vacancies"
+        circle:name="@string/vacancies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/icon_ration_card" />
+        android:src="@mipmap/vacancy" />
 
     <hp.dit.hpsssb.aadhaar.com.presentation.CircleImageView
-        android:id="@+id/main_facebook_image"
-        circle:name="@string/facebook"
+        android:id="@+id/main_information"
+        circle:name="@string/information"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/icon_facebook" />
+        android:src="@mipmap/information" />
 
     <hp.dit.hpsssb.aadhaar.com.presentation.CircleImageView
-        android:id="@+id/main_key_image"
-        circle:name="@string/key"
+        android:id="@+id/main_notifications"
+        circle:name="@string/notifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/icon_key" />
+        android:src="@mipmap/notifications" />
 
     <hp.dit.hpsssb.aadhaar.com.presentation.CircleImageView
-        android:id="@+id/main_profile_image"
-        circle:name="@string/profile"
+        android:id="@+id/main_results"
+        circle:name="@string/results"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/icon_profile" />
+        android:src="@mipmap/results" />
 
     <hp.dit.hpsssb.aadhaar.com.presentation.CircleImageView
-        android:id="@+id/main_tap_phone"
-        circle:name="@string/tag"
+        android:id="@+id/main_admitcard"
+        circle:name="@string/rollnoadmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/icon_phone" />
+        android:src="@mipmap/rollnoadmitcard" />
 
 
 
