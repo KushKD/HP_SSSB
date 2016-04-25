@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.widget.Button;
 import android.widget.TextView;
 
 import hp.dit.hpsssb.aadhaar.com.presentation.CircleImageView;
@@ -21,6 +22,7 @@ import hp.dit.hpsssb.aadhaar.com.presentation.TestRun;
 public class HPSSSB_MAIN extends TestRun implements CircleLayout.OnItemSelectedListener, CircleLayout.OnItemClickListener, CircleLayout.OnRotationFinishedListener, CircleLayout.OnCenterClickListener {
 
     private TextView selectedTextView;
+    private TextView ClickOption;
     final Context context = this;
 
     @Override
@@ -37,6 +39,11 @@ public class HPSSSB_MAIN extends TestRun implements CircleLayout.OnItemSelectedL
 
         selectedTextView = (TextView) findViewById(R.id.main_selected_textView);
         selectedTextView.setText(((CircleImageView) circleMenu.getSelectedItem()).getName());
+
+        ClickOption = (TextView)findViewById(R.id.proceed);
+        ClickOption.setText(((CircleImageView) circleMenu.getSelectedItem()).getName());
+
+
     }
 
 
