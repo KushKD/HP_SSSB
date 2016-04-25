@@ -7,6 +7,7 @@
     <hp.dit.hpsssb.aadhaar.com.presentation.CircleImageView
         android:id="@+id/main_interviews"
         circle:name="@string/interview"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/interviewsch" />
@@ -42,6 +43,7 @@
     <hp.dit.hpsssb.aadhaar.com.presentation.CircleImageView
         android:id="@+id/main_results"
         circle:name="@string/results"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/results" />

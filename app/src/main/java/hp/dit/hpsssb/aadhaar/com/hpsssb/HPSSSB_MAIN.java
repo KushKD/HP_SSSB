@@ -3,11 +3,14 @@ package hp.dit.hpsssb.aadhaar.com.hpsssb;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
@@ -68,7 +71,8 @@ public class HPSSSB_MAIN extends TestRun implements CircleLayout.OnItemSelectedL
                         Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
                         break;
                     case "Interview Schedule":
-                        Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
+                        ShowAlert("Currently there is no Interview Scheduled.");
+
                         break;
                     case "Admit Card":
                         Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
@@ -121,8 +125,8 @@ public class HPSSSB_MAIN extends TestRun implements CircleLayout.OnItemSelectedL
 
         switch (view.getId()) {
             case R.id.main_interviews:
-                /*Intent i = new Intent(HPSSSB_MAIN.this, Info.class);
-                startActivity(i);*/
+               // Toast.makeText(getApplicationContext(),"Currently there is no Interview Scheduled.",Toast.LENGTH_LONG).show();
+                ShowAlert("Currently there is no Interview Scheduled.");
                 break;
             case R.id.main_dashboard:
                /* Intent i2 = new Intent(HPSSSB_MAIN.this, Cloud.class);
@@ -190,10 +194,45 @@ public class HPSSSB_MAIN extends TestRun implements CircleLayout.OnItemSelectedL
         }
     }
 
+    private void ShowAlert(String s) {
+        Log.d("SMS is ==========",s);
+        final Dialog dialog = new Dialog(HPSSSB_MAIN.this); // Context, this, etc.
+        dialog.setContentView(R.layout.dialog_demo);
+        dialog.setTitle("Notification");
+        dialog.setCancelable(false);
+        dialog.show();
+
+        TextView DialogInfo = (TextView)dialog.findViewById(R.id.dialog_info);
+        DialogInfo.setText(s);
+
+        Button agree = (Button)dialog.findViewById(R.id.dialog_ok);
+       // Button disagree = (Button)dialog.findViewById(R.id.dialog_cancel);
+
+        agree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /**
+                 * Phone Number
+                 * Message
+                 */
+                //sendSMS("51969",DataSend);
+
+                dialog.dismiss();
+            }
+        });
+
+       /* disagree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });*/
+    }
+
     @Override
     public void onRotationFinished(View view, String name) {
         Animation animation = new RotateAnimation(0, 360, view.getWidth() / 2,view.getHeight() / 2);
-        animation.setDuration(500);  //default is 250
+        animation.setDuration(1000);  //default is 250
         view.startAnimation(animation);
 
     }
