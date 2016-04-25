@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import hp.dit.hpsssb.aadhaar.com.presentation.CircleImageView;
 import hp.dit.hpsssb.aadhaar.com.presentation.CircleLayout;
@@ -22,7 +23,7 @@ import hp.dit.hpsssb.aadhaar.com.presentation.TestRun;
 public class HPSSSB_MAIN extends TestRun implements CircleLayout.OnItemSelectedListener, CircleLayout.OnItemClickListener, CircleLayout.OnRotationFinishedListener, CircleLayout.OnCenterClickListener {
 
     private TextView selectedTextView;
-    private TextView ClickOption;
+    private  Button Proceed;
     final Context context = this;
 
     @Override
@@ -40,8 +41,44 @@ public class HPSSSB_MAIN extends TestRun implements CircleLayout.OnItemSelectedL
         selectedTextView = (TextView) findViewById(R.id.main_selected_textView);
         selectedTextView.setText(((CircleImageView) circleMenu.getSelectedItem()).getName());
 
-        ClickOption = (TextView)findViewById(R.id.proceed);
-        ClickOption.setText(((CircleImageView) circleMenu.getSelectedItem()).getName());
+        Proceed = (Button) findViewById(R.id.proceed);
+        Proceed.setText(((CircleImageView) circleMenu.getSelectedItem()).getName());
+
+
+        Proceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String ButtonText = (String) ((Button)v).getText();
+              //  Toast.makeText(getApplicationContext(),ButtonText,Toast.LENGTH_LONG).show();
+
+                switch (ButtonText){
+                    case "Results":
+                        Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
+                        break;
+                    case "Notifications":
+                        Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
+                        break;
+                    case "Instructions":
+                        Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
+                        break;
+                    case "Vacancies":
+                        Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
+                        break;
+                    case "Dashboard":
+                        Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
+                        break;
+                    case "Interview Schedule":
+                        Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
+                        break;
+                    case "Admit Card":
+                        Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
+                        break;
+                    default:
+                        Toast.makeText(getApplicationContext(),"Somethings Not Good",Toast.LENGTH_LONG).show();
+                        break;
+                }
+            }
+        });
 
 
     }
@@ -50,6 +87,7 @@ public class HPSSSB_MAIN extends TestRun implements CircleLayout.OnItemSelectedL
     @Override
     public void onItemSelected(View view, String name) {
         selectedTextView.setText(name);
+        Proceed.setText(name);
 
         switch (view.getId()) {
             case R.id.main_interviews:

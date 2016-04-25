@@ -62,21 +62,20 @@
 
             </RelativeLayout>
             <TextView
-                android:id="@+id/proceed"
+                android:id="@+id/main_selected_textView"
                 android:layout_width="wrap_content"
                 android:layout_gravity="center|center_horizontal|center_vertical"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textColor="#366988"
-                android:visibility="gone"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/main_selected_textView"
+            <Button
+                android:id="@+id/proceed"
                 android:layout_width="match_parent"
-                android:background="#564"
+                android:background="#5EB888"
                 android:textColor="#FFFFFF"
                 android:gravity="center|center_horizontal|center_vertical"
                 android:layout_margin="10dp"
