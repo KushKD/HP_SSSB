@@ -91,7 +91,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:text="Copyright © 2016 Department Of Ingomation Technology HP"
+            android:text="Copyright © 2016 Department Of Information Technology H.P."
             android:textStyle="bold"
             android:gravity="center|center_horizontal|center_vertical"
             android:textColor="#FFFFFF"/>
