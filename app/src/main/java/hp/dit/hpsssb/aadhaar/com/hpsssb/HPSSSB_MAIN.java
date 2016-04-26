@@ -1,14 +1,9 @@
 package hp.dit.hpsssb.aadhaar.com.hpsssb;
 
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,10 +15,10 @@ import android.widget.Toast;
 
 import hp.dit.hpsssb.aadhaar.com.presentation.CircleImageView;
 import hp.dit.hpsssb.aadhaar.com.presentation.CircleLayout;
-import hp.dit.hpsssb.aadhaar.com.presentation.TestRun;
+import hp.dit.hpsssb.aadhaar.com.presentation.BaseActivity;
 
 
-public class HPSSSB_MAIN extends TestRun implements CircleLayout.OnItemSelectedListener, CircleLayout.OnItemClickListener, CircleLayout.OnRotationFinishedListener, CircleLayout.OnCenterClickListener {
+public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSelectedListener, CircleLayout.OnItemClickListener, CircleLayout.OnRotationFinishedListener, CircleLayout.OnCenterClickListener {
 
     private TextView selectedTextView;
     private  Button Proceed;
@@ -56,7 +51,7 @@ public class HPSSSB_MAIN extends TestRun implements CircleLayout.OnItemSelectedL
 
                 switch (ButtonText){
                     case "Results":
-                        Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
+                        ShowAlert("No pending results in pipeline.");
                         break;
                     case "Notifications":
                         Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
@@ -75,7 +70,8 @@ public class HPSSSB_MAIN extends TestRun implements CircleLayout.OnItemSelectedL
 
                         break;
                     case "Admit Card":
-                        Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
+                        Intent i_AdmitCard = new Intent(HPSSSB_MAIN.this,AdmitCard.class);
+                        startActivity(i_AdmitCard);
                         break;
                     default:
                         Toast.makeText(getApplicationContext(),"Somethings Not Good",Toast.LENGTH_LONG).show();
@@ -148,48 +144,16 @@ public class HPSSSB_MAIN extends TestRun implements CircleLayout.OnItemSelectedL
 
                 break;
             case R.id.main_admitcard:
-                // Handle tap click  //call epds Toll Free
-                // Intent i = new Intent(CircularMenu.this , Phone_Call_Activity.class);
-                // startActivity(i);
-                /*AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-
-                // set title
-                alertDialogBuilder.setTitle("Give a Call");
-
-                // set dialog message
-                alertDialogBuilder
-                        .setMessage("You are about to call ePDS Department Himachal Pradesh")
-                        .setCancelable(false)
-                        .setPositiveButton("Call",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                // if this button is clicked, close
-                                // current activity
-                                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                                callIntent.setData(Uri.parse("tel:1967"));
-                                startActivity(callIntent);
-
-                            }
-                        })
-                        .setNegativeButton("Don't Call", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // if this button is clicked, just close
-                                // the dialog box and do nothing
-                                dialog.cancel();
-                            }
-                        });
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
-                alertDialog.show();*/
-
-
-
+                Intent i_AdmitCard = new Intent(HPSSSB_MAIN.this,AdmitCard.class);
+                startActivity(i_AdmitCard);
                 break;
 
             case R.id.main_vacancies:
                 //Handle Tab Selection //Find Your Ration Card
+                break;
+
+            case R.id.main_results:
+                ShowAlert("No pending results in pipeline.");
                 break;
         }
     }
@@ -211,12 +175,6 @@ public class HPSSSB_MAIN extends TestRun implements CircleLayout.OnItemSelectedL
         agree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /**
-                 * Phone Number
-                 * Message
-                 */
-                //sendSMS("51969",DataSend);
-
                 dialog.dismiss();
             }
         });

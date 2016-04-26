@@ -10,6 +10,8 @@
         android:id="@+id/dialog_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:padding="10dp"
        />
 
@@ -21,7 +23,7 @@
             android:id="@+id/dialog_ok"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#366988"
             android:textColor="#FFFFFF"
             android:layout_weight="1"

@@ -5,5 +5,5 @@ import android.app.Activity;
 /**
  * Created by kuush on 4/22/2016.
  */
-public class TestRun extends Activity {
+public class BaseActivity extends Activity {
 }
