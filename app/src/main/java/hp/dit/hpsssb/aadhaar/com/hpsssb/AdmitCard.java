@@ -12,13 +12,12 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
 import hp.dit.hpsssb.aadhaar.com.presentation.BaseActivity;
 
 public class AdmitCard extends BaseActivity implements View.OnClickListener {
 
     private Button back;
-    private TextView et_Aadhaar, et_ApplicationID , et_Name , et_DOB;
+    private TextView et_Aadhaar, et_ApplicationID , et_Name , et_DOB,x;
     private DatePickerDialog dateofBirth_Dialog;
     private SimpleDateFormat dateFormatter;
     private Button bt_GetAdmitCard;
