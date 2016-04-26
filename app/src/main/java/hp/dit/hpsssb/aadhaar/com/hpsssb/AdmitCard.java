@@ -49,19 +49,21 @@ public class AdmitCard extends BaseActivity implements View.OnClickListener {
         bt_GetAdmitCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String AadhaarNo = null;
-                String ApplicationId = null;
-                String Name = null;
-                String DOB = null;
 
-                AadhaarNo = et_Aadhaar.toString().trim();
-                ApplicationId = et_ApplicationID.toString().trim();
-                Name = et_Name.toString().trim();
-                DOB = et_DOB.toString().trim();
+                String AadhaarNo = et_Aadhaar.getText().toString().trim();
+                String ApplicationId = et_ApplicationID.getText().toString().trim();
+                String Name = et_Name.getText().toString().trim();
+                String DOB = et_DOB.getText().toString().trim();
 
-                boolean check = Velidate_Date(AadhaarNo,ApplicationId,Name,DOB);
+
+                Validate = Velidate_Date(AadhaarNo,ApplicationId,Name,DOB);
 
                 //if check is true then go for Uploading and Retrieving data from Server
+                if(Validate){
+
+                }else{
+                    Toast.makeText(getApplicationContext(),"You need to fill in some details to get your Admit Card.",Toast.LENGTH_LONG).show();
+                }
 
             }
         });
@@ -71,10 +73,16 @@ public class AdmitCard extends BaseActivity implements View.OnClickListener {
 
     private boolean Velidate_Date(String aadhaarNo, String applicationId, String name, String dob) {
 
-        if(aadhaarNo!=null || applicationId !=null && name!=null && dob!=null){
+        if(aadhaarNo.length()==12 && aadhaarNo.length()!= 0 && aadhaarNo!=null  ){
+            Toast.makeText(getApplicationContext(),"Get Admit Card on the basis of Aadhaar.",Toast.LENGTH_LONG).show();
             return true;
-        }else{
-            Toast.makeText(getApplicationContext(),"You need to fill in some details to get your Admit Card.",Toast.LENGTH_LONG).show();
+
+        }if(applicationId.length()!=0 && name.length()!=0 && dob.length()!=0 && aadhaarNo.length()!=12 ) {
+            Toast.makeText(getApplicationContext(),"Get Admit Card on the basis of personal details.",Toast.LENGTH_LONG).show();
+            return true;
+        }
+        else{
+            Toast.makeText(getApplicationContext(),"Please enter either your valid Aadhaar number or complete personal Details.",Toast.LENGTH_LONG).show();
             return false;
         }
     }
