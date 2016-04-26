@@ -169,7 +169,7 @@
 
 
             <EditText
-                android:id="@+id/etphone"
+                android:id="@+id/etappid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/tvCity"
@@ -239,7 +239,7 @@
 
 
             <EditText
-                android:id="@+id/etemail"
+                android:id="@+id/etname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/tvCity"
@@ -358,6 +358,7 @@
 
 
                 <Button
+                    android:id="@+id/back"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#366988"
@@ -371,7 +372,7 @@
 
 
                 <Button
-                    android:id="@+id/submit"
+                    android:id="@+id/getadmitcard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#366988"
