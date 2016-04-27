@@ -1,5 +1,8 @@
-﻿using System;
+﻿using HPSSSB_WEB_API.HelperClasses;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -12,7 +15,7 @@ namespace HPSSSB_WEB_API
     public class HPSSSB_REST : IHPSSSB_REST
     {
 
-
+        SqlConnection dbConnection;
 
         #region Basic Testing Functions Rest Architecture
 
@@ -55,6 +58,93 @@ namespace HPSSSB_WEB_API
             {
                 return e.GetBaseException().ToString().Trim();
             }
+        }
+
+
+        #endregion
+
+        #region Get Vacancies XML and JSON
+        public string XML_Vacancies(string date) 
+        {
+            string new_date = date.Replace(".", "/");
+            SqlDataReader reader = null;
+            try {
+                dbConnection = DBConnect.getConnection();
+
+                if (dbConnection.State.ToString() == "Closed")
+                {
+                    dbConnection.Open();
+                }
+
+                DataSet dt = new DataSet();
+                SqlCommand cmd = new SqlCommand("GetAllCurrentVacancies", dbConnection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Ldate", new_date);
+                cmd.Parameters.AddWithValue("@PDate", new_date);
+
+                SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                try
+                {
+                    adp.Fill(dt);
+                }
+                catch
+                {
+
+                }
+                finally
+                {
+                    adp.Dispose();
+                }
+            }catch(Exception e)
+            {
+                return "null";
+            }
+
+            //return dt;
+            throw new NotImplementedException();
+        }
+
+        public string JSON_Vacancies(string date)
+        {
+            SqlDataReader reader = null;
+            try
+            {
+                dbConnection = DBConnect.getConnection();
+
+                if (dbConnection.State.ToString() == "Closed")
+                {
+                    dbConnection.Open();
+                }
+
+                DataSet dt = new DataSet();
+                SqlCommand cmd = new SqlCommand("GetAllCurrentVacancies", dbConnection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Ldate", date);
+                cmd.Parameters.AddWithValue("@PDate", date);
+
+                SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                try
+                {
+                    adp.Fill(dt);
+                    //Convert DT to List
+                }
+                catch
+                {
+
+                }
+                finally
+                {
+                    adp.Dispose();
+                }
+            }
+            catch (Exception e)
+            {
+                return "null";
+            }
+
+            //return dt;
+
+            throw new NotImplementedException();
         }
         #endregion
 
