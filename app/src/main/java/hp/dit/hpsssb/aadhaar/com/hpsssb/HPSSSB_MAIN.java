@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -83,7 +84,11 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                            new get_URL_InstructionsPDF().execute(url_local);
                         break;
                     case "Vacancies":
-                        Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
+                        String dateString = (String) DateFormat.format("dd.MM.yyyy",new java.util.Date());
+                        // Toast.makeText(getApplicationContext(),dateString,Toast.LENGTH_LONG).show();
+                        Intent i_vacancy = new Intent(HPSSSB_MAIN.this,Vacancies_List.class);
+                        i_vacancy.putExtra("DATE_TO_SEND",dateString);
+                        startActivity(i_vacancy);
                         break;
                     case "Dashboard":
                         Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
@@ -169,7 +174,11 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                 break;
 
             case R.id.main_vacancies:
-                //Handle Tab Selection //Find Your Ration Card
+                String dateString = (String) DateFormat.format("dd.MM.yyyy",new java.util.Date());
+               // Toast.makeText(getApplicationContext(),dateString,Toast.LENGTH_LONG).show();
+                Intent i_vacancy = new Intent(HPSSSB_MAIN.this,Vacancies_List.class);
+                i_vacancy.putExtra("DATE_TO_SEND",dateString);
+                startActivity(i_vacancy);
                 break;
 
             case R.id.main_results:

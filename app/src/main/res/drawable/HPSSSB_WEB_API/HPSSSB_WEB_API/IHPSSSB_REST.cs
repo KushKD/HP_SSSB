@@ -24,7 +24,7 @@ namespace HPSSSB_WEB_API
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getjson/{id}")]
         string JSONData(string id);
 
-        #endregion
+        #endregion  
 
         #region Get Instructions (PDF File Link) in XML and JSON
         [OperationContract]
@@ -40,11 +40,11 @@ namespace HPSSSB_WEB_API
         #region Get All Vacancies JSON and XML 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getVacancies_XML/{date}")]
-        string XML_Vacancies(string date);
+        IEnumerable<Vacancies> XML_Vacancies(string date);
 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getVacancies_JSON/{date}")]
-        string JSON_Vacancies(string date);
+        IEnumerable<Vacancies> JSON_Vacancies(string date);
         #endregion
     }
 }

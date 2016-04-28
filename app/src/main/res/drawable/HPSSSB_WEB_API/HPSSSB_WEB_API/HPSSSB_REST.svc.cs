@@ -64,7 +64,8 @@ namespace HPSSSB_WEB_API
         #endregion
 
         #region Get Vacancies XML and JSON
-        public string XML_Vacancies(string date) 
+        List<Vacancies> vacancy_List = null;
+        public IEnumerable<Vacancies> XML_Vacancies(string date) 
         {
             string new_date = date.Replace(".", "/");
             SqlDataReader reader = null;
@@ -86,10 +87,26 @@ namespace HPSSSB_WEB_API
                 try
                 {
                     adp.Fill(dt);
+                    // Convert DataSet to List
+                    vacancy_List = new List<Vacancies>();
+                    Vacancies objVac = null;
+                    for (int i = 0; i < dt.Tables[0].Rows.Count; i++)
+                    {
+                        objVac = new Vacancies();
+                        objVac.SNO = dt.Tables[0].Rows[i]["SNO"].ToString();
+                        objVac.PostID = dt.Tables[0].Rows[i]["PostId"].ToString();
+                        objVac.Department = dt.Tables[0].Rows[i]["Department"].ToString();
+                        objVac.PostName = dt.Tables[0].Rows[i]["PostName"].ToString();
+                        objVac.PostCode = dt.Tables[0].Rows[i]["PostCode"].ToString();
+                        objVac.Details = dt.Tables[0].Rows[i]["Details"].ToString();
+                        objVac.PubDate = dt.Tables[0].Rows[i]["PubDate"].ToString();
+                        objVac.LastDate = dt.Tables[0].Rows[i]["LastDate"].ToString();
+                        vacancy_List.Add(objVac);
+                    }
                 }
-                catch
+                catch (Exception ex)
                 {
-
+                    throw ex;
                 }
                 finally
                 {
@@ -97,15 +114,14 @@ namespace HPSSSB_WEB_API
                 }
             }catch(Exception e)
             {
-                return "null";
+                throw e;
             }
 
-            //return dt;
-            throw new NotImplementedException();
+            return vacancy_List;
         }
-
-        public string JSON_Vacancies(string date)
+        public IEnumerable<Vacancies> JSON_Vacancies(string date)
         {
+            string new_date = date.Replace(".", "/");
             SqlDataReader reader = null;
             try
             {
@@ -119,18 +135,33 @@ namespace HPSSSB_WEB_API
                 DataSet dt = new DataSet();
                 SqlCommand cmd = new SqlCommand("GetAllCurrentVacancies", dbConnection);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Ldate", date);
-                cmd.Parameters.AddWithValue("@PDate", date);
+                cmd.Parameters.AddWithValue("@Ldate", new_date);
+                cmd.Parameters.AddWithValue("@PDate", new_date);
 
                 SqlDataAdapter adp = new SqlDataAdapter(cmd);
                 try
                 {
                     adp.Fill(dt);
-                    //Convert DT to List
+                    // Convert DataSet to List
+                    vacancy_List = new List<Vacancies>();
+                    Vacancies objVac = null;
+                    for (int i = 0; i < dt.Tables[0].Rows.Count; i++)
+                    {
+                        objVac = new Vacancies();
+                        objVac.SNO = dt.Tables[0].Rows[i]["SNO"].ToString();
+                        objVac.PostID = dt.Tables[0].Rows[i]["PostId"].ToString();
+                        objVac.Department = dt.Tables[0].Rows[i]["Department"].ToString();
+                        objVac.PostName = dt.Tables[0].Rows[i]["PostName"].ToString();
+                        objVac.PostCode = dt.Tables[0].Rows[i]["PostCode"].ToString();
+                        objVac.Details = dt.Tables[0].Rows[i]["Details"].ToString();
+                        objVac.PubDate = dt.Tables[0].Rows[i]["PubDate"].ToString();
+                        objVac.LastDate = dt.Tables[0].Rows[i]["LastDate"].ToString();
+                        vacancy_List.Add(objVac);
+                    }
                 }
-                catch
+                catch (Exception ex)
                 {
-
+                    throw ex;
                 }
                 finally
                 {
@@ -139,13 +170,12 @@ namespace HPSSSB_WEB_API
             }
             catch (Exception e)
             {
-                return "null";
+                throw e;
             }
 
-            //return dt;
-
-            throw new NotImplementedException();
+            return vacancy_List;
         }
+
         #endregion
 
 

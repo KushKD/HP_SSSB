@@ -22,4 +22,6 @@
     <string name="title_activity_dfsc__data__detals">DFSC_Data_Detals</string>
     <string name="title_activity_inspectors__data_details">Inspectors_Data_details</string>
     <string name="title_activity_admit_card">AdmitCard</string>
+    <string name="title_activity_vacancies__list">Vacancies_List</string>
+    <string name="title_activity_vacancy_details">VacancyDetails</string>
 </resources>
