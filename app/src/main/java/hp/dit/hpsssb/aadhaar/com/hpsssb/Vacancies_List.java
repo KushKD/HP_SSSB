@@ -160,13 +160,10 @@ public class Vacancies_List extends Activity {
             vacancies_Server = UserJson_FiveParameters.parseFeed(result);
             if(vacancies_Server.isEmpty()){
                 Toast.makeText(getApplicationContext(),"Empty List",Toast.LENGTH_LONG).show();
-            }if(vacancies_Server.size()>=0) {
-                updateDisplay();
-                Toast.makeText(getApplicationContext(),"We Found Something. ",Toast.LENGTH_LONG).show();
             }else
-            {
-                updateDisplay();
-            }
+        {
+            updateDisplay();
+        }
             tasks.remove(this);
             if (tasks.size() == 0) {
                 pb.setVisibility(View.INVISIBLE);
