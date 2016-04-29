@@ -46,5 +46,18 @@ namespace HPSSSB_WEB_API
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getVacancies_JSON/{date}")]
         IEnumerable<Vacancies> JSON_Vacancies(string date);
         #endregion
+
+        #region Dashboard {sp_Dashboard}  XML and JSON
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getDashboard_XML/{FromDate}/{ToDate}")]
+        IEnumerable<DashboardBank> XML_DashBoard (string fromdate , string todate);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getDashboard_JSON/{FromDate}/{ToDate}")]
+        IEnumerable<DashboardBank> JSON_Dashboard (string fromdate , string todate);
+
+        #endregion
+
+
     }
 }
