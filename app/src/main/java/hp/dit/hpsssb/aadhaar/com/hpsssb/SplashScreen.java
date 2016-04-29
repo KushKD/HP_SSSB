@@ -14,7 +14,7 @@ import hp.dit.hpsssb.aadhaar.com.presentation.BaseActivity;
 
 public class SplashScreen extends BaseActivity {
 
-    public static final String Folder_name = "/HPSSSB/Instructions";
+    public static final String Folder_name = "/HPSSSB";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class SplashScreen extends BaseActivity {
                 if (success) {
                     return "Directory Created Successfully";
                 } else {
-                    return "Something went wrong while creating the Directory.";
+                    return "Something went wrong while creating the Directory. ";
                 }
 
             }

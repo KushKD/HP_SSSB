@@ -3,9 +3,13 @@ package hp.dit.hpsssb.aadhaar.com.hpsssb;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,6 +27,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -79,9 +84,31 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                         Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
                         break;
                     case "Instructions":
-                          // Get Instructions from Server pdf
-                          // new DownloadFileFromURL().execute(url_Generic);
-                           new get_URL_InstructionsPDF().execute(url_local);
+                        //Check weather the file is present in the SDCARD
+                        File extStorage = Environment.getExternalStorageDirectory();
+                        File file = new File(extStorage.getAbsolutePath()+ "/HPSSSB/HPSSSB_Instructions.pdf");
+
+                        if (file.exists()) {
+                            Uri path = Uri.fromFile(file);
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setDataAndType(path, "application/pdf");
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                            try {
+                                startActivity(intent);
+                            }
+                            catch (ActivityNotFoundException e) {
+                                Toast.makeText(getApplicationContext(), "No Application Available to View PDF",Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            Toast.makeText(getApplicationContext(), "File Not Found. Please wait file will be downloaded.",Toast.LENGTH_SHORT).show();
+                            if(isOnline()){
+                                new get_URL_InstructionsPDF().execute(url_local);
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Network not found.",Toast.LENGTH_LONG).show();
+                            }
+                        }
+
                         break;
                     case "Vacancies":
                         String dateString = (String) DateFormat.format("dd.MM.yyyy",new java.util.Date());
@@ -157,9 +184,30 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                 startActivity(i2);*/
                 break;
             case R.id.main_information:
-                // Get Instructions from Server PDF
-                //new DownloadFileFromURL().execute(url_Generic);
-                new get_URL_InstructionsPDF().execute(url_local);
+                //Check weather the file is present in the SDCARD
+                File extStorage = Environment.getExternalStorageDirectory();
+                File file = new File(extStorage.getAbsolutePath()+ "/HPSSSB/HPSSSB_Instructions.pdf");
+
+                if (file.exists()) {
+                    Uri path = Uri.fromFile(file);
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(path, "application/pdf");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                    try {
+                        startActivity(intent);
+                    }
+                    catch (ActivityNotFoundException e) {
+                        Toast.makeText(getApplicationContext(), "No Application Available to View PDF",Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(), "File Not Found. Please wait file will be downloaded.",Toast.LENGTH_SHORT).show();
+                    if(isOnline()){
+                        new get_URL_InstructionsPDF().execute(url_local);
+                    }else{
+                        Toast.makeText(getApplicationContext(),"Network not found.",Toast.LENGTH_LONG).show();
+                    }
+                }
                 break;
 
             case R.id.main_notifications:
@@ -214,6 +262,16 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                 dialog.dismiss();
             }
         });*/
+    }
+
+    protected boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -294,7 +352,11 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
             this.dialog.dismiss();
            System.out.println(s.length());
             if(s.length()>=57){
-                new DownloadFileFromURL().execute(s);
+                if(isOnline()) {
+                    new DownloadFileFromURL().execute(s);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Unable to connect to Internet. Please check your network connection.",Toast.LENGTH_LONG).show();
+                }
             }else{
                 Toast.makeText(getApplicationContext(),"Something went wrong.",Toast.LENGTH_LONG).show();
             }
@@ -333,7 +395,7 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                 InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
                 // Output stream to write file
-                OutputStream output = new FileOutputStream("/sdcard/HPSSSB_Instructions.pdf");
+                OutputStream output = new FileOutputStream("/sdcard/HPSSSB/HPSSSB_Instructions.pdf");
 
                 byte data[] = new byte[1024];
 
@@ -380,11 +442,25 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
             // dismiss the dialog after the file was downloaded
             dismissDialog(progress_bar_type);
 
-            // Displaying downloaded image into image view
-            // Reading image path from sdcard
-            String imagePath = Environment.getExternalStorageDirectory().toString() + "/downloadedfile.jpg";
-            // setting downloaded into image view
-            // my_image.setImageDrawable(Drawable.createFromPath(imagePath));
+
+            //Open PDF In PDF Viewer
+            File file = new File("/sdcard/HPSSSB/HPSSSB_Instructions.pdf");
+
+            if (file.exists()) {
+                Uri path = Uri.fromFile(file);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(path, "application/pdf");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                try {
+                    startActivity(intent);
+                }
+                catch (ActivityNotFoundException e) {
+                    Toast.makeText(getApplicationContext(), "No Application Available to View PDF",Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                Toast.makeText(getApplicationContext(), "The downloaded file is not a valid format.",Toast.LENGTH_SHORT).show();
+            }
         }
 
     }
