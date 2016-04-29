@@ -157,7 +157,7 @@ public class Vacancies_List extends Activity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             Log.d("== Date From Server ==",result);
-            vacancies_Server = UserJson_FiveParameters.parseFeed(result);
+            vacancies_Server = Vacancy_JSON.parseFeed(result);
             if(vacancies_Server.isEmpty()){
                 Toast.makeText(getApplicationContext(),"Empty List",Toast.LENGTH_LONG).show();
             }else

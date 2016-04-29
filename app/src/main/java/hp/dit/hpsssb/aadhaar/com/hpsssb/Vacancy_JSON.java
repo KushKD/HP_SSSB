@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by KD on 7/28/2015.
  */
-public class UserJson_FiveParameters {
+public class Vacancy_JSON {
 
     public static List<VacancyPOJO> parseFeed(String content) {
 

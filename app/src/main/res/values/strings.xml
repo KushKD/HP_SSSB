@@ -24,4 +24,5 @@
     <string name="title_activity_admit_card">AdmitCard</string>
     <string name="title_activity_vacancies__list">Vacancies_List</string>
     <string name="title_activity_vacancy_details">VacancyDetails</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
 </resources>

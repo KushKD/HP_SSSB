@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen">
         <activity
-            android:name=".HPSSSB_MAIN"
+            android:name=".SplashScreen"
+            android:label="@string/title_activity_splash_screen"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -35,7 +37,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".VacancyDetails"
-            android:label="@string/title_activity_vacancy_details"></activity>
+            android:label="@string/title_activity_vacancy_details" />
+        <activity
+            android:name=".HPSSSB_MAIN"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
