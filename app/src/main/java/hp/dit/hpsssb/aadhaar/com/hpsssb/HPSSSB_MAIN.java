@@ -118,7 +118,8 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                         startActivity(i_vacancy);
                         break;
                     case "Dashboard":
-                        Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
+                        Intent i_dashboard = new Intent(HPSSSB_MAIN.this, Dashboard.class);
+                        startActivity(i_dashboard);
                         break;
                     case "Interview Schedule":
                         ShowAlert("Currently there is no Interview Scheduled.");
@@ -180,8 +181,8 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                 ShowAlert("Currently there is no Interview Scheduled.");
                 break;
             case R.id.main_dashboard:
-               /* Intent i2 = new Intent(HPSSSB_MAIN.this, Cloud.class);
-                startActivity(i2);*/
+                Intent i_dashboard = new Intent(HPSSSB_MAIN.this, Dashboard.class);
+                startActivity(i_dashboard);
                 break;
             case R.id.main_information:
                 //Check weather the file is present in the SDCARD
@@ -289,7 +290,7 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
 
     /**
      * Showing Dialog
-     * */
+      */
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
