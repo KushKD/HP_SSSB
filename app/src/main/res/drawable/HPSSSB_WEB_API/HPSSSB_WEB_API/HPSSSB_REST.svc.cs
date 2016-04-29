@@ -293,6 +293,121 @@ namespace HPSSSB_WEB_API
 
             return DashboardBank_List;
         }
+
+
+        #endregion
+
+        #region Dashboard Consolodated Report XML and JSON
+        List<DashboardCReport> DashboardCReport_List = null;
+        public IEnumerable<DashboardCReport> XML_DashBoardCReport(string fromdate, string todate)
+        {
+            string new_fromdate = fromdate.Replace(".", "/");
+            string new_todate = todate.Replace(".", "/");
+            SqlDataReader reader = null;
+            try
+            {
+                dbConnection = DBConnect.getConnection();
+
+                if (dbConnection.State.ToString() == "Closed")
+                {
+                    dbConnection.Open();
+                }
+
+                DataSet dt = new DataSet();
+                SqlCommand cmd = new SqlCommand("sp_GetConsolidatedReport", dbConnection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@FrmDate", new_fromdate);
+                cmd.Parameters.AddWithValue("@TDate", new_todate);
+
+                SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                try
+                {
+                    adp.Fill(dt);
+                    // Convert DataSet to List
+                    DashboardCReport_List = new List<DashboardCReport>();
+                    DashboardCReport objDashBoardCReport = null;
+                    for (int i = 0; i < dt.Tables[0].Rows.Count; i++)
+                    {
+                        objDashBoardCReport = new DashboardCReport();
+                        objDashBoardCReport.Post_Name = dt.Tables[0].Rows[i][0].ToString();
+                        objDashBoardCReport.Male = dt.Tables[0].Rows[i][1].ToString();
+                        objDashBoardCReport.Female = dt.Tables[0].Rows[i][2].ToString();
+                        objDashBoardCReport.Others = dt.Tables[0].Rows[i][3].ToString();
+
+                        DashboardCReport_List.Add(objDashBoardCReport);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    adp.Dispose();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return DashboardCReport_List;
+        }
+
+        public IEnumerable<DashboardCReport> JSON_DashboardCReport(string fromdate, string todate)
+        {
+            string new_fromdate = fromdate.Replace(".", "/");
+            string new_todate = todate.Replace(".", "/");
+            SqlDataReader reader = null;
+            try
+            {
+                dbConnection = DBConnect.getConnection();
+
+                if (dbConnection.State.ToString() == "Closed")
+                {
+                    dbConnection.Open();
+                }
+
+                DataSet dt = new DataSet();
+                SqlCommand cmd = new SqlCommand("sp_GetConsolidatedReport", dbConnection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@FrmDate", new_fromdate);
+                cmd.Parameters.AddWithValue("@TDate", new_todate);
+
+                SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                try
+                {
+                    adp.Fill(dt);
+                    // Convert DataSet to List
+                    DashboardCReport_List = new List<DashboardCReport>();
+                    DashboardCReport objDashBoardCReport = null;
+                    for (int i = 0; i < dt.Tables[0].Rows.Count; i++)
+                    {
+                        objDashBoardCReport = new DashboardCReport();
+                        objDashBoardCReport.Post_Name = dt.Tables[0].Rows[i][0].ToString();
+                        objDashBoardCReport.Male = dt.Tables[0].Rows[i][1].ToString();
+                        objDashBoardCReport.Female = dt.Tables[0].Rows[i][2].ToString();
+                        objDashBoardCReport.Others = dt.Tables[0].Rows[i][3].ToString();
+
+                        DashboardCReport_List.Add(objDashBoardCReport);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    adp.Dispose();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return DashboardCReport_List;
+        }
         #endregion
 
 

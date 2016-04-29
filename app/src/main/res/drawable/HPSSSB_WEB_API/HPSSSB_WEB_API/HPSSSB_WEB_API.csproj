@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DashboardBank.cs" />
+    <Compile Include="DashboardCReport.cs" />
     <Compile Include="HelperClasses\DBConnect.cs" />
     <Compile Include="HPSSSB_REST.svc.cs">
       <DependentUpon>HPSSSB_REST.svc</DependentUpon>

@@ -58,6 +58,15 @@ namespace HPSSSB_WEB_API
 
         #endregion
 
+        #region Dashboard Consolodated Report XML and JSON
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getDashboardCReport_XML/{FromDate}/{ToDate}")]
+        IEnumerable<DashboardCReport> XML_DashBoardCReport(string fromdate, string todate);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getDashboardCReport_JSON/{FromDate}/{ToDate}")]
+        IEnumerable<DashboardCReport> JSON_DashboardCReport(string fromdate, string todate);
+        #endregion
 
     }
 }

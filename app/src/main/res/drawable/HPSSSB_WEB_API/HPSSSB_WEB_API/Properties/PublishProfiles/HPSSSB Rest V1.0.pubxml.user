@@ -6,11 +6,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\HPSSSB REST\HPSSSB REST V3</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\HPSSSB REST\HPSSSB REST V4</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/HPSSSB_WEB_API.dll">
-      <publishTime>04/28/2016 12:03:18</publishTime>
+      <publishTime>04/29/2016 21:56:48</publishTime>
     </File>
     <File Include="HPSSSB_REST.svc">
       <publishTime>04/27/2016 10:32:21</publishTime>
