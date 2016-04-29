@@ -23,7 +23,7 @@
             android:id="@+id/ImageUser"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/jobsdetails" />
         <TextView
             android:id="@+id/postname"
             android:layout_width="match_parent"
@@ -40,6 +40,8 @@
         android:id="@+id/laydetails"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
+        android:background="#40666666"
+        android:layout_margin="5dp"
         android:layout_weight="2.2" >
 
         <ScrollView
@@ -59,38 +61,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
-                    android:background="#40666666"
                     android:visibility="visible"
                     android:layout_margin="5dp"
                     android:orientation="vertical">
 
 
                     <TextView
+                        android:text="Department Name"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+                    <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
                         android:id="@+id/department"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical|center_horizontal|left"
                         />
-                </LinearLayout>
-
-                <!-- Details -->
-                <LinearLayout
-                    android:id="@+id/textview2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:background="#40666666"
-                    android:visibility="visible"
-                    android:layout_margin="5dp"
-                    android:orientation="vertical">
-
-
-
-                    <TextView
-                        android:id="@+id/details"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical|center_horizontal|left"/>
                 </LinearLayout>
 
                 <!-- Post Code -->
@@ -99,13 +93,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
-                    android:background="#40666666"
                     android:layout_margin="5dp"
                     android:orientation="vertical">
 
-
+                    <TextView
+                        android:text="Post Code"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
 
                     <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
                         android:id="@+id/postcode"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -113,13 +117,46 @@
                         android:text=""/>
                 </LinearLayout>
 
-                <!-- Post ID -->
+                <!-- Details -->
+                <LinearLayout
+                    android:id="@+id/textview2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:visibility="visible"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:text="Details"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
+
+
+                    <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:id="@+id/details"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"/>
+                </LinearLayout>
+
+
+
+                <!-- Post ID  visibility Gone-->
                 <LinearLayout
                     android:id="@+id/textview4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
-                    android:background="#40666666"
+                    android:visibility="gone"
                     android:layout_margin="5dp"
                     android:orientation="vertical">
 
@@ -132,19 +169,30 @@
                         android:text=""/>
                 </LinearLayout>
 
-                <!-- Pub  date and last date -->
+                <!-- Pub  date -->
                 <LinearLayout
                     android:id="@+id/textview5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:layout_margin="5dp"
-                    android:background="#40666666"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:visibility="visible">
 
+                    <TextView
+                        android:text="Published Date"
+                        android:textColor="#366988"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical|center_horizontal|left"
+                        />
 
                     <TextView
+                        android:textColor="#3d3d29"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
                         android:id="@+id/pubdate"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -152,17 +200,42 @@
                         android:gravity="center_vertical|center_horizontal|left"
                         android:text=""/>
 
-                    <TextView
-                        android:id="@+id/lastdate"
-                        android:layout_width="fill_parent"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical|center_horizontal|left"
-                        android:text=""/>
+
                 </LinearLayout>
 
+                <!-- Last Date -->
+            <LinearLayout
+                android:id="@+id/textview6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_margin="5dp"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:text="Last Date"
+                    android:textColor="#366988"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal|left"
+                    />
+
+                <TextView
+                    android:textColor="#3d3d29"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:id="@+id/lastdate"
+                    android:layout_width="fill_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal|left"
+                    android:text=""/>
 
 
+  </LinearLayout>
 
 
 
@@ -205,7 +278,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:text="  APPLY  "
-            android:background="#366988"
+            android:background="#ff8000"
             android:textColor="#FFFFFF"
             android:gravity="center|center_horizontal|center_vertical"/>
 
