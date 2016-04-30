@@ -64,6 +64,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdmitCardAadhaar.cs" />
     <Compile Include="DashboardBank.cs" />
     <Compile Include="DashboardCReport.cs" />
     <Compile Include="HelperClasses\DBConnect.cs" />

@@ -25,7 +25,6 @@ namespace HPSSSB_WEB_API
         string JSONData(string id);
 
         #endregion  
-
         #region Get Instructions (PDF File Link) in XML and JSON
         [OperationContract]
         [WebInvoke(Method ="GET",  ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate ="getInstructions_XML")]
@@ -36,7 +35,6 @@ namespace HPSSSB_WEB_API
         string JSON_getInstructions();
 
         #endregion
-
         #region Get All Vacancies JSON and XML 
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getVacancies_XML/{date}")]
@@ -46,7 +44,6 @@ namespace HPSSSB_WEB_API
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getVacancies_JSON/{date}")]
         IEnumerable<Vacancies> JSON_Vacancies(string date);
         #endregion
-
         #region Dashboard {sp_Dashboard}  XML and JSON
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getDashboard_XML/{FromDate}/{ToDate}")]
@@ -57,7 +54,6 @@ namespace HPSSSB_WEB_API
         IEnumerable<DashboardBank> JSON_Dashboard (string fromdate , string todate);
 
         #endregion
-
         #region Dashboard Consolodated Report XML and JSON
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getDashboardCReport_XML/{FromDate}/{ToDate}")]
@@ -66,6 +62,26 @@ namespace HPSSSB_WEB_API
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getDashboardCReport_JSON/{FromDate}/{ToDate}")]
         IEnumerable<DashboardCReport> JSON_DashboardCReport(string fromdate, string todate);
+        #endregion
+        #region Admit Card (Aadhaar Card) Json and XML
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getAdmitCardAadhaar_XML/{aadhaarno}")]
+        IEnumerable<AdmitCardAadhaar> XML_AdmitCardAadhar(string aadhaarno);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getAdmitCardAadhaar_JSON/{aadhaarno}")]
+        IEnumerable<AdmitCardAadhaar> JSON_AdmitCardAadhar(string aadhaarno);
+        #endregion
+        #region Admit Card (Personal Details) Json and XML
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getAdmitCardPersonalDetails_XML/{aplicationId}/{name}/{dateofbirth}")]
+        IEnumerable<AdmitCardAadhaar> XML_AdmitCardPersonalDetails(string aplicationId, string name , string DateOfBirth);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "getAdmitCardPersonalDetails_JSON/{aplicationId}/{name}/{dateofbirth}")]
+        IEnumerable<AdmitCardAadhaar> JSON_AdmitCardPersonalDetails(string aplicationId, string name, string DateOfBirth);
+        #endregion
+        #region notifications JSON and XML Not Implemented
         #endregion
 
     }

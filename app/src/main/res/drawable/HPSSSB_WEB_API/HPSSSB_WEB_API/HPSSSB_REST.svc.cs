@@ -31,7 +31,6 @@ namespace HPSSSB_WEB_API
         }
 
         #endregion
-
         #region get Instructions XML and JSON Link
        
 
@@ -62,7 +61,6 @@ namespace HPSSSB_WEB_API
 
 
         #endregion
-
         #region Get Vacancies XML and JSON
         List<Vacancies> vacancy_List = null;
         public IEnumerable<Vacancies> XML_Vacancies(string date) 
@@ -177,7 +175,6 @@ namespace HPSSSB_WEB_API
         }
 
         #endregion
-
         #region Dashboard Bank for XML and JSON
         List<DashboardBank> DashboardBank_List = null;
         public IEnumerable<DashboardBank> XML_DashBoard(string fromdate, string todate)
@@ -296,7 +293,6 @@ namespace HPSSSB_WEB_API
 
 
         #endregion
-
         #region Dashboard Consolodated Report XML and JSON
         List<DashboardCReport> DashboardCReport_List = null;
         public IEnumerable<DashboardCReport> XML_DashBoardCReport(string fromdate, string todate)
@@ -408,7 +404,283 @@ namespace HPSSSB_WEB_API
 
             return DashboardCReport_List;
         }
+
+
         #endregion
+        #region Admit Card (Aadhaar Number) Json and XML
+        List<AdmitCardAadhaar> AdmitCardAadhaar_List = null;
+        public IEnumerable<AdmitCardAadhaar> XML_AdmitCardAadhar(string aadhaarno)
+        {
+            SqlDataReader reader = null;
+            try
+            {
+                dbConnection = DBConnect.getConnection();
+
+                if (dbConnection.State.ToString() == "Closed")
+                {
+                    dbConnection.Open();
+                }
+
+                DataSet dt = new DataSet();
+                SqlCommand cmd = new SqlCommand("sp_ReturnAdmitcardData", dbConnection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Adh", aadhaarno);
+                cmd.Parameters.AddWithValue("@Refid", "");
+                cmd.Parameters.AddWithValue("@Name", "");
+                cmd.Parameters.AddWithValue("@DOB", "");
+
+
+                SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                try
+                {
+                    adp.Fill(dt);
+                    // Convert DataSet to List
+                    AdmitCardAadhaar_List = new List<AdmitCardAadhaar>();
+                    AdmitCardAadhaar objAdmitCardAadhaar = null; 
+                    for (int i = 0; i < dt.Tables[0].Rows.Count; i++)
+                    {
+                        objAdmitCardAadhaar = new AdmitCardAadhaar();
+                        objAdmitCardAadhaar.App_RollNo = dt.Tables[0].Rows[i][0].ToString();
+                        objAdmitCardAadhaar.PostName = dt.Tables[0].Rows[i][1].ToString();
+                        objAdmitCardAadhaar.PerName = dt.Tables[0].Rows[i][2].ToString();
+                        objAdmitCardAadhaar.PerFName = dt.Tables[0].Rows[i][3].ToString();
+                        objAdmitCardAadhaar.PerPhoto = dt.Tables[0].Rows[i][4].ToString();
+                        objAdmitCardAadhaar.PerSignature = dt.Tables[0].Rows[i][5].ToString();
+                        objAdmitCardAadhaar.PerAddress = dt.Tables[0].Rows[i][6].ToString();
+                        objAdmitCardAadhaar.DistrictName = dt.Tables[0].Rows[i][7].ToString();
+                        objAdmitCardAadhaar.centreAlloted = dt.Tables[0].Rows[i][8].ToString();
+                        objAdmitCardAadhaar.ApplicationFormNo = dt.Tables[0].Rows[i][9].ToString();
+                        objAdmitCardAadhaar.DateofExamination = dt.Tables[0].Rows[i][10].ToString();
+                        objAdmitCardAadhaar.ReportingTime = dt.Tables[0].Rows[i][11].ToString();
+                        objAdmitCardAadhaar.Duration = dt.Tables[0].Rows[i][12].ToString();
+
+                        AdmitCardAadhaar_List.Add(objAdmitCardAadhaar);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    adp.Dispose();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return AdmitCardAadhaar_List;
+        }
+        public IEnumerable<AdmitCardAadhaar> JSON_AdmitCardAadhar(string aadhaarno)
+        {
+            SqlDataReader reader = null;
+            try
+            {
+                dbConnection = DBConnect.getConnection();
+
+                if (dbConnection.State.ToString() == "Closed")
+                {
+                    dbConnection.Open();
+                }
+
+                DataSet dt = new DataSet();
+                SqlCommand cmd = new SqlCommand("sp_ReturnAdmitcardData", dbConnection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Adh", aadhaarno);
+                cmd.Parameters.AddWithValue("@Refid", "");
+                cmd.Parameters.AddWithValue("@Name", "");
+                cmd.Parameters.AddWithValue("@DOB", "");
+
+
+                SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                try
+                {
+                    adp.Fill(dt);
+                    // Convert DataSet to List
+                    AdmitCardAadhaar_List = new List<AdmitCardAadhaar>();
+                    AdmitCardAadhaar objAdmitCardAadhaar = null;
+                    for (int i = 0; i < dt.Tables[0].Rows.Count; i++)
+                    {
+                        objAdmitCardAadhaar = new AdmitCardAadhaar();
+                        objAdmitCardAadhaar.App_RollNo = dt.Tables[0].Rows[i][0].ToString();
+                        objAdmitCardAadhaar.PostName = dt.Tables[0].Rows[i][1].ToString();
+                        objAdmitCardAadhaar.PerName = dt.Tables[0].Rows[i][2].ToString();
+                        objAdmitCardAadhaar.PerFName = dt.Tables[0].Rows[i][3].ToString();
+                        objAdmitCardAadhaar.PerPhoto = dt.Tables[0].Rows[i][4].ToString();
+                        objAdmitCardAadhaar.PerSignature = dt.Tables[0].Rows[i][5].ToString();
+                        objAdmitCardAadhaar.PerAddress = dt.Tables[0].Rows[i][6].ToString();
+                        objAdmitCardAadhaar.DistrictName = dt.Tables[0].Rows[i][7].ToString();
+                        objAdmitCardAadhaar.centreAlloted = dt.Tables[0].Rows[i][8].ToString();
+                        objAdmitCardAadhaar.ApplicationFormNo = dt.Tables[0].Rows[i][9].ToString();
+                        objAdmitCardAadhaar.DateofExamination = dt.Tables[0].Rows[i][10].ToString();
+                        objAdmitCardAadhaar.ReportingTime = dt.Tables[0].Rows[i][11].ToString();
+                        objAdmitCardAadhaar.Duration = dt.Tables[0].Rows[i][12].ToString();
+
+                        AdmitCardAadhaar_List.Add(objAdmitCardAadhaar);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    adp.Dispose();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return AdmitCardAadhaar_List;
+        }
+
+        #endregion
+        #region Admit Card (Personal Details) Json and XML
+        List<AdmitCardAadhaar> AdmitCardPersonalDetails_List = null;
+        public IEnumerable<AdmitCardAadhaar> XML_AdmitCardPersonalDetails(string aplicationId, string name, string DateOfBirth)
+        {
+            //Date DD/MM/YY
+            string new_dateOfbirth = DateOfBirth.Replace(".", "/");
+            SqlDataReader reader = null;
+            try
+            {
+                dbConnection = DBConnect.getConnection();
+
+                if (dbConnection.State.ToString() == "Closed")
+                {
+                    dbConnection.Open();
+                }
+
+                DataSet dt = new DataSet();
+                SqlCommand cmd = new SqlCommand("sp_ReturnAdmitcardData", dbConnection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Adh", "");
+                cmd.Parameters.AddWithValue("@Refid", aplicationId);
+                cmd.Parameters.AddWithValue("@Name", name);
+                cmd.Parameters.AddWithValue("@DOB", new_dateOfbirth);
+
+
+                SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                try
+                {
+                    adp.Fill(dt);
+                    // Convert DataSet to List
+                    AdmitCardPersonalDetails_List = new List<AdmitCardAadhaar>();
+                    AdmitCardAadhaar objAdmitCardPersonalDetails = null;
+                    for (int i = 0; i < dt.Tables[0].Rows.Count; i++)
+                    {
+                        objAdmitCardPersonalDetails = new AdmitCardAadhaar();
+                        objAdmitCardPersonalDetails.App_RollNo = dt.Tables[0].Rows[i][0].ToString();
+                        objAdmitCardPersonalDetails.PostName = dt.Tables[0].Rows[i][1].ToString();
+                        objAdmitCardPersonalDetails.PerName = dt.Tables[0].Rows[i][2].ToString();
+                        objAdmitCardPersonalDetails.PerFName = dt.Tables[0].Rows[i][3].ToString();
+                        objAdmitCardPersonalDetails.PerPhoto = dt.Tables[0].Rows[i][4].ToString();
+                        objAdmitCardPersonalDetails.PerSignature = dt.Tables[0].Rows[i][5].ToString();
+                        objAdmitCardPersonalDetails.PerAddress = dt.Tables[0].Rows[i][6].ToString();
+                        objAdmitCardPersonalDetails.DistrictName = dt.Tables[0].Rows[i][7].ToString();
+                        objAdmitCardPersonalDetails.centreAlloted = dt.Tables[0].Rows[i][8].ToString();
+                        objAdmitCardPersonalDetails.ApplicationFormNo = dt.Tables[0].Rows[i][9].ToString();
+                        objAdmitCardPersonalDetails.DateofExamination = dt.Tables[0].Rows[i][10].ToString();
+                        objAdmitCardPersonalDetails.ReportingTime = dt.Tables[0].Rows[i][11].ToString();
+                        objAdmitCardPersonalDetails.Duration = dt.Tables[0].Rows[i][12].ToString();
+
+                        AdmitCardPersonalDetails_List.Add(objAdmitCardPersonalDetails);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    adp.Dispose();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return AdmitCardPersonalDetails_List;
+
+        }
+        public IEnumerable<AdmitCardAadhaar> JSON_AdmitCardPersonalDetails(string aplicationId, string name, string DateOfBirth)
+        {
+            //Date DD/MM/YY
+            string new_dateOfbirth = DateOfBirth.Replace(".", "/");
+            SqlDataReader reader = null;
+            try
+            {
+                dbConnection = DBConnect.getConnection();
+
+                if (dbConnection.State.ToString() == "Closed")
+                {
+                    dbConnection.Open();
+                }
+
+                DataSet dt = new DataSet();
+                SqlCommand cmd = new SqlCommand("sp_ReturnAdmitcardData", dbConnection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Adh", "");
+                cmd.Parameters.AddWithValue("@Refid", aplicationId);
+                cmd.Parameters.AddWithValue("@Name", name);
+                cmd.Parameters.AddWithValue("@DOB", new_dateOfbirth);
+
+
+                SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                try
+                {
+                    adp.Fill(dt);
+                    // Convert DataSet to List
+                    AdmitCardPersonalDetails_List = new List<AdmitCardAadhaar>();
+                    AdmitCardAadhaar objAdmitCardPersonalDetails = null;
+                    for (int i = 0; i < dt.Tables[0].Rows.Count; i++)
+                    {
+                        objAdmitCardPersonalDetails = new AdmitCardAadhaar();
+                        objAdmitCardPersonalDetails.App_RollNo = dt.Tables[0].Rows[i][0].ToString();
+                        objAdmitCardPersonalDetails.PostName = dt.Tables[0].Rows[i][1].ToString();
+                        objAdmitCardPersonalDetails.PerName = dt.Tables[0].Rows[i][2].ToString();
+                        objAdmitCardPersonalDetails.PerFName = dt.Tables[0].Rows[i][3].ToString();
+                        objAdmitCardPersonalDetails.PerPhoto = dt.Tables[0].Rows[i][4].ToString();
+                        objAdmitCardPersonalDetails.PerSignature = dt.Tables[0].Rows[i][5].ToString();
+                        objAdmitCardPersonalDetails.PerAddress = dt.Tables[0].Rows[i][6].ToString();
+                        objAdmitCardPersonalDetails.DistrictName = dt.Tables[0].Rows[i][7].ToString();
+                        objAdmitCardPersonalDetails.centreAlloted = dt.Tables[0].Rows[i][8].ToString();
+                        objAdmitCardPersonalDetails.ApplicationFormNo = dt.Tables[0].Rows[i][9].ToString();
+                        objAdmitCardPersonalDetails.DateofExamination = dt.Tables[0].Rows[i][10].ToString();
+                        objAdmitCardPersonalDetails.ReportingTime = dt.Tables[0].Rows[i][11].ToString();
+                        objAdmitCardPersonalDetails.Duration = dt.Tables[0].Rows[i][12].ToString();
+
+                        AdmitCardPersonalDetails_List.Add(objAdmitCardPersonalDetails);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    adp.Dispose();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return AdmitCardPersonalDetails_List;
+
+        }
+        #endregion
+        #region notifications JSON and XML
+        #endregion
+        #region notifications JSON and XML Not Implemented
+        #endregion
+
 
 
 
