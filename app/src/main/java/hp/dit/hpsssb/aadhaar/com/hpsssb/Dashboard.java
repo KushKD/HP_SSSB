@@ -1,6 +1,7 @@
 package hp.dit.hpsssb.aadhaar.com.hpsssb;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -50,8 +51,12 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                 GetToDate = ext_ToDate.getText().toString().trim();
 
                 if(GetFromDate.length()!=0 && GetToDate.length()!=0){
-                    Toast.makeText(getApplicationContext(),GetFromDate +"###"+GetToDate,Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(),GetFromDate +"###"+GetToDate,Toast.LENGTH_LONG).show();
                     //Send From Date and To Date to Other Activity.
+                    Intent i_postwise= new Intent(Dashboard.this,DashboardList_PostWise.class);
+                    i_postwise.putExtra("DATE_TO_SEND_FROM",GetFromDate);
+                    i_postwise.putExtra("DATE_TO_SEND_TO",GetToDate);
+                    startActivity(i_postwise);
 
                 }else{
                     Toast.makeText(getApplicationContext(),"Please input valid dates",Toast.LENGTH_LONG).show();
@@ -67,8 +72,12 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                 GetToDate = ext_ToDate.getText().toString().trim();
 
                 if(GetFromDate.length()!=0 && GetToDate.length()!=0){
-                    Toast.makeText(getApplicationContext(),GetFromDate +"###"+GetToDate,Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getApplicationContext(),GetFromDate +"###"+GetToDate,Toast.LENGTH_LONG).show();
                     //Send From Date and To Date to Other Activity.
+                    Intent i_formwise= new Intent(Dashboard.this,DashboardList_FormsReceived.class);
+                    i_formwise.putExtra("DATE_TO_SEND_FROM",GetFromDate);
+                    i_formwise.putExtra("DATE_TO_SEND_TO",GetToDate);
+                    startActivity(i_formwise);
 
                 }else{
                     Toast.makeText(getApplicationContext(),"Please input valid dates",Toast.LENGTH_LONG).show();
