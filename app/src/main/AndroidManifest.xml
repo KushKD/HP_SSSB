@@ -43,7 +43,13 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Dashboard"
-            android:label="@string/title_activity_dashboard"></activity>
+            android:label="@string/title_activity_dashboard" />
+        <activity
+            android:name=".DashboardList_PostWise"
+            android:label="@string/title_activity_dashboard_list" />
+        <activity
+            android:name=".DashboardList_FormsReceived"
+            android:label="@string/title_activity_dashboard_list__forms_received"></activity>
     </application>
 
 </manifest>

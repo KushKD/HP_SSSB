@@ -1,12 +1,274 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="hp.dit.hpsssb.aadhaar.com.hpsssb.Dashboard">
+    android:layout_weight="6"
+    android:background="#f2f2f2"
+    android:orientation="vertical">
 
-</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:layout_weight="3.0"
+        android:background="#366988"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|center_horizontal|center_vertical"
+            android:text="Dashboard"
+            android:textColor="#FFFFFF"
+            android:background="#366988"
+            android:textSize="20sp"
+            android:textStyle="bold"
+
+            />
+
+
+    </LinearLayout>
+
+    <!-- Body -->
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="#f2f2f2"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:orientation="vertical">
+
+
+
+        <!-- Relative LAyout Goes Here -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F2F2F2"
+            android:gravity="center|center_vertical|center_horizontal"
+            android:padding="10dip"
+            android:layout_margin="5dp"
+            android:text="Reporting Date Range"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#366988"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#40666666"
+            android:gravity="left|center_vertical|center_horizontal"
+            android:padding="10dip"
+            android:text="** Notification Goes Here "
+            android:textColor="#366988"/>
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#40666666"
+            android:gravity="center|center_vertical|center_horizontal"
+            android:orientation="horizontal"
+            android:padding="15dip" >
+
+            <!-- ListRow Left sied Thumbnail image -->
+
+            <LinearLayout
+                android:id="@+id/thumbnail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginRight="3dip"
+                android:padding="3dip" >
+
+
+                <ImageView
+                    android:id="@+id/list_image"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="top"
+                    android:src="@drawable/dob"
+                    android:contentDescription="@string/app_name" />
+
+            </LinearLayout>
+
+            <!-- Rightend Arrow -->
+            <ImageButton
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/circularbutton"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/speaker" />
+
+
+            <TextView
+                android:id="@+id/fromdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvCity"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dip"
+                android:layout_marginRight="5dip"
+                android:layout_toLeftOf="@+id/imageView1"
+                android:background="@drawable/rounded_edittext"
+                android:hint="  From date"
+                android:inputType="number"
+                android:textColor="#366988"
+                android:textColorHint="#366988"
+                android:textSize="18dip" />
+
+        </RelativeLayout>
+
+
+        <!-- Phone No -->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#40666666"
+            android:gravity="center|center_vertical|center_horizontal"
+            android:orientation="horizontal"
+            android:padding="15dip" >
+
+            <!-- ListRow Left sied Thumbnail image -->
+
+            <LinearLayout
+                android:id="@+id/thumbnail2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginRight="3dip"
+                android:padding="3dip" >
+
+
+                <ImageView
+                    android:id="@+id/list_image2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="top"
+                    android:src="@drawable/dob"
+                    android:contentDescription="@string/app_name" />
+
+            </LinearLayout>
+
+            <!-- Rightend Arrow -->
+            <ImageButton
+                android:id="@+id/imageView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/circularbutton"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/speaker" />
+
+
+
+
+
+
+            <TextView
+                android:id="@+id/todate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvCity"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dip"
+                android:layout_marginRight="5dip"
+                android:layout_toLeftOf="@+id/imageView12"
+                android:background="@drawable/rounded_edittext"
+                android:hint="Till Date"
+                android:textColor="#366988"
+                android:textColorHint="#366988"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+        <!-- Name -->
+
+
+        <!-- Date Of Birth -->
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3.0"
+        android:gravity="bottom|center_horizontal|center_vertical"
+        android:background="#F2F2F2"
+        android:orientation="vertical">
+
+
+
+        <!--  -->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="bottom"
+            android:weightSum="2">
+
+
+
+            <Button
+                android:id="@+id/back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#366988"
+                android:textColor="#FFFFFF"
+                android:layout_weight="1"
+                android:text="Back"
+                android:visibility="gone"
+                android:layout_margin="5dp"
+                android:textSize="16sp"/>
+
+            <Button
+                android:id="@+id/formsreceived"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#366988"
+                android:layout_margin="5dp"
+                android:text="Forms Received Report"
+                android:layout_weight="1"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"/>
+
+
+
+            <Button
+                android:id="@+id/postwise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#366988"
+                android:layout_margin="5dp"
+                android:text="Post wise Report"
+                android:layout_weight="1"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"/>
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+

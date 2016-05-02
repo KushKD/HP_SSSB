@@ -26,4 +26,7 @@
     <string name="title_activity_vacancy_details">VacancyDetails</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="title_activity_dashboard">Dashboard</string>
+    <string name="title_activity_dashboard_list">DashboardList</string>
+    <string name="title_activity_dashboard_list__forms_received">DashboardList_FormsReceived
+    </string>
 </resources>
