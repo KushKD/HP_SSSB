@@ -7,34 +7,34 @@ namespace HPSSSB_WEB_API
     public class AdmitCardAadhaar
     {
         [DataMember]
-        public String App_RollNo { get; set; }
-
-        [DataMember]
         public String PostName { get; set; }
 
         [DataMember]
-        public String PerName { get; set; }
+        public String Name { get; set; }
 
         [DataMember]
-        public String PerFName { get; set; }
+        public String FathersName { get; set; }
 
         [DataMember]
-        public String PerPhoto { get; set; }
+        public String Photo { get; set; }
 
         [DataMember]
-        public String PerSignature { get; set; }
+        public String Signature { get; set; }
 
         [DataMember]
-        public String PerAddress { get; set; }
+        public String Address { get; set; }
 
         [DataMember]
-        public String DistrictName { get; set; }
+        public String District { get; set; }
 
         [DataMember]
-        public String centreAlloted { get; set; }
+        public String RollNo { get; set; }
 
         [DataMember]
-        public String ApplicationFormNo { get; set; }
+        public String ExamCenter { get; set; }
+
+        [DataMember]
+        public String CenterAddress { get; set; }
 
         [DataMember]
         public String DateofExamination { get; set; }
