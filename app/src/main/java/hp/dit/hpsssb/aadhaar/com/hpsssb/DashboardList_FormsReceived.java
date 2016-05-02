@@ -110,8 +110,8 @@ public class DashboardList_FormsReceived extends Activity {
                 conn_ = (HttpURLConnection)url_.openConnection();
                 conn_.setRequestMethod("GET");
                 conn_.setUseCaches(false);
-                conn_.setConnectTimeout(20000);
-                conn_.setReadTimeout(20000);
+                conn_.setConnectTimeout(30000);
+                conn_.setReadTimeout(30000);
                 conn_.connect();
 
                 int HttpResult =conn_.getResponseCode();
