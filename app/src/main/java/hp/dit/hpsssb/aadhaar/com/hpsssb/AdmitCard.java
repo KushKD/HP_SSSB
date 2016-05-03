@@ -1,6 +1,7 @@
 package hp.dit.hpsssb.aadhaar.com.hpsssb;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -54,15 +55,24 @@ public class AdmitCard extends BaseActivity implements View.OnClickListener {
                 String Name = et_Name.getText().toString().trim();
                 String DOB = et_DOB.getText().toString().trim();
 
+                if(AadhaarNo.length()==12 && AadhaarNo.length()!= 0 && AadhaarNo!=null  ){
+                    Toast.makeText(getApplicationContext(),"Get Admit Card on the basis of Aadhaar.",Toast.LENGTH_LONG).show();
+                   //Get Admit Card on the basis of Aadhaar
+                    Intent i_admit_Aadhaar = new Intent(AdmitCard.this,AdmitCard_List.class);
+                    i_admit_Aadhaar.putExtra("Aadhaar_Service",AadhaarNo);
+                    startActivity(i_admit_Aadhaar);
 
-                Validate = Velidate_Date(AadhaarNo,ApplicationId,Name,DOB);
+                }if(ApplicationId.length()!=0 && Name.length()!=0 && DOB.length()!=0 && AadhaarNo.length()!=12 ) {
+                    Toast.makeText(getApplicationContext(),"Get Admit Card on the basis of personal details.",Toast.LENGTH_LONG).show();
 
-                //if check is true then go for Uploading and Retrieving data from Server
-                if(Validate){
-
-                }else{
-                    Toast.makeText(getApplicationContext(),"You need to fill in some details to get your Admit Card.",Toast.LENGTH_LONG).show();
                 }
+                else{
+                    Toast.makeText(getApplicationContext(),"Please enter either your valid Aadhaar number or complete personal Details.",Toast.LENGTH_LONG).show();
+
+                }
+
+
+
 
             }
         });
@@ -70,21 +80,7 @@ public class AdmitCard extends BaseActivity implements View.OnClickListener {
 
     }
 
-    private boolean Velidate_Date(String aadhaarNo, String applicationId, String name, String dob) {
 
-        if(aadhaarNo.length()==12 && aadhaarNo.length()!= 0 && aadhaarNo!=null  ){
-            Toast.makeText(getApplicationContext(),"Get Admit Card on the basis of Aadhaar.",Toast.LENGTH_LONG).show();
-            return true;
-
-        }if(applicationId.length()!=0 && name.length()!=0 && dob.length()!=0 && aadhaarNo.length()!=12 ) {
-            Toast.makeText(getApplicationContext(),"Get Admit Card on the basis of personal details.",Toast.LENGTH_LONG).show();
-            return true;
-        }
-        else{
-            Toast.makeText(getApplicationContext(),"Please enter either your valid Aadhaar number or complete personal Details.",Toast.LENGTH_LONG).show();
-            return false;
-        }
-    }
 
     private void setDateTimeField() {
         et_DOB.setOnClickListener(this);

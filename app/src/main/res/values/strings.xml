@@ -29,4 +29,6 @@
     <string name="title_activity_dashboard_list">DashboardList</string>
     <string name="title_activity_dashboard_list__forms_received">DashboardList_FormsReceived
     </string>
+    <string name="title_activity_admit_card__list">AdmitCard_List</string>
+    <string name="title_activity_admit_card_details">AdmitCardDetails</string>
 </resources>
