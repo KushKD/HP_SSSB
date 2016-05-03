@@ -48,7 +48,7 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
     private  Button Proceed;
     final Context context = this;
     public static final String url_Generic = "http://hpsssb.hp.gov.in/Uploads/HPSSSB%20Instructions.pdf" ;
-    public static final String url_local = "http://10.0.2.2:8015/HPSSSB_REST.svc/getInstructions_JSON" ;
+    public static final String url_local = "http://10.241.9.72/HPSSSB_wep/HPSSSB_REST.svc/getInstructions_JSON" ;  //"http://10.0.2.2:8015/HPSSSB_REST.svc/getInstructions_JSON"
 
 
     @Override

@@ -40,7 +40,7 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
         ext_ToDate = (TextView)findViewById(R.id.todate);
         ext_ToDate.setInputType(InputType.TYPE_NULL);
 
-        dateFormatter = new SimpleDateFormat("MM.dd.yyyy", Locale.US);
+        dateFormatter = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
         setDateTimeField();
 
         postWise.setOnClickListener(new View.OnClickListener() {

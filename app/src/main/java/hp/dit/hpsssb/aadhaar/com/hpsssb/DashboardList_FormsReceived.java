@@ -106,7 +106,7 @@ public class DashboardList_FormsReceived extends Activity {
 
 
             try {
-                url_ =new URL("http://10.0.2.2:8018/HPSSSB_REST.svc/getDashboard_JSON/"+params[0]+"/"+params[1]);
+                url_ =new URL("http://10.241.9.72/HPSSSB_wep/HPSSSB_REST.svc/getDashboard_JSON/"+params[0]+"/"+params[1]);
                 conn_ = (HttpURLConnection)url_.openConnection();
                 conn_.setRequestMethod("GET");
                 conn_.setUseCaches(false);

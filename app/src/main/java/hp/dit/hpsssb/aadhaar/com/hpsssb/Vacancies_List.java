@@ -44,7 +44,7 @@ public class Vacancies_List extends Activity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         Date_Service = bundle.getString("DATE_TO_SEND");
-        Toast.makeText(getApplicationContext(), Date_Service, Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(), Date_Service, Toast.LENGTH_LONG).show();
 
         listv = (ListView) findViewById(R.id.list);
         context = this;
@@ -115,7 +115,7 @@ public class Vacancies_List extends Activity {
 
 
             try {
-                url_ =new URL("http://10.0.2.2:8016/HPSSSB_REST.svc/getVacancies_JSON/07.03.2016");
+                url_ =new URL("http://10.241.9.72/HPSSSB_wep/HPSSSB_REST.svc/getVacancies_JSON/07-03-2016");
                 conn_ = (HttpURLConnection)url_.openConnection();
                 conn_.setRequestMethod("GET");
                 conn_.setUseCaches(false);
