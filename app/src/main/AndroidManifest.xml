@@ -59,6 +59,12 @@
             android:name=".AdmitCard_List"
             android:label="@string/title_activity_admit_card__list"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".AdmitCardPDetails_List"
+            android:label="@string/title_activity_admit_card__list"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".AdmitCardDetails"
             android:label="@string/title_activity_admit_card_details"

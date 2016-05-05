@@ -63,7 +63,13 @@ public class AdmitCard extends BaseActivity implements View.OnClickListener {
                     startActivity(i_admit_Aadhaar);
 
                 }if(ApplicationId.length()!=0 && Name.length()!=0 && DOB.length()!=0 && AadhaarNo.length()!=12 ) {
-                    Toast.makeText(getApplicationContext(),"Get Admit Card on the basis of personal details.",Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getApplicationContext(),"Get Admit Card on the basis of personal details.",Toast.LENGTH_LONG).show();
+                    Intent i_admit_PDetals = new Intent(AdmitCard.this,AdmitCardPDetails_List.class);
+                    i_admit_PDetals.putExtra("Name_Service",Name);
+                    i_admit_PDetals.putExtra("DOB_Service",DOB);
+                    i_admit_PDetals.putExtra("ApplicationID_Service",ApplicationId);
+                    startActivity(i_admit_PDetals);
+
 
                 }
                 else{
