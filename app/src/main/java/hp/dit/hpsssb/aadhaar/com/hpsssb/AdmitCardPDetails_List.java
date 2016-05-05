@@ -126,7 +126,7 @@ public class AdmitCardPDetails_List extends Activity {
 
 
             try {
-                url_ =new URL("http://10.241.9.72/HPSSSB_wep/HPSSSB_REST.svc/getAdmitCardPersonalDetails_JSON/");
+                url_ =new URL("http://10.241.9.72/HPSSSB_wep/HPSSSB_REST.svc/getAdmitCardPersonalDetails_JSON");
                 conn_ = (HttpURLConnection)url_.openConnection();
                 conn_.setDoOutput(true);
                 conn_.setRequestMethod("POST");
@@ -137,7 +137,7 @@ public class AdmitCardPDetails_List extends Activity {
                 conn_.connect();
 
                 JSONStringer userJson = new JSONStringer()
-                        .object().key("AdmitCard_PersonalDetails")
+                        .object().key("details")
                         .object()
                         .key("Name_Service").value(params[0])
                         .key("DOB_Service").value(params[1])
