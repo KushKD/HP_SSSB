@@ -81,7 +81,7 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                         ShowAlert("No pending results in pipeline.");
                         break;
                     case "Notifications":
-                        Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
+                       // Toast.makeText(getApplicationContext(),ButtonText + " was clicked",Toast.LENGTH_LONG).show();
                         break;
                     case "Instructions":
                         //Check weather the file is present in the SDCARD
@@ -126,8 +126,11 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
 
                         break;
                     case "Admit Card":
-                        Intent i_AdmitCard = new Intent(HPSSSB_MAIN.this,AdmitCard.class);
-                        startActivity(i_AdmitCard);
+                           //Login Pop Up goes Here
+                        Intent i_Login = new Intent(HPSSSB_MAIN.this,LoginScreen.class);
+                        startActivity(i_Login);
+                        /*Intent i_AdmitCard = new Intent(HPSSSB_MAIN.this,AdmitCard.class);
+                        startActivity(i_AdmitCard);*/
                         break;
                     default:
                         Toast.makeText(getApplicationContext(),"Somethings Not Good",Toast.LENGTH_LONG).show();
@@ -218,8 +221,11 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
 
                 break;
             case R.id.main_admitcard:
-                Intent i_AdmitCard = new Intent(HPSSSB_MAIN.this,AdmitCard.class);
-                startActivity(i_AdmitCard);
+                //Login Pop Up goes Here
+               /* Intent i_AdmitCard = new Intent(HPSSSB_MAIN.this,AdmitCard.class);
+                startActivity(i_AdmitCard);*/
+                 Intent i_Login = new Intent(HPSSSB_MAIN.this,LoginScreen.class);
+                startActivity(i_Login);
                 break;
 
             case R.id.main_vacancies:
@@ -235,6 +241,8 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                 break;
         }
     }
+
+
 
     private void ShowAlert(String s) {
         Log.d("SMS is ==========",s);

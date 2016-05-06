@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center|center_horizontal|center_vertical"
-            android:text="Dashboard"
+            android:text="Login"
             android:textColor="#FFFFFF"
             android:background="#366988"
             android:textSize="20sp"
@@ -38,7 +38,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="#f2f2f2"
-        android:gravity="center|center_horizontal|center_vertical"
+        android:gravity="top|center_horizontal|center_vertical"
         android:orientation="vertical">
 
 
@@ -51,7 +51,7 @@
             android:gravity="center|center_vertical|center_horizontal"
             android:padding="10dip"
             android:layout_margin="5dp"
-            android:text="Reporting Date Range"
+            android:text="Please Login via entering your registered Mobile Number"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#366988"/>
@@ -62,7 +62,7 @@
             android:background="#40666666"
             android:gravity="left|center_vertical|center_horizontal"
             android:padding="10dip"
-            android:text="** Notification Goes Here "
+            android:text="** Enter your registered  Mobile number . One Time Password will be sent to the registered Mobile Number. "
             android:textColor="#366988"/>
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -89,7 +89,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="top"
-                    android:src="@drawable/dob"
+                    android:src="@drawable/profile"
                     android:contentDescription="@string/app_name" />
 
             </LinearLayout>
@@ -107,8 +107,8 @@
                 android:src="@drawable/speaker" />
 
 
-            <TextView
-                android:id="@+id/fromdate"
+            <EditText
+                android:id="@+id/phonenumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/tvCity"
@@ -117,20 +117,33 @@
                 android:layout_marginRight="5dip"
                 android:layout_toLeftOf="@+id/imageView1"
                 android:background="@drawable/rounded_edittext"
-                android:hint="  From date"
+                android:hint=" Enter Mobile Number"
                 android:inputType="number"
+                android:maxLength="10"
                 android:textColor="#366988"
                 android:textColorHint="#366988"
                 android:textSize="18dip" />
 
         </RelativeLayout>
 
-
+        <Button
+            android:id="@+id/get_otp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get OTP"
+            android:gravity="center_horizontal|center_vertical|center"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:background="#366988"
+            android:layout_margin="5dp"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"/>
         <!-- Phone No -->
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="#40666666"
+            android:visibility="gone"
+            android:id="@+id/rl_otp"
             android:gravity="center|center_vertical|center_horizontal"
             android:orientation="horizontal"
             android:padding="15dip" >
@@ -163,18 +176,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:visibility="gone"
                 android:background="@drawable/circularbutton"
                 android:contentDescription="@string/app_name"
-                android:visibility="gone"
                 android:src="@drawable/speaker" />
 
 
-
-
-
-
-            <TextView
-                android:id="@+id/todate"
+            <EditText
+                android:id="@+id/otp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/tvCity"
@@ -183,7 +192,7 @@
                 android:layout_marginRight="5dip"
                 android:layout_toLeftOf="@+id/imageView12"
                 android:background="@drawable/rounded_edittext"
-                android:hint="Till Date"
+                android:hint="Enter OTP"
                 android:textColor="#366988"
                 android:textColorHint="#366988"
                 android:textSize="18sp" />
@@ -240,12 +249,12 @@
                 android:textSize="16sp"/>
 
             <Button
-                android:id="@+id/formsreceived"
+                android:id="@+id/quit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#366988"
                 android:layout_margin="5dp"
-                android:text="Forms Received Report"
+                android:text="Back"
                 android:layout_weight="1"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"/>
@@ -253,13 +262,14 @@
 
 
             <Button
-                android:id="@+id/postwise"
+                android:id="@+id/login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="Log In"
+                android:layout_weight="1"
                 android:background="#366988"
                 android:layout_margin="5dp"
-                android:text="Post wise Report"
-                android:layout_weight="1"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"/>
 
