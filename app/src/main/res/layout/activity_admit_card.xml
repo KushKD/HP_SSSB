@@ -179,7 +179,6 @@
                 android:layout_toLeftOf="@+id/imageView12"
                 android:background="@drawable/rounded_edittext"
                 android:hint="Enter Application ID"
-                android:maxLength="10"
                 android:textColor="#366988"
                 android:textColorHint="#366988"
                 android:textSize="18sp" />
@@ -313,7 +312,6 @@
                 android:layout_toLeftOf="@+id/imageView14"
                 android:background="@drawable/rounded_edittext"
                 android:hint="Enter Date Of Birth"
-                android:maxLength="10"
                 android:textColor="#366988"
                 android:textColorHint="#366988"
                 android:textSize="18sp" />

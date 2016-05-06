@@ -63,7 +63,6 @@ public class AdmitCardPDetails_List extends Activity {
 
         if (isOnline()) {
             GetAdmitCard asy_Get_AdmitCard_Aadhaar = new GetAdmitCard();
-            Toast.makeText(getApplicationContext(),Name_Service+DOB_Service+ApplicationID_Service,Toast.LENGTH_LONG).show();
             asy_Get_AdmitCard_Aadhaar.execute(Name_Service,DOB_Service,ApplicationID_Service);
         } else {
             Toast.makeText(this, "Network Error. Please connect to Internet.", Toast.LENGTH_LONG).show();
@@ -190,7 +189,7 @@ public class AdmitCardPDetails_List extends Activity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             Log.d("== Date From Server ==",result);
-            Admit_Card_Server = AdmitCard_JSON.parseFeed(result);
+            Admit_Card_Server = AdmitCardP_JSON.parseFeed(result);
             if(Admit_Card_Server.isEmpty()){
                 Toast.makeText(getApplicationContext(),"Empty List",Toast.LENGTH_LONG).show();
             }else
