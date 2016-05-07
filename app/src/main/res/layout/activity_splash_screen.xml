@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#f2f2f2"
+    android:background="@drawable/splashscreen"
     android:weightSum="3">
 
     <!-- ImageView -->
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="\u00A9 2016 Department Of Information Technology Himachal Pradesh"
+            android:text=""
             android:textSize="16sp"/>
     </LinearLayout>
 

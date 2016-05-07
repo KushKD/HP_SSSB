@@ -36,7 +36,7 @@ public class SplashScreen extends BaseActivity {
                 SplashScreen.this.startActivity(mainIntent);
                 SplashScreen.this.finish();
             }
-        }, 5000);
+        }, 3000);
     }
 
 

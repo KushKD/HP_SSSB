@@ -37,38 +37,48 @@
         <activity
             android:name=".VacancyDetails"
             android:label="@string/title_activity_vacancy_details"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
             android:name=".HPSSSB_MAIN"
             android:launchMode="singleInstance"
+
             android:screenOrientation="portrait" />
         <activity
             android:name=".Dashboard"
             android:label="@string/title_activity_dashboard"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
             android:name=".DashboardList_PostWise"
             android:label="@string/title_activity_dashboard_list"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
             android:name=".DashboardList_FormsReceived"
             android:label="@string/title_activity_dashboard_list__forms_received"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
             android:name=".AdmitCard_List"
             android:label="@string/title_activity_admit_card__list"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
             android:name=".AdmitCardPDetails_List"
             android:label="@string/title_activity_admit_card__list"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
             android:name=".AdmitCardDetails"
             android:label="@string/title_activity_admit_card_details"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
             android:name=".LoginScreen"
-            android:label="@string/title_activity_login_screen"></activity>
+            android:label="@string/title_activity_login_screen"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
