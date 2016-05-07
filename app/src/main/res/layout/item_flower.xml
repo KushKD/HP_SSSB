@@ -19,8 +19,9 @@ android:padding="5dip" >
 
     <ImageView
         android:id="@+id/imageView1"
-        android:src="@drawable/jobs"
+        android:src="@drawable/jobsnew"
         android:layout_width="60dip"
+        android:layout_margin="3dp"
         android:layout_height="60dip"
         android:layout_gravity="top"
         android:contentDescription="@string/app_name" />

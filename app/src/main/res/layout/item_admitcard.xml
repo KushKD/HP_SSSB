@@ -19,7 +19,7 @@
 
         <ImageView
             android:id="@+id/imageView1"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/applicationid"
             android:layout_width="60dip"
             android:layout_height="60dip"
             android:layout_gravity="top"
