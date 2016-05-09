@@ -93,7 +93,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:gravity="center|center_vertical|center_horizontal"
+        android:gravity="top|center_vertical|center_horizontal"
         android:background="#366988"
         android:layout_weight="0.5">
 
@@ -102,7 +102,7 @@
             android:layout_height="fill_parent"
             android:text="Copyright © 2016 Department Of Information Technology H.P."
             android:textStyle="bold"
-            android:gravity="center|center_horizontal|center_vertical"
+            android:gravity="top|center_horizontal|center_vertical"
             android:textColor="#FFFFFF"/>
     </LinearLayout>
 
