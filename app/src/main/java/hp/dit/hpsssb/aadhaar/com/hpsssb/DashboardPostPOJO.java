@@ -8,6 +8,9 @@ import java.io.Serializable;
 public class DashboardPostPOJO implements Serializable {
 
     private String Post_Name;
+    private String Female;
+    private String Male;
+    private String Others;
 
     public String getPost_Name() {
         return Post_Name;
@@ -41,7 +44,5 @@ public class DashboardPostPOJO implements Serializable {
         Others = others;
     }
 
-    private String Female;
-    private String Male;
-    private String Others;
+
 }

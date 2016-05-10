@@ -19,29 +19,20 @@ public class Vacancy_JSON {
     public static List<VacancyPOJO> parseFeed(String content) {
 
         try {
-
             String g_Table = null;
             Object json = new JSONTokener(content).nextValue();
             if (json instanceof JSONObject){
-              //  Log.d("Json ", "Object");
                 JSONObject obj = new JSONObject(content);
-                g_Table = obj.optString("JSON_VacanciesResult");
-                Log.d("Table===",g_Table);
+                g_Table = obj.optString(EConstants.Vacancies_Result);
             }
-            //you have an object
             else if (json instanceof JSONArray){
             }
-
             JSONArray ar = new JSONArray(g_Table);
             List<VacancyPOJO>VacancyList = new ArrayList<>();
 
             for (int i = 0; i < ar.length(); i++) {
                 JSONObject obj = ar.getJSONObject(i);
                 VacancyPOJO pojo_Vacancy = new VacancyPOJO();
-
-                /**
-                 * Add the Values Here
-                 */
                 pojo_Vacancy.setDepartment(obj.getString("Department"));
                 pojo_Vacancy.setDetails(obj.getString("Details"));
                 pojo_Vacancy.setLastDate(obj.getString("LastDate"));
@@ -50,7 +41,6 @@ public class Vacancy_JSON {
                 pojo_Vacancy.setPostName(obj.getString("PostName"));
                 pojo_Vacancy.setPubDate(obj.getString("PubDate"));
                 pojo_Vacancy.setSNO(obj.getString("SNO"));
-
                 VacancyList.add(pojo_Vacancy);
             }
             return VacancyList;

@@ -12,6 +12,9 @@ public class VacancyPOJO implements Serializable {
     private String Department;
     private String PostName;
     private String PostCode;
+    private String Details;
+    private String PubDate;
+    private String LastDate;
 
     public String getSNO() {
         return SNO;
@@ -77,7 +80,5 @@ public class VacancyPOJO implements Serializable {
         LastDate = lastDate;
     }
 
-    private String Details;
-    private String PubDate;
-    private String LastDate;
+
 }

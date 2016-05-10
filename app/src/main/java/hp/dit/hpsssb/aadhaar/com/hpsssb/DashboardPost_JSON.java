@@ -15,18 +15,13 @@ import java.util.List;
  */
 public class DashboardPost_JSON {
     public static List<DashboardPostPOJO> parseFeed(String content) {
-
         try {
-
             String g_Table = null;
             Object json = new JSONTokener(content).nextValue();
             if (json instanceof JSONObject){
-                //  Log.d("Json ", "Object");
                 JSONObject obj = new JSONObject(content);
-                g_Table = obj.optString("JSON_DashboardCReportResult");
-                Log.d("Table===",g_Table);
+                g_Table = obj.optString(EConstants.DashboardCReport_Result);
             }
-            //you have an object
             else if (json instanceof JSONArray){
             }
 
@@ -36,16 +31,10 @@ public class DashboardPost_JSON {
             for (int i = 0; i < ar.length(); i++) {
                 JSONObject obj = ar.getJSONObject(i);
                 DashboardPostPOJO pojo_DashboardPost = new DashboardPostPOJO();
-
-                /**
-                 * Add the Values Here
-                 */
                 pojo_DashboardPost.setPost_Name(obj.getString("Post_Name"));
                 pojo_DashboardPost.setMale(obj.getString("Male"));
                 pojo_DashboardPost.setFemale(obj.getString("Female"));
                 pojo_DashboardPost.setOthers(obj.getString("Others"));
-
-
                 DashboardPostList.add(pojo_DashboardPost);
             }
             return DashboardPostList;

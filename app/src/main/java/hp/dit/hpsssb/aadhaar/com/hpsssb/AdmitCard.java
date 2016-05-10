@@ -18,7 +18,7 @@ import hp.dit.hpsssb.aadhaar.com.presentation.BaseActivity;
 public class AdmitCard extends BaseActivity implements View.OnClickListener {
 
     private Button back;
-    private TextView et_Aadhaar, et_ApplicationID , et_Name , et_DOB,x;
+    private TextView et_Aadhaar, et_ApplicationID , et_Name , et_DOB;
     private DatePickerDialog dateofBirth_Dialog;
     private SimpleDateFormat dateFormatter;
     private Button bt_GetAdmitCard;
@@ -56,24 +56,22 @@ public class AdmitCard extends BaseActivity implements View.OnClickListener {
                 String DOB = et_DOB.getText().toString().trim();
 
                 if(AadhaarNo.length()==12 && AadhaarNo.length()!= 0 && AadhaarNo!=null  ){
-                    Toast.makeText(getApplicationContext(),"Get Admit Card on the basis of Aadhaar.",Toast.LENGTH_LONG).show();
-                   //Get Admit Card on the basis of Aadhaar
+
                     Intent i_admit_Aadhaar = new Intent(AdmitCard.this,AdmitCard_List.class);
-                    i_admit_Aadhaar.putExtra("Aadhaar_Service",AadhaarNo);
+                    i_admit_Aadhaar.putExtra(EConstants.Put_Aadhaar,AadhaarNo);
                     startActivity(i_admit_Aadhaar);
 
                 }if(ApplicationId.length()!=0 && Name.length()!=0 && DOB.length()!=0 && AadhaarNo.length()!=12 ) {
-                   // Toast.makeText(getApplicationContext(),"Get Admit Card on the basis of personal details.",Toast.LENGTH_LONG).show();
-                    Intent i_admit_PDetals = new Intent(AdmitCard.this,AdmitCardPDetails_List.class);
-                    i_admit_PDetals.putExtra("Name_Service",Name);
-                    i_admit_PDetals.putExtra("DOB_Service",DOB);
-                    i_admit_PDetals.putExtra("ApplicationID_Service",ApplicationId);
+                  Intent i_admit_PDetals = new Intent(AdmitCard.this,AdmitCardPDetails_List.class);
+                    i_admit_PDetals.putExtra(EConstants.Put_Name,Name);
+                    i_admit_PDetals.putExtra(EConstants.Put_DOB,DOB);
+                    i_admit_PDetals.putExtra(EConstants.Put_ApplicationID,ApplicationId);
                     startActivity(i_admit_PDetals);
 
 
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"Please enter either your valid Aadhaar number or complete personal Details.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),EConstants.Error_Aadhaar,Toast.LENGTH_LONG).show();
 
                 }
 
@@ -109,7 +107,7 @@ public class AdmitCard extends BaseActivity implements View.OnClickListener {
         if(v == et_DOB) {
             dateofBirth_Dialog.show();
         } else {
-            Toast.makeText(getApplicationContext(),"There are some serious issues.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),EConstants.Error_NoIdea ,Toast.LENGTH_SHORT).show();
         }
     }
 }

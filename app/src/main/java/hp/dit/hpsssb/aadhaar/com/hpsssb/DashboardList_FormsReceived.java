@@ -61,7 +61,7 @@ public class DashboardList_FormsReceived extends Activity {
             GetFormWise asy_Get_FD = new GetFormWise();
             asy_Get_FD.execute(Date_Service_From,Date_Service_To);
         } else {
-            Toast.makeText(this, "Network Error. Please connect to Internet.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, EConstants.Error_NoNetwork, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -106,22 +106,20 @@ public class DashboardList_FormsReceived extends Activity {
 
 
             try {
-                url_ =new URL("http://10.241.9.72/HPSSSB_wep/HPSSSB_REST.svc/getDashboard_JSON/"+params[0]+"/"+params[1]);
+                url_ =new URL(EConstants.url_Generic+EConstants.Delemeter+EConstants.function_Dashboard+EConstants.Delemeter+params[0]+EConstants.Delemeter+params[1]);
                 conn_ = (HttpURLConnection)url_.openConnection();
-                conn_.setRequestMethod("GET");
+                conn_.setRequestMethod(EConstants.HTTP_Verb_Get);
                 conn_.setUseCaches(false);
-                conn_.setConnectTimeout(30000);
-                conn_.setReadTimeout(30000);
+                conn_.setConnectTimeout(EConstants.Connection_TimeOut);
+                conn_.setReadTimeout(EConstants.Connection_TimeOut);
                 conn_.connect();
 
                 int HttpResult =conn_.getResponseCode();
                 if(HttpResult ==HttpURLConnection.HTTP_OK){
-                    System.out.println(HttpResult+ "@@@@@@");
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn_.getInputStream(),"utf-8"));
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn_.getInputStream(),EConstants.UNICODE));
                     String line = null;
                     while ((line = br.readLine()) != null) {
                         sb.append(line + "\n");
-                        System.out.println(sb.toString()+ "@@@@@@");
                     }
                     br.close();
 
@@ -147,10 +145,9 @@ public class DashboardList_FormsReceived extends Activity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.d("== Date From Server ==",result);
             Dashboard_Forms_Server = DashboardForm_JSON.parseFeed(result);
             if(Dashboard_Forms_Server.isEmpty()){
-                Toast.makeText(getApplicationContext(),"Empty List",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"No Record Found.",Toast.LENGTH_LONG).show();
             }else
             {
                 updateDisplay();

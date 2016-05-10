@@ -33,11 +33,6 @@ public class JSONParser {
 
     }
 
-    /**
-     * Verification LOGIN
-     * @author Kush Kumar Dhawan
-     */
-
     public String getDataRest(String url) {
 
         HttpClient httpclient = new DefaultHttpClient();
@@ -65,12 +60,10 @@ public class JSONParser {
         try {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(is, "utf-8"), 32);
-            //    BufferedReader reader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"), 16);
             StringBuilder sb = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
-                System.out.println("This is the RESPONSE I'm Getting" + line);
             }
             is.close();
             varification = sb.toString();
@@ -123,7 +116,6 @@ public class JSONParser {
             String line = null;
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
-                System.out.println("This is the RESPONSE I'm Getting"+line);
             }
             is.close();
             pdf_URL = sb.toString();
@@ -138,10 +130,6 @@ public class JSONParser {
     }
 
 
-    /*
-    Check Login
-    Kush Kumar Dhawan
-     */
 
     public String checkLogin(String url) {
 

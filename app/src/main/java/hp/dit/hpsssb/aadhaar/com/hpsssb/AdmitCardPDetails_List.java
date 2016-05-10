@@ -49,9 +49,9 @@ public class AdmitCardPDetails_List extends Activity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
-        Name_Service = bundle.getString("Name_Service");
-        DOB_Service = bundle.getString("DOB_Service");
-        ApplicationID_Service = bundle.getString("ApplicationID_Service");
+        Name_Service = bundle.getString(EConstants.Put_Name);
+        DOB_Service = bundle.getString(EConstants.Put_DOB);
+        ApplicationID_Service = bundle.getString(EConstants.Put_ApplicationID);
 
 
         listv = (ListView) findViewById(R.id.list);
@@ -65,7 +65,7 @@ public class AdmitCardPDetails_List extends Activity {
             GetAdmitCard asy_Get_AdmitCard_Aadhaar = new GetAdmitCard();
             asy_Get_AdmitCard_Aadhaar.execute(Name_Service,DOB_Service,ApplicationID_Service);
         } else {
-            Toast.makeText(this, "Network Error. Please connect to Internet.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, EConstants.Error_NoNetwork, Toast.LENGTH_LONG).show();
         }
 
         listv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -101,14 +101,8 @@ public class AdmitCardPDetails_List extends Activity {
 
     }
 
-    /**
-     * Async Task Starts Here
-     */
     class GetAdmitCard extends AsyncTask<String,String,String> {
-
-
-        String url = null;
-
+         String url = null;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -125,10 +119,10 @@ public class AdmitCardPDetails_List extends Activity {
 
 
             try {
-                url_ =new URL("http://10.241.9.72/HPSSSB_wep/HPSSSB_REST.svc/getAdmitCardPersonalDetails_JSON");
+                url_ =new URL(EConstants.url_Generic+EConstants.Delemeter+EConstants.function_getAdmitCardPersonalDetails);
                 conn_ = (HttpURLConnection)url_.openConnection();
                 conn_.setDoOutput(true);
-                conn_.setRequestMethod("POST");
+                conn_.setRequestMethod(EConstants.HTTP_Verb_post);
                 conn_.setUseCaches(false);
                 conn_.setConnectTimeout(10000);
                 conn_.setReadTimeout(10000);
@@ -154,13 +148,10 @@ public class AdmitCardPDetails_List extends Activity {
 
                 int HttpResult =conn_.getResponseCode();
                 if(HttpResult ==HttpURLConnection.HTTP_OK){
-                    System.out.println(HttpResult+ "@@@@@@");
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn_.getInputStream(),"utf-8"));
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn_.getInputStream(),EConstants.UNICODE));
                     String line = null;
                     while ((line = br.readLine()) != null) {
                         sb.append(line + "\n");
-                        System.out.println(sb.toString()+ "@@@@@@");
-                        System.out.println("\n \t" +"@@@@@@"+sb.toString().length());
                     }
                     br.close();
 
@@ -188,10 +179,9 @@ public class AdmitCardPDetails_List extends Activity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.d("== Date From Server ==",result);
             Admit_Card_Server = AdmitCardP_JSON.parseFeed(result);
             if(Admit_Card_Server.isEmpty()){
-                Toast.makeText(getApplicationContext(),"Empty List",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Details not found.",Toast.LENGTH_LONG).show();
             }else
             {
                 updateDisplay();

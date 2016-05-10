@@ -11,6 +11,8 @@ public class DashboardFormsPOJO implements Serializable {
     private String HDFC;
     private String LMK;
     private String Offline;
+    private String PNB;
+    private String Total_Payment_Received;
 
     public String getTotal_Payment_Received() {
         return Total_Payment_Received;
@@ -60,7 +62,6 @@ public class DashboardFormsPOJO implements Serializable {
         Application_Recived = application_Recived;
     }
 
-    private String PNB;
-    private String Total_Payment_Received;
+
 
 }

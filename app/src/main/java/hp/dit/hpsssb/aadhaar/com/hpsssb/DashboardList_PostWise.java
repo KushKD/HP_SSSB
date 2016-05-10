@@ -46,11 +46,8 @@ public class DashboardList_PostWise extends Activity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        Date_Service_From = bundle.getString("DATE_TO_SEND_FROM");
-        Date_Service_To = bundle.getString("DATE_TO_SEND_TO");
-
-       // Toast.makeText(getApplicationContext(), Date_Service_From +"@@@@@"+ Date_Service_To , Toast.LENGTH_LONG).show();
-
+        Date_Service_From = bundle.getString(EConstants.Put_From_Date);
+        Date_Service_To = bundle.getString(EConstants.Put_To_Date);
         listv = (ListView) findViewById(R.id.list);
         context = this;
         pb = (ProgressBar) findViewById(R.id.progressBar1);
@@ -62,7 +59,7 @@ public class DashboardList_PostWise extends Activity {
             GetPostwiseDashboard asy_Get_PD = new GetPostwiseDashboard();
             asy_Get_PD.execute(Date_Service_From,Date_Service_To);
         } else {
-            Toast.makeText(this, "Network Error. Please connect to Internet.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, EConstants.Error_NoNetwork, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -80,17 +77,10 @@ public class DashboardList_PostWise extends Activity {
 
         DashboardPost_Adapter adapter = new DashboardPost_Adapter(this, R.layout.item_flower, DashboardPost_POJO_Server);
         listv.setAdapter(adapter);
-
     }
 
-    /**
-     * Async Task Starts Here
-     */
     class GetPostwiseDashboard extends AsyncTask<String,String,String> {
-
-
         String url = null;
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -99,30 +89,24 @@ public class DashboardList_PostWise extends Activity {
                 pb.setVisibility(View.VISIBLE);
             }
             tasks.add(this);
-
         }
-
         @Override
         protected String doInBackground(String... params) {
-
-
             try {
-                url_ =new URL("http://10.241.9.72/HPSSSB_wep/HPSSSB_REST.svc/getDashboardCReport_JSON/"+params[0]+"/"+params[1]);
+                url_ =new URL(EConstants.url_Generic+EConstants.Delemeter+EConstants.function_DashboardCReport+EConstants.Delemeter+params[0]+EConstants.Delemeter+params[1]);
                 conn_ = (HttpURLConnection)url_.openConnection();
-                conn_.setRequestMethod("GET");
+                conn_.setRequestMethod(EConstants.HTTP_Verb_Get);
                 conn_.setUseCaches(false);
-                conn_.setConnectTimeout(20000);
-                conn_.setReadTimeout(20000);
+                conn_.setConnectTimeout(EConstants.Connection_TimeOut);
+                conn_.setReadTimeout(EConstants.Connection_TimeOut);
                 conn_.connect();
 
                 int HttpResult =conn_.getResponseCode();
                 if(HttpResult ==HttpURLConnection.HTTP_OK){
-                    System.out.println(HttpResult+ "@@@@@@");
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn_.getInputStream(),"utf-8"));
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn_.getInputStream(),EConstants.UNICODE));
                     String line = null;
                     while ((line = br.readLine()) != null) {
                         sb.append(line + "\n");
-                        System.out.println(sb.toString()+ "@@@@@@");
                     }
                     br.close();
 
@@ -148,10 +132,9 @@ public class DashboardList_PostWise extends Activity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.d("== Date From Server ==",result);
             DashboardPost_POJO_Server = DashboardPost_JSON.parseFeed(result);
             if(DashboardPost_POJO_Server.isEmpty()){
-                Toast.makeText(getApplicationContext(),"Empty List",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"No record found.",Toast.LENGTH_LONG).show();
             }else
             {
                 updateDisplay();

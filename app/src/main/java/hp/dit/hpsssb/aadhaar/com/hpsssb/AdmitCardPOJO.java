@@ -10,6 +10,16 @@ public class AdmitCardPOJO implements Serializable {
     private String PostName;
     private String Name;
     private String FathersName;
+    private byte[] Photo;
+    private byte[] Signature;
+    private String Address;
+    private String District;
+    private String RollNo;
+    private String ExamCenter;
+    private String CenterAddress;
+    private String DateofExamination;
+    private String ReportingTime;
+    private String Duration;
 
     public String getDuration() {
         return Duration;
@@ -115,16 +125,7 @@ public class AdmitCardPOJO implements Serializable {
         PostName = postName;
     }
 
-    private byte[] Photo;
-    private byte[] Signature;
-    private String Address;
-    private String District;
-    private String RollNo;
-    private String ExamCenter;
-    private String CenterAddress;
-    private String DateofExamination;
-    private String ReportingTime;
-    private String Duration;
+
 
 
 }

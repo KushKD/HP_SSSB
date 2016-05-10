@@ -21,7 +21,7 @@ public class VacancyDetails extends Activity {
         setContentView(R.layout.activity_vacancy_details);
 
         Intent getRoomDetailsIntent = getIntent();
-        final VacancyPOJO VacancyDetails =  (VacancyPOJO) getRoomDetailsIntent.getSerializableExtra("Details");
+        final VacancyPOJO VacancyDetails =  (VacancyPOJO) getRoomDetailsIntent.getSerializableExtra(EConstants.PutExtra_Message_Vacancies);
 
         back = (Button)findViewById(R.id.back);
         apply = (Button)findViewById(R.id.apply);
@@ -53,13 +53,13 @@ public class VacancyDetails extends Activity {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowAlert("You'll be redirected to the http://hpsssb.hp.gov.in. Do you want to continue? Press Proceed to continue and Quit to exit. ");
+                ShowAlert( EConstants.ApplyButton_AlertMessage);
             }
         });
     }
 
     private void ShowAlert(String s) {
-        final Dialog dialog = new Dialog(VacancyDetails.this); // Context, this, etc.
+        final Dialog dialog = new Dialog(VacancyDetails.this);
         dialog.setContentView(R.layout.dialog_apply);
         dialog.setTitle("Notification");
         dialog.setCancelable(false);
@@ -75,14 +75,11 @@ public class VacancyDetails extends Activity {
             @Override
             public void onClick(View v) {
 
-                /**
-                 * Open website www.hpsssb.gov.in
-                 */
                 dialog.dismiss();
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse("http://hpsssb.hp.gov.in/vacancies.aspx"));
+                intent.setData(Uri.parse(EConstants.WebSite_Link));
                 startActivity(intent);
             }
         });

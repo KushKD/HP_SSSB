@@ -1,7 +1,10 @@
 package hp.dit.hpsssb.aadhaar.com.hpsssb;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -44,10 +47,14 @@ public class LoginScreen extends BaseActivity {
                 String Phone_Verify = tv_Phone.getText().toString().trim();
 
                 if(OTP_Verify!=null && Phone_Verify.length()==10 ){
-                    Async_Verify_OTP async_verify_otp = new Async_Verify_OTP();
-                    async_verify_otp.execute(Phone_Verify,OTP_Verify);
+                    if(isOnline()) {
+                        Async_Verify_OTP async_verify_otp = new Async_Verify_OTP();
+                        async_verify_otp.execute(Phone_Verify, OTP_Verify);
+                    }else{
+                        Toast.makeText(getApplicationContext(),EConstants.Error_NoNetwork,Toast.LENGTH_LONG).show();
+                    }
                 }else{
-                   Toast.makeText(getApplicationContext(),"Something went wrong. Please try again ",Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(), EConstants.Error_NoIdea,Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -58,24 +65,38 @@ public class LoginScreen extends BaseActivity {
             public void onClick(View v) {
                String PhoneNumber = tv_Phone.getText().toString().trim();
                 if(PhoneNumber.length()==10 && PhoneNumber!=null){
-                    //Run Async Task
-                    Async_Get_OTP async_otp = new Async_Get_OTP();
-                    async_otp.execute(PhoneNumber);
+                    if(isOnline()){
+                        Async_Get_OTP async_otp = new Async_Get_OTP();
+                        async_otp.execute(PhoneNumber);
+                    }else{
+                        Toast.makeText(getApplicationContext(),EConstants.Error_NoNetwork,Toast.LENGTH_LONG).show();
+                    }
+
                 }else{
-                    Toast.makeText(getApplicationContext(),"Please enter a valid mobile number.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),EConstants.ErrorMobile,Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
 
-        btn_Login.setEnabled(false);
 
+        btn_Login.setEnabled(false);
         btn_Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoginScreen.this.finish();
             }
         });
+    }
+
+    protected boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
@@ -91,7 +112,7 @@ public class LoginScreen extends BaseActivity {
             super.onPreExecute();
             // Showing progress dialog
             progressDialog = new ProgressDialog(LoginScreen.this);
-            progressDialog.setMessage("Please wait , an OTP will be sent to this mobile number");
+            progressDialog.setMessage(EConstants.Messages_OTP);
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
@@ -101,10 +122,10 @@ public class LoginScreen extends BaseActivity {
             Server_Phone = params[0];
 
             StringBuilder sb = new StringBuilder();
-            sb.append("http://10.241.9.72/HPSSSB_wep/HPSSSB_REST.svc");
-            sb.append("/");
-            sb.append("getLogin_JSON");
-            sb.append("/");
+            sb.append(EConstants.url_Generic);
+            sb.append(EConstants.Delemeter);
+            sb.append(EConstants.function_GetOTP);
+            sb.append(EConstants.Delemeter);
             sb.append(Server_Phone);
             url = sb.toString();
             JSONParser jParser = new JSONParser();
@@ -116,14 +137,12 @@ public class LoginScreen extends BaseActivity {
 
                 if (json instanceof JSONObject){
                     JSONObject obj = new JSONObject(result);
-                    Result = obj.getString("JSON_LoginResult");
+                    Result = obj.getString(EConstants.OTP_Result);
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
-              //  Server_value = false;
             }
-
             return Result;
         }
 
@@ -141,14 +160,10 @@ if(s.length()==52){
     rl_otp.setVisibility(View.VISIBLE);
     tv_Phone.setEnabled(false);
 
-
 }else{
     progressDialog.dismiss();
     Toast.makeText(getApplicationContext(),s + s.length(),Toast.LENGTH_LONG).show();
 }
-
-
-
         }
     }
 
@@ -166,7 +181,7 @@ if(s.length()==52){
             super.onPreExecute();
             // Showing progress dialog
             progressDialog = new ProgressDialog(LoginScreen.this);
-            progressDialog.setMessage("Please wait ,while we are trying to connect ..");
+            progressDialog.setMessage(EConstants.progress_Dialog_Message);
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
@@ -175,14 +190,13 @@ if(s.length()==52){
         protected Boolean  doInBackground(String... params) {
             Server_Phone = params[0];
             Server_OTP = params[1];
-
             StringBuilder sb = new StringBuilder();
-            sb.append("http://10.241.9.72/HPSSSB_wep/HPSSSB_REST.svc");
-            sb.append("/");
-            sb.append("getLoginAuth_JSON");
-            sb.append("/");
+            sb.append(EConstants.url_Generic);
+            sb.append(EConstants.Delemeter);
+            sb.append(EConstants.function_VerifyOTP);
+            sb.append(EConstants.Delemeter);
             sb.append(Server_Phone);
-            sb.append("/");
+            sb.append(EConstants.Delemeter);
             sb.append(Server_OTP);
             url = sb.toString();
             JSONParser jParser = new JSONParser();
@@ -191,34 +205,30 @@ if(s.length()==52){
             Object json ;
             try {
                 json = new JSONTokener(result).nextValue();
-
                 if (json instanceof JSONObject){
                     JSONObject obj = new JSONObject(result);
-                    Server_value = obj.optBoolean("JSON_LoginAuthResult");
+                    Server_value = obj.optBoolean(EConstants.Login_Result);
                 }
-
             } catch (JSONException e) {
                 e.printStackTrace();
                   Server_value = false;
             }
-
             return Server_value;
-        }
+        };
 
         @Override
         protected void onPostExecute(Boolean s) {
             super.onPostExecute(s);
             this.progressDialog.dismiss();
-
-
-
             if(s) {
                 Intent i_2 = new Intent(LoginScreen.this, AdmitCard.class);
                 startActivity(i_2);
                 LoginScreen.this.finish();
             }else {
-                Toast.makeText(getApplicationContext(), "Something Went wrong . Please try again..", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),EConstants.Error_NoIdea, Toast.LENGTH_LONG).show();
             }
         }
+
+
     }
 }

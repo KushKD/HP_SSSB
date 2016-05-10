@@ -181,7 +181,7 @@
                 android:layout_marginRight="5dip"
                 android:layout_toLeftOf="@+id/imageView12"
                 android:background="@drawable/rounded_edittext"
-                android:hint="Till Date"
+                android:hint="To Date"
                 android:textColor="#366988"
                 android:textColorHint="#366988"
                 android:textSize="18sp" />

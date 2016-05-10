@@ -22,25 +22,18 @@ public class AdmitCard_JSON {
             String g_Table = null;
             Object json = new JSONTokener(content).nextValue();
             if (json instanceof JSONObject){
-                //  Log.d("Json ", "Object");
                 JSONObject obj = new JSONObject(content);
-                g_Table = obj.optString("JSON_AdmitCardAadharResult");
-                Log.d("Table===",g_Table);
-            }
-            //you have an object
-            else if (json instanceof JSONArray){
+                g_Table = obj.optString(EConstants.AdmitCardAadhaar_Result);
             }
 
+            else if (json instanceof JSONArray){
+            }
             JSONArray ar = new JSONArray(g_Table);
             List<AdmitCardPOJO>AdmiCardList = new ArrayList<>();
 
             for (int i = 0; i < ar.length(); i++) {
                 JSONObject obj = ar.getJSONObject(i);
                 AdmitCardPOJO pojo_AdmitCard = new AdmitCardPOJO();
-
-                /**
-                 * Add the Values Here
-                 */
                 pojo_AdmitCard.setAddress(obj.getString("Address"));
                 pojo_AdmitCard.setCenterAddress(obj.getString("CenterAddress"));
                 pojo_AdmitCard.setDateofExamination(obj.getString("DateofExamination"));
@@ -49,14 +42,11 @@ public class AdmitCard_JSON {
                 pojo_AdmitCard.setExamCenter(obj.getString("ExamCenter"));
                 pojo_AdmitCard.setFathersName(obj.getString("FathersName"));
                 pojo_AdmitCard.setName(obj.getString("Name"));
-               // pojo_AdmitCard.setPhoto(obj.getString("Photo"));
                 pojo_AdmitCard.setPhoto(Base64.decode(obj.getString("Photo"), Base64.DEFAULT));
                 pojo_AdmitCard.setPostName(obj.getString("PostName"));
                 pojo_AdmitCard.setReportingTime(obj.getString("ReportingTime"));
                 pojo_AdmitCard.setRollNo(obj.getString("RollNo"));
-               // pojo_AdmitCard.setSignature(obj.getString("Signature"));
                 pojo_AdmitCard.setSignature(Base64.decode(obj.getString("Signature"), Base64.DEFAULT));
-
                 AdmiCardList.add(pojo_AdmitCard);
             }
             return AdmiCardList;

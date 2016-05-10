@@ -40,7 +40,7 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
         ext_ToDate = (TextView)findViewById(R.id.todate);
         ext_ToDate.setInputType(InputType.TYPE_NULL);
 
-        dateFormatter = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
+        dateFormatter = new SimpleDateFormat(EConstants.Date_Format, Locale.US);
         setDateTimeField();
 
         postWise.setOnClickListener(new View.OnClickListener() {
@@ -51,15 +51,13 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                 GetToDate = ext_ToDate.getText().toString().trim();
 
                 if(GetFromDate.length()!=0 && GetToDate.length()!=0){
-                    //Toast.makeText(getApplicationContext(),GetFromDate +"###"+GetToDate,Toast.LENGTH_LONG).show();
-                    //Send From Date and To Date to Other Activity.
                     Intent i_postwise= new Intent(Dashboard.this,DashboardList_PostWise.class);
-                    i_postwise.putExtra("DATE_TO_SEND_FROM",GetFromDate);
-                    i_postwise.putExtra("DATE_TO_SEND_TO",GetToDate);
+                    i_postwise.putExtra(EConstants.Put_From_Date,GetFromDate);
+                    i_postwise.putExtra(EConstants.Put_To_Date,GetToDate);
                     startActivity(i_postwise);
 
                 }else{
-                    Toast.makeText(getApplicationContext(),"Please input valid dates",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),EConstants.Error_ValidDates,Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -72,15 +70,13 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                 GetToDate = ext_ToDate.getText().toString().trim();
 
                 if(GetFromDate.length()!=0 && GetToDate.length()!=0){
-                   // Toast.makeText(getApplicationContext(),GetFromDate +"###"+GetToDate,Toast.LENGTH_LONG).show();
-                    //Send From Date and To Date to Other Activity.
                     Intent i_formwise= new Intent(Dashboard.this,DashboardList_FormsReceived.class);
-                    i_formwise.putExtra("DATE_TO_SEND_FROM",GetFromDate);
-                    i_formwise.putExtra("DATE_TO_SEND_TO",GetToDate);
+                    i_formwise.putExtra(EConstants.Put_From_Date,GetFromDate);
+                    i_formwise.putExtra(EConstants.Put_To_Date,GetToDate);
                     startActivity(i_formwise);
 
                 }else{
-                    Toast.makeText(getApplicationContext(),"Please input valid dates",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),EConstants.Error_ValidDates,Toast.LENGTH_LONG).show();
                 }
             }
         });
