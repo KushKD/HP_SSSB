@@ -8,7 +8,7 @@ public class EConstants {
     /**
      * HPSSSB MAin Screen
      */
-    public static final String url_Generic = "http://hpsssb.hp.gov.in/hpsssbwebAPI/HPSSSB_REST.svc" ;
+    public static final String url_Generic = "" ;
     public static final String function_Instructions = "" ;
     public static final String function_Vacancies = "" ;
     public static final String function_GetOTP = "";
