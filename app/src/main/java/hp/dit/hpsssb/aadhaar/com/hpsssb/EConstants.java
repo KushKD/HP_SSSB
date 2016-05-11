@@ -19,7 +19,7 @@ public class EConstants {
     public static final String function_getAdmitCardAadhaar = "";
     public static final String HTTP_Verb_Get = "";
     public static final String HTTP_Verb_post = "";
-    public static final int Connection_TimeOut = 0;
+    public static final int Connection_TimeOut = 000;
     public static final String UNICODE = "";
     public static final String InstructionsResult = "";
     public static final String Vacancies_Result = "";
@@ -33,8 +33,8 @@ public class EConstants {
     public static final String progress_Dialog_Message = "Please be patient,as the application is trying to connect to the Internet";
     public static final String Error_NoIdea = "Something went wrong, while fetching the results. Please try again later.";
     public static final String Error_NoNetwork = "Unable to connect to Internet. Please check your network connection and try again.";
-    public static final String Path_PDF = "";
-    public static final String Intent_Type = "application/photos";
+    public static final String Path_PDF = "/sdcard/HPSSSB/HPSSSB_Instructions.pdf";
+    public static final String Intent_Type = "application/";
     public static final int Chuck_Size = 1024;
     public static final String Error_NoPDF_Viewer = "No Application Available to View PDF";
     public static final String Error_DownloadFile = "The downloaded file is not a valid format.";
@@ -48,7 +48,7 @@ public class EConstants {
     public static final String PutExtra_Message_Vacancies = "";
     public static final String PutExtra_Message_Vacancies_Date ="";
     public static final String ApplyButton_AlertMessage ="You'll be redirected to the http://hpsssb.hp.gov.in. Do you want to continue? Press Proceed to continue and Quit to exit.";
-    public static final String WebSite_Link = "http://hpsssb.hp.gov.in/vacancies.aspx";
+    public static final String WebSite_Link = "";
 
     /**
      * Login Screen
@@ -56,7 +56,7 @@ public class EConstants {
     public static final String ErrorMobile = "Please enter a valid mobile number.";
     public static final String Messages_OTP = "Please wait , an OTP will be sent to this mobile number";
     public static final String Date_Format = "";
-    public static final String Error_ValidDates = " input valid dates";
+    public static final String Error_ValidDates = "Please input valid dates";
     public static final String  Put_From_Date="";
     public static final String  Put_To_Date="";
 
