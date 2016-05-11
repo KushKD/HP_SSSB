@@ -1,10 +1,12 @@
 package hp.dit.hpsssb.aadhaar.com.hpsssb;
 
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
@@ -125,6 +127,31 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
             }
         });
 
+
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to exit the application.")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        HPSSSB_MAIN.this.finish();
+                        int pid = android.os.Process.myPid();
+                        android.os.Process.killProcess(pid);
+                        System.exit(0);
+                        HPSSSB_MAIN.this.finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
 
     }
 

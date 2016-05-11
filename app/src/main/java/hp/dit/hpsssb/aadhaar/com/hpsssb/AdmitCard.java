@@ -1,6 +1,8 @@
 package hp.dit.hpsssb.aadhaar.com.hpsssb;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -29,7 +31,6 @@ public class AdmitCard extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admit_card);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
-        back = (Button)findViewById(R.id.back);
         bt_GetAdmitCard = (Button)findViewById(R.id.getadmitcard);
         et_Aadhaar = (TextView)findViewById(R.id.etaadhaar);
         et_ApplicationID = (TextView)findViewById(R.id.etappid);
@@ -39,12 +40,7 @@ public class AdmitCard extends BaseActivity implements View.OnClickListener {
 
         setDateTimeField();
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AdmitCard.this.finish();
-            }
-        });
+
 
         bt_GetAdmitCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +80,25 @@ public class AdmitCard extends BaseActivity implements View.OnClickListener {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to exit the Admit Card Screen?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        AdmitCard.this.finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
 
+    }
 
     private void setDateTimeField() {
         et_DOB.setOnClickListener(this);
@@ -110,4 +124,6 @@ public class AdmitCard extends BaseActivity implements View.OnClickListener {
             Toast.makeText(getApplicationContext(),EConstants.Error_NoIdea ,Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }
