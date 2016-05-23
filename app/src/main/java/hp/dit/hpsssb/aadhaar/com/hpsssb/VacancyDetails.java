@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class VacancyDetails extends Activity {
 
@@ -75,12 +76,24 @@ public class VacancyDetails extends Activity {
             @Override
             public void onClick(View v) {
 
-                dialog.dismiss();
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse(EConstants.WebSite_Link));
-                startActivity(intent);
+                if(postid.getText().toString()!=null && postid.getText().toString().length()!=0){
+                    dialog.dismiss();
+                    EncryptData ED = new EncryptData();
+                    //Encrypt String;
+                    String Encrypt_PostID = ED.Encryption(postid.getText().toString().trim());
+                    //Toast.makeText(getApplicationContext(),Encrypt_PostID,Toast.LENGTH_LONG).show();
+                    Log.d(postid.getText().toString().trim(),Encrypt_PostID);
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    intent.setData(Uri.parse("http://hpsssb.hp.gov.in/Login.aspx?Id=0&Apply="+Encrypt_PostID));
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Something went wrong.Please try again later.",Toast.LENGTH_LONG).show();
+                }
+
+
             }
         });
 

@@ -7,9 +7,14 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -26,6 +31,8 @@ import java.util.List;
 public class Vacancies_List extends Activity {
 
     private String Date_Service = null;
+    LinearLayout LGone;
+    Button refresh;
     ProgressBar pb;
     URL url_;
     HttpURLConnection conn_;
@@ -34,6 +41,8 @@ public class Vacancies_List extends Activity {
     Context context;
     List<GetVacancies> tasks;
     List<VacancyPOJO> vacancies_Server;
+    EditText Search_EditText;
+    Vacancies_Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +52,28 @@ public class Vacancies_List extends Activity {
         Bundle bundle = intent.getExtras();
         Date_Service = bundle.getString(EConstants.PutExtra_Message_Vacancies_Date);
         listv = (ListView) findViewById(R.id.list);
+        Search_EditText = (EditText)findViewById(R.id.edit_text_search);
+        refresh = (Button)findViewById(R.id.refresh);
+        LGone = (LinearLayout)findViewById(R.id.lgone);
         context = this;
         pb = (ProgressBar) findViewById(R.id.progressBar1);
         pb.setVisibility(View.INVISIBLE);
         tasks = new ArrayList<>();
+
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isOnline()) {
+                    Search_EditText.setText("");
+                    GetVacancies asy_Get_Vacancy = new GetVacancies();
+                    asy_Get_Vacancy.execute(Date_Service);
+                } else {
+                    Toast.makeText(getApplicationContext(),EConstants.Error_NoNetwork, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
 
         if (isOnline()) {
             GetVacancies asy_Get_Vacancy = new GetVacancies();
@@ -67,7 +94,42 @@ public class Vacancies_List extends Activity {
 
             }
         });
+
+        Search_EditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // TODO Auto-generated method stub
+                //MainActivity.this.adapt.getFilter().filter(s);
+              //  String searchString=Search_EditText.getText().toString();
+              //  adapter.getFilter().filter(searchString);
+               // System.out.println("Text ["+s+"] - Start ["+start+"] - Before ["+before+"] - Count ["+count+"]");
+               /* if (count < before) {
+                    // We're deleting char so we need to reset the adapter data
+                    adapter.resetData();
+                }*/
+
+                adapter.getFilter().filter(s.toString());
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+                Vacancies_List.this.adapter.getFilter().filter(s);
+
+
+            }
+        });
     }
+
+
 
         protected boolean isOnline() {
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -80,8 +142,11 @@ public class Vacancies_List extends Activity {
         }
 
     protected void updateDisplay() {
-        Vacancies_Adapter adapter = new Vacancies_Adapter(this, R.layout.item_flower, vacancies_Server);
+
+        LGone.setVisibility(View.VISIBLE);
+        adapter = new Vacancies_Adapter(this, R.layout.item_flower, vacancies_Server);
         listv.setAdapter(adapter);
+        listv.setTextFilterEnabled(true);
 
     }
     class GetVacancies extends AsyncTask<String,String,String> {
@@ -97,7 +162,7 @@ public class Vacancies_List extends Activity {
         @Override
         protected String doInBackground(String... params) {
             try {
-                url_ =new URL(EConstants.url_Generic+EConstants.Delemeter+EConstants.function_Vacancies+EConstants.Delemeter+params[0]);
+                url_ =new URL("http://10.241.9.72/HPSSSB_Wep/HPSSSB_REST.svc/getVacancies_JSON/"+params[0]);
                 conn_ = (HttpURLConnection)url_.openConnection();
                 conn_.setRequestMethod(EConstants.HTTP_Verb_Get);
                 conn_.setUseCaches(false);
@@ -113,7 +178,7 @@ public class Vacancies_List extends Activity {
                         sb.append(line + "\n");
                     }
                     br.close();
-
+                   System.out.print(sb.toString());
 
                 }else{
                 }

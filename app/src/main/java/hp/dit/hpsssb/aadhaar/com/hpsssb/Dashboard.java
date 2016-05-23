@@ -31,14 +31,25 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        int mYear,mMonth,mDay;
+        Calendar c=Calendar.getInstance();
+        mYear=c.get(Calendar.YEAR);
+        mMonth=c.get(Calendar.MONTH);
+        mDay=c.get(Calendar.DAY_OF_MONTH);
+        //String dateFormat = "MM-DD-YYYY";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+
         postWise = (Button)findViewById(R.id.postwise);
         formsReceived = (Button)findViewById(R.id.formsreceived);
 
         ext_FromDate = (TextView)findViewById(R.id.fromdate);
         ext_FromDate.setInputType(InputType.TYPE_NULL);
+        ext_FromDate.setText( sdf.format(c.getTime()));
 
         ext_ToDate = (TextView)findViewById(R.id.todate);
         ext_ToDate.setInputType(InputType.TYPE_NULL);
+        ext_ToDate.setText( sdf.format(c.getTime()));
 
         dateFormatter = new SimpleDateFormat(EConstants.Date_Format, Locale.US);
         setDateTimeField();

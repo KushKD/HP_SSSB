@@ -62,6 +62,7 @@ android:padding="5dip" >
     android:layout_height="wrap_content"
         android:text="three"
     android:textSize="14dip"
+        android:visibility="gone"
         android:layout_marginLeft="75dip"
 
     android:textColor="#366988"

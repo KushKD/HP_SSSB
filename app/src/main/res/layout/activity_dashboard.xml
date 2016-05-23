@@ -62,6 +62,7 @@
             android:background="#40666666"
             android:gravity="left|center_vertical|center_horizontal"
             android:padding="10dip"
+            android:visibility="gone"
             android:text="** Notification Goes Here "
             android:textColor="#366988"/>
 
