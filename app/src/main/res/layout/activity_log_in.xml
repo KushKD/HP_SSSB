@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="6"
+    android:background="#f2f2f2"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:layout_weight="3.0"
+        android:background="#366988"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|center_horizontal|center_vertical"
+            android:text="Registration"
+            android:textColor="#FFFFFF"
+            android:background="#366988"
+            android:textSize="20sp"
+            android:textStyle="bold"
+
+            />
+
+
+    </LinearLayout>
+
+    <!-- Body -->
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:background="#f2f2f2"
+        android:gravity="top|center_horizontal|center_vertical"
+        android:orientation="vertical">
+
+
+
+        <!-- Relative LAyout Goes Here -->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#40666666"
+            android:gravity="center|center_vertical|center_horizontal"
+            android:orientation="horizontal"
+            android:padding="15dip" >
+
+            <!-- ListRow Left sied Thumbnail image -->
+
+            <LinearLayout
+                android:id="@+id/thumbnail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginRight="3dip"
+                android:padding="3dip" >
+
+
+                <ImageView
+                    android:id="@+id/list_image"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="top"
+                    android:src="@drawable/mobilenumber"
+                    android:contentDescription="@string/app_name" />
+
+            </LinearLayout>
+
+            <!-- Rightend Arrow -->
+            <ImageButton
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:background="@drawable/circularbutton"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/speaker" />
+
+
+
+
+
+
+            <EditText
+                android:id="@+id/etmobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dip"
+                android:layout_marginRight="5dip"
+                android:layout_toLeftOf="@+id/imageView1"
+                android:background="@drawable/rounded_edittext"
+                android:hint="Enter Mobile Number"
+                android:inputType="number"
+                android:maxLength="10"
+                android:textColor="#366988"
+                android:textColorHint="#366988"
+                android:textSize="18dip" />
+
+        </RelativeLayout>
+
+
+        <!-- Phone No -->
+
+
+        <!-- Name -->
+
+
+        <!-- Date Of Birth -->
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#40666666"
+            android:gravity="left|center_vertical|center_horizontal"
+            android:padding="10dip"
+            android:text="**Please input your valid 10 digit Mobile Number. We'll be pushing all our notifications to this number vis SMS facility."
+            android:textColor="#366988"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="top"
+            android:weightSum="2">
+
+
+
+            <Button
+                android:id="@+id/back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#366988"
+                android:textColor="#FFFFFF"
+                android:layout_weight="1"
+                android:text="Quit"
+                android:layout_margin="5dp"
+                android:textSize="16sp"/>
+
+
+
+
+            <Button
+                android:id="@+id/register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#366988"
+                android:layout_margin="5dp"
+                android:text="Register Me"
+                android:layout_weight="1"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"/>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+

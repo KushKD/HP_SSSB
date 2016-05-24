@@ -72,6 +72,16 @@
                 android:layout_centerHorizontal="true"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
+            <!-- Custom TextView -->
+            <hp.dit.hpsssb.aadhaar.com.presentation.TextView_ServerConnected
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_gravity="top|center_horizontal|center_vertical"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
             <Button
                 android:id="@+id/proceed"
                 android:layout_width="match_parent"

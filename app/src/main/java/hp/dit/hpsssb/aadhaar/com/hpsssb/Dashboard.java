@@ -73,7 +73,7 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                     i_postwise.putExtra(EConstants.Put_To_Date,GetToDate);
                     startActivity(i_postwise);
                     }else{
-                        Toast.makeText(getApplicationContext(),"Please enter valid Dates.",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Please enter valid dates range.",Toast.LENGTH_LONG).show();
                     }
 
                 }else{
@@ -100,7 +100,7 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                     i_formwise.putExtra(EConstants.Put_To_Date,GetToDate);
                     startActivity(i_formwise);
                     }else{
-                        Toast.makeText(getApplicationContext(), "Please enter valid Dates.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Please enter valid dates range .", Toast.LENGTH_LONG).show();
                     }
 
                 }else{

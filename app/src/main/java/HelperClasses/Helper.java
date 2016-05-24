@@ -1,5 +1,10 @@
 package HelperClasses;
 
+import android.app.Activity;
+import android.content.Context;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,7 +13,7 @@ import java.util.Date;
 /**
  * Created by kuush on 5/24/2016.
  */
-public class Helper {
+public class Helper extends Activity {
 
 
     /**
@@ -47,4 +52,12 @@ public class Helper {
 
         return outputDateStr;
     }
+
+   public  String GetIMEI_Number(){
+      // String androidID = System.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+
+       TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+       String IMEI =  telephonyManager.getDeviceId();
+       return IMEI;
+   }
 }

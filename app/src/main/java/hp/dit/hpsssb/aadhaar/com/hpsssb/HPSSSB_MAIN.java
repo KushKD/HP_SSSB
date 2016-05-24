@@ -332,7 +332,7 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             this.dialog.dismiss();
-           System.out.println(s.length());
+          // System.out.println(s.length());
             if(s.length()>=57){
                 if(isOnline()) {
                     new DownloadFileFromURL().execute(s);

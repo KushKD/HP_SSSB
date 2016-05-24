@@ -1,6 +1,7 @@
 package hp.dit.hpsssb.aadhaar.com.hpsssb;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -10,11 +11,13 @@ import android.widget.Toast;
 
 import java.io.File;
 
+import HelperClasses.EConstants;
 import hp.dit.hpsssb.aadhaar.com.presentation.BaseActivity;
 
 public class SplashScreen extends BaseActivity {
 
     public static final String Folder_name = "/HPSSSB";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +35,25 @@ public class SplashScreen extends BaseActivity {
                     Log.e("Error","While Executing ASYNC Task");
                 }
 
-                Intent mainIntent = new Intent(SplashScreen.this, HPSSSB_MAIN.class);
-                SplashScreen.this.startActivity(mainIntent);
-                SplashScreen.this.finish();
+                SharedPreferences settings = getSharedPreferences(EConstants.PREFS_NAME, 0);
+                //Get "hasLoggedIn" value. If the value doesn't exist yet false is returned
+                boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
+
+                if(hasLoggedIn)
+                {
+                    Intent mainIntent = new Intent(SplashScreen.this, HPSSSB_MAIN.class);
+                    SplashScreen.this.startActivity(mainIntent);
+                    SplashScreen.this.finish();
+                }else{
+                    Intent loginIntent = new Intent(SplashScreen.this, LogInActivity.class);
+                    SplashScreen.this.startActivity(loginIntent);
+                    SplashScreen.this.finish();
+
+                }
+
+
+
+
             }
         }, 3000);
     }

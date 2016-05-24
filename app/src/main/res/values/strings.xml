@@ -6,7 +6,7 @@
     <string name="interview">Interview Schedule</string>
     <string name="dashboard">Dashboard</string>
     <string name="information">Instructions</string>
-    <string name="notifications">Notifications</string>
+    <string name="notifications">Ads</string>
     <string name="results">Results</string>
     <string name="rollnoadmit">Admit Card</string>
 
@@ -32,4 +32,6 @@
     <string name="title_activity_admit_card__list">AdmitCard_List</string>
     <string name="title_activity_admit_card_details">AdmitCardDetails</string>
     <string name="title_activity_login_screen">LoginScreen</string>
+    <string name="title_activity_log_in">LogInActivity</string>
+    <string name="title_activity_ads">Ads</string>
 </resources>

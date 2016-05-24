@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -43,7 +44,6 @@
         <activity
             android:name=".HPSSSB_MAIN"
             android:launchMode="singleInstance"
-
             android:screenOrientation="portrait" />
         <activity
             android:name=".Dashboard"
@@ -79,7 +79,13 @@
             android:name=".LoginScreen"
             android:label="@string/title_activity_login_screen"
             android:launchMode="singleInstance"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LogInActivity"
+            android:label="@string/title_activity_log_in" />
+        <activity
+            android:name=".Ads"
+            android:label="@string/title_activity_ads"></activity>
     </application>
 
 </manifest>

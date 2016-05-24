@@ -10,6 +10,7 @@ public class EConstants {
     public static final String function_Vacancies = "" ;
     public static final String function_GetOTP = "";
     public static final String function_VerifyOTP = "";
+    public static final String function_Register = "";
     public static final String function_DashboardCReport = "";
     public static final String function_Dashboard = "";
     public static final String function_getAdmitCardPersonalDetails = "";
@@ -26,16 +27,16 @@ public class EConstants {
     public static final String Dashboard_Result = "";
     public static final String AdmitCardAadhaar_Result = "";
     public static final String AdmitCardPersonalDetails_Result = "";
-    public static final String Delemeter = "/";
+    public static final String Delemeter = "";
     public static final String progress_Dialog_Message = "Please be patient,as the application is trying to connect to the Internet";
     public static final String Error_NoIdea = "Something went wrong, while fetching the results. Please try again later.";
     public static final String Error_NoNetwork = "Unable to connect to Internet. Please check your network connection and try again.";
-    public static final String Path_PDF = "";
+    public static final String Path_PDF = "/sdcard/HPSSSB/HPSSSB_Instructions.pdf";
     public static final String Intent_Type = "";
-    public static final int Chuck_Size = 14;
-    public static final String Error_NoPDF_Viewer = "";
+    public static final int Chuck_Size = 124;
+    public static final String Error_NoPDF_Viewer = "No Application Available to View PDF";
     public static final String Error_DownloadFile = "The downloaded file is not a valid format.";
-    public static final String Messages_Results = "";
+    public static final String Messages_Results = "No pending results in pipeline.";
     public static final String Messages_Interview="Currently there is no Interview Scheduled.";
 
 
@@ -66,4 +67,10 @@ public class EConstants {
     public static final String Put_DOB  ="";
     public static final String Put_ApplicationID  ="";
     public static final String Error_Aadhaar = "Please enter either your valid Aadhaar number or complete personal Details.";
+
+    /**
+     * Login Screen
+     */
+    //Give your SharedPreferences file a name and save it to a static variable
+    public static final String PREFS_NAME = "";
 }

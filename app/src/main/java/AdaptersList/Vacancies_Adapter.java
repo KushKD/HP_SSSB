@@ -94,8 +94,9 @@ public class Vacancies_Adapter extends ArrayAdapter<VacancyPOJO> implements Filt
                 List<VacancyPOJO> nPlanetList = new ArrayList<>();
 
                 for (VacancyPOJO p : userlist) {
-                    if (p.getPostName().toUpperCase().startsWith(constraint.toString().toUpperCase()))
+                    if (p.getPostName().toUpperCase().contains(constraint.toString().toUpperCase()))
                         nPlanetList.add(p);
+                    //p.getPostName().toUpperCase().startsWith(constraint.toString().toUpperCase())
                 }
 
                 results.values = nPlanetList;
