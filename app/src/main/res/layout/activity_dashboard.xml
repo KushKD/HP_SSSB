@@ -62,8 +62,7 @@
             android:background="#40666666"
             android:gravity="left|center_vertical|center_horizontal"
             android:padding="10dip"
-            android:visibility="gone"
-            android:text="** Notification Goes Here "
+            android:text="Select from Date:- "
             android:textColor="#366988"/>
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -125,7 +124,14 @@
 
         </RelativeLayout>
 
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#40666666"
+            android:gravity="left|center_vertical|center_horizontal"
+            android:padding="10dip"
+            android:text="Select To Date:- "
+            android:textColor="#366988"/>
         <!-- Phone No -->
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"

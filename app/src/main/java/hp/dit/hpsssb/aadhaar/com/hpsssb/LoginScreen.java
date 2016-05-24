@@ -5,21 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import DataParse.JSONParser;
+import HelperClasses.EConstants;
 import hp.dit.hpsssb.aadhaar.com.presentation.BaseActivity;
 
 public class LoginScreen extends BaseActivity {
@@ -51,7 +50,7 @@ public class LoginScreen extends BaseActivity {
                         Async_Verify_OTP async_verify_otp = new Async_Verify_OTP();
                         async_verify_otp.execute(Phone_Verify, OTP_Verify);
                     }else{
-                        Toast.makeText(getApplicationContext(),EConstants.Error_NoNetwork,Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), EConstants.Error_NoNetwork,Toast.LENGTH_LONG).show();
                     }
                 }else{
                    Toast.makeText(getApplicationContext(), EConstants.Error_NoIdea,Toast.LENGTH_SHORT).show();

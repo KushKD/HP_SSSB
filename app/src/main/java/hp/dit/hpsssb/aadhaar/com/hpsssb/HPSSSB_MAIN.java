@@ -8,7 +8,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -35,6 +34,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+
+import DataParse.JSONParser;
+import HelperClasses.EConstants;
 import hp.dit.hpsssb.aadhaar.com.presentation.CircleImageView;
 import hp.dit.hpsssb.aadhaar.com.presentation.CircleLayout;
 import hp.dit.hpsssb.aadhaar.com.presentation.BaseActivity;

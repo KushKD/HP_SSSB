@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -27,6 +26,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import AdaptersList.Vacancies_Adapter;
+import DataParse.Vacancy_JSON;
+import HelperClasses.EConstants;
+import Model.VacancyPOJO;
 
 public class Vacancies_List extends Activity {
 

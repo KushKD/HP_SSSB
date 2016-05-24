@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import HelperClasses.EConstants;
+import HelperClasses.EncryptData;
+import Model.VacancyPOJO;
+
 public class VacancyDetails extends Activity {
 
     TextView postid , department, postname, postcode, details, pubdate, lastdate;

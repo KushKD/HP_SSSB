@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import Model.AdmitCardPOJO;
+
 public class AdmitCardDetails extends Activity {
 
     private TextView name, fhname, postname, address, district, rollno;

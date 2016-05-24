@@ -12,8 +12,11 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
+import HelperClasses.EConstants;
+import HelperClasses.Helper;
 import hp.dit.hpsssb.aadhaar.com.presentation.BaseActivity;
 
 public class Dashboard extends BaseActivity implements View.OnClickListener {
@@ -31,13 +34,6 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        int mYear,mMonth,mDay;
-        Calendar c=Calendar.getInstance();
-        mYear=c.get(Calendar.YEAR);
-        mMonth=c.get(Calendar.MONTH);
-        mDay=c.get(Calendar.DAY_OF_MONTH);
-        //String dateFormat = "MM-DD-YYYY";
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 
         postWise = (Button)findViewById(R.id.postwise);
@@ -45,11 +41,15 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
 
         ext_FromDate = (TextView)findViewById(R.id.fromdate);
         ext_FromDate.setInputType(InputType.TYPE_NULL);
-        ext_FromDate.setText( sdf.format(c.getTime()));
+        SimpleDateFormat fromdateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        ext_FromDate.setText(fromdateFormat.format(new Date())); // it will show 16/07/2013
+       // ext_FromDate.setText( sdf.format(c.getTime()));
 
         ext_ToDate = (TextView)findViewById(R.id.todate);
         ext_ToDate.setInputType(InputType.TYPE_NULL);
-        ext_ToDate.setText( sdf.format(c.getTime()));
+        SimpleDateFormat todateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        ext_ToDate.setText(todateFormat.format(new Date())); // it will show 16/07/2013
+      //  ext_ToDate.setText( sdf.format(c.getTime()));
 
         dateFormatter = new SimpleDateFormat(EConstants.Date_Format, Locale.US);
         setDateTimeField();
@@ -62,10 +62,19 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                 GetToDate = ext_ToDate.getText().toString().trim();
 
                 if(GetFromDate.length()!=0 && GetToDate.length()!=0){
+
+                    //Compare the Two Dateds Here
+                    Boolean IsValid = false;
+                     IsValid = Helper.CheckDates(GetFromDate,GetToDate);
+                    if(IsValid){
+                       // Toast.makeText(getApplicationContext(),"True",Toast.LENGTH_LONG).show();
                     Intent i_postwise= new Intent(Dashboard.this,DashboardList_PostWise.class);
                     i_postwise.putExtra(EConstants.Put_From_Date,GetFromDate);
                     i_postwise.putExtra(EConstants.Put_To_Date,GetToDate);
                     startActivity(i_postwise);
+                    }else{
+                        Toast.makeText(getApplicationContext(),"Please enter valid Dates.",Toast.LENGTH_LONG).show();
+                    }
 
                 }else{
                     Toast.makeText(getApplicationContext(),EConstants.Error_ValidDates,Toast.LENGTH_LONG).show();
@@ -81,10 +90,18 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                 GetToDate = ext_ToDate.getText().toString().trim();
 
                 if(GetFromDate.length()!=0 && GetToDate.length()!=0){
+
+                    Boolean IsValid = false;
+                    IsValid = Helper.CheckDates(GetFromDate,GetToDate);
+                    if(IsValid) {
+                       // Toast.makeText(getApplicationContext(), "True", Toast.LENGTH_LONG).show();
                     Intent i_formwise= new Intent(Dashboard.this,DashboardList_FormsReceived.class);
                     i_formwise.putExtra(EConstants.Put_From_Date,GetFromDate);
                     i_formwise.putExtra(EConstants.Put_To_Date,GetToDate);
                     startActivity(i_formwise);
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Please enter valid Dates.", Toast.LENGTH_LONG).show();
+                    }
 
                 }else{
                     Toast.makeText(getApplicationContext(),EConstants.Error_ValidDates,Toast.LENGTH_LONG).show();

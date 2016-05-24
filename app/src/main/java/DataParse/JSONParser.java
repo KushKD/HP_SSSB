@@ -1,4 +1,4 @@
-package hp.dit.hpsssb.aadhaar.com.hpsssb;
+package DataParse;
 
 import org.json.JSONArray;
 import java.io.BufferedReader;

@@ -7,7 +7,6 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -19,13 +18,21 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import AdaptersList.DashboardPost_Adapter;
+import DataParse.DashboardPost_JSON;
+import HelperClasses.EConstants;
+import HelperClasses.Helper;
+import Model.DashboardPostPOJO;
 
 public class DashboardList_PostWise extends Activity {
 
     private String Date_Service_From = null;
    private  String Date_Service_To = null;
+    private String Reformated_From_Date,Reformated_To_Date = null;
 
     private String Date_Service = null;
     ProgressBar pb;
@@ -48,6 +55,17 @@ public class DashboardList_PostWise extends Activity {
         Bundle bundle = intent.getExtras();
         Date_Service_From = bundle.getString(EConstants.Put_From_Date);
         Date_Service_To = bundle.getString(EConstants.Put_To_Date);
+
+        //Reformat the Dates as Desired
+        try {
+            Reformated_From_Date = Helper.ChangeDatesFormat(Date_Service_From);
+            Reformated_To_Date = Helper.ChangeDatesFormat(Date_Service_To);
+            //  Toast.makeText(getApplicationContext(), Reformated_From_Date +"@@@@@"+ Reformated_To_Date , Toast.LENGTH_LONG).show();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Something's Not Good.", Toast.LENGTH_SHORT).show();
+        }
+
         listv = (ListView) findViewById(R.id.list);
         context = this;
         pb = (ProgressBar) findViewById(R.id.progressBar1);
@@ -57,7 +75,7 @@ public class DashboardList_PostWise extends Activity {
 
         if (isOnline()) {
             GetPostwiseDashboard asy_Get_PD = new GetPostwiseDashboard();
-            asy_Get_PD.execute(Date_Service_From,Date_Service_To);
+            asy_Get_PD.execute(Reformated_From_Date,Reformated_To_Date);
         } else {
             Toast.makeText(this, EConstants.Error_NoNetwork, Toast.LENGTH_LONG).show();
         }

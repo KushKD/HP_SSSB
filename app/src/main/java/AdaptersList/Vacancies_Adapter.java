@@ -1,4 +1,4 @@
-package hp.dit.hpsssb.aadhaar.com.hpsssb;
+package AdaptersList;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import Model.VacancyPOJO;
+import hp.dit.hpsssb.aadhaar.com.hpsssb.R;
 
 /**
  * Created by HPZ231 on 24-07-2015.

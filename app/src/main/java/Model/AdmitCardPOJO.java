@@ -1,4 +1,4 @@
-package hp.dit.hpsssb.aadhaar.com.hpsssb;
+package Model;
 
 import java.io.Serializable;
 

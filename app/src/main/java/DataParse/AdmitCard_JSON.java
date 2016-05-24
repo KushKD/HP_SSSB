@@ -1,7 +1,6 @@
-package hp.dit.hpsssb.aadhaar.com.hpsssb;
+package DataParse;
 
 import android.util.Base64;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,6 +9,9 @@ import org.json.JSONTokener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import HelperClasses.EConstants;
+import Model.AdmitCardPOJO;
 
 /**
  * Created by kuush on 5/3/2016.

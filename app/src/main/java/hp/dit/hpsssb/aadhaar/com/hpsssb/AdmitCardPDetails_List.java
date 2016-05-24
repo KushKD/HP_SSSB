@@ -7,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -26,6 +25,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import AdaptersList.AdmitCard_Adaptar;
+import DataParse.AdmitCardP_JSON;
+import HelperClasses.EConstants;
+import Model.AdmitCardPOJO;
 
 /**
  * Created by kuush on 5/5/2016.

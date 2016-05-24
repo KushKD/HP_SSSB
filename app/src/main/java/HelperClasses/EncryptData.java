@@ -1,4 +1,4 @@
-package hp.dit.hpsssb.aadhaar.com.hpsssb;
+package HelperClasses;
 
 import android.util.Base64;
 
@@ -9,31 +9,7 @@ import java.security.NoSuchAlgorithmException;
  * Created by kuush on 5/23/2016.
  */
 public class EncryptData {
-    private static MessageDigest digester;
-    static {
-        try {
-            digester = MessageDigest.getInstance(EConstants.EnycType);
-        }
-        catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-    }
-    public static String Encrypt_String(String str) {
-        if (str == null || str.length() == 0) {
-            throw new IllegalArgumentException(EConstants.EnycError);
-        }
-        digester.update(str.getBytes());
-        byte[] hash = digester.digest();
-        StringBuffer hexString = new StringBuffer();
-        for (int i = 0; i < hash.length; i++) {
-            if ((0xff & hash[i]) < 0x10) {
-                // hexString.append(EConstants.IMEINumber + Integer.toHexString((0xFF & hash[i])));
-            } else {
-                hexString.append(Integer.toHexString(0xFF & hash[i]));
-            }
-        }
-        return hexString.toString();
-    }
+
 
     /**
      * Method To Encryption methode for eParivar and Aadhaar
