@@ -10,6 +10,8 @@ import android.widget.ImageView;
 
 
 
+
+
 public class CircleImageView extends ImageView {
 
     // Angle is used for the positioning on the circle
@@ -90,8 +92,7 @@ public class CircleImageView extends ImageView {
     public CircleImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         if (attrs != null) {
-            TypedArray array = getContext().obtainStyledAttributes(attrs,
-                    R.styleable.CircleImageView);
+            TypedArray array = getContext().obtainStyledAttributes(attrs,R.styleable.CircleImageView);
 
             this.name = array.getString(R.styleable.CircleImageView_name);
         }

@@ -20,9 +20,9 @@ public class EncryptData {
         byte[] plainText = null;
         byte[] base64_Previous = null;
         try{
-             plainText = values.getBytes("UTF-16LE");  //UTF-16LE
+             plainText = values.getBytes("");  //UTF-16LE
             String base64 = Base64.encodeToString(plainText, Base64.DEFAULT);
-            base64_Previous = base64.getBytes("UTF-16LE");
+            base64_Previous = base64.getBytes("");
             encryptedString = Base64.encodeToString(base64_Previous, Base64.DEFAULT);
           //  encryptedString = Base64.encodeToString(Base64.encode(plainText,Base64.DEFAULT));
           //  BASE64Encoder base64encoder = new BASE64Encoder();

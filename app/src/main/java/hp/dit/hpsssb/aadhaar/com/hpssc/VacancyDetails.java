@@ -1,4 +1,4 @@
-package hp.dit.hpsssb.aadhaar.com.hpsssb;
+package hp.dit.hpsssb.aadhaar.com.hpssc;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -90,7 +90,7 @@ public class VacancyDetails extends Activity {
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_VIEW);
                     intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                    intent.setData(Uri.parse("http://hpsssb.hp.gov.in/Login.aspx?Id=0&Apply="+Encrypt_PostID));
+                    intent.setData(Uri.parse("?Id=0&Apply="+Encrypt_PostID));
                     startActivity(intent);
                 }
                 else{

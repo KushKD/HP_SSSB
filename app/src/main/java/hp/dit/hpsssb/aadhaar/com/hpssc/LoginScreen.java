@@ -1,4 +1,4 @@
-package hp.dit.hpsssb.aadhaar.com.hpsssb;
+package hp.dit.hpsssb.aadhaar.com.hpssc;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -161,7 +161,7 @@ if(s.length()==52){
 
 }else{
     progressDialog.dismiss();
-    Toast.makeText(getApplicationContext(),s + s.length(),Toast.LENGTH_LONG).show();
+    Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
 }
         }
     }

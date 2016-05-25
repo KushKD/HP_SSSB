@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="hp.dit.hpsssb.aadhaar.com.hpsssb">
+    package="hp.dit.hpsssb.aadhaar.com.hpssc">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen">
         <activity
-            android:name=".SplashScreen"
+            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.SplashScreen"
             android:label="@string/app_name"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait">
@@ -27,65 +27,68 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AdmitCard"
+            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.AdmitCard"
             android:label="@string/title_activity_admit_card"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Vacancies_List"
+            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.Vacancies_List"
             android:label="@string/title_activity_vacancies__list"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".VacancyDetails"
+            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.VacancyDetails"
             android:label="@string/title_activity_vacancy_details"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HPSSSB_MAIN"
+            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.HPSSSB_MAIN"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Dashboard"
+            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.Dashboard"
             android:label="@string/title_activity_dashboard"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DashboardList_PostWise"
+            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.DashboardList_PostWise"
             android:label="@string/title_activity_dashboard_list"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DashboardList_FormsReceived"
+            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.DashboardList_FormsReceived"
             android:label="@string/title_activity_dashboard_list__forms_received"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdmitCard_List"
+            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.AdmitCard_List"
             android:label="@string/title_activity_admit_card__list"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdmitCardPDetails_List"
+            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.AdmitCardPDetails_List"
             android:label="@string/title_activity_admit_card__list"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AdmitCardDetails"
+            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.AdmitCardDetails"
             android:label="@string/title_activity_admit_card_details"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginScreen"
+            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.LoginScreen"
             android:label="@string/title_activity_login_screen"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LogInActivity"
+            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.LogInActivity"
             android:label="@string/title_activity_log_in" />
         <activity
-            android:name=".Ads"
-            android:label="@string/title_activity_ads"></activity>
+            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.Ads"
+            android:label="@string/title_activity_ads" />
+        <activity
+            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.Ads_Details"
+            android:label="@string/title_activity_ads__details"></activity>
     </application>
 
 </manifest>

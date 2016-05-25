@@ -10,9 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import Model.AdmitCardPOJO;
 import Model.AdsPOJO;
-import hp.dit.hpsssb.aadhaar.com.hpsssb.R;
+import hp.dit.hpsssb.aadhaar.com.hpssc.R;
 
 /**
  * Created by kuush on 5/24/2016.
@@ -36,7 +35,7 @@ public class AdsAdapter extends ArrayAdapter<AdsPOJO> {
         TextView tv1 = (TextView)view.findViewById(R.id.textView1_aadhaar);
         TextView tv2 = (TextView)view.findViewById(R.id.textView2_name);
 
-        tv1.setText(u.getShortnotification());
+        tv1.setText(u.getDetailed());
         tv2.setText(u.getPublish());
 
         return view;

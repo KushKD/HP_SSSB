@@ -24,7 +24,7 @@ public class Helper extends Activity {
      */
     public static boolean CheckDates(String startDate, String endDate) {
 
-        SimpleDateFormat dfDate = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dfDate = new SimpleDateFormat("");
 
         boolean b = false;
 

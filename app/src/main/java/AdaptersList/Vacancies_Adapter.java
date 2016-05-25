@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Model.VacancyPOJO;
-import hp.dit.hpsssb.aadhaar.com.hpsssb.R;
+import hp.dit.hpsssb.aadhaar.com.hpssc.R;
 
 /**
  * Created by HPZ231 on 24-07-2015.

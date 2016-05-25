@@ -1,4 +1,4 @@
-package hp.dit.hpsssb.aadhaar.com.hpsssb;
+package hp.dit.hpsssb.aadhaar.com.hpssc;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

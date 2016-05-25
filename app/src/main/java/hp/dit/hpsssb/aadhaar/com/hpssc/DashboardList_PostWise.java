@@ -1,40 +1,40 @@
-package hp.dit.hpsssb.aadhaar.com.hpsssb;
+package hp.dit.hpsssb.aadhaar.com.hpssc;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.app.Activity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONStringer;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import AdaptersList.AdmitCard_Adaptar;
-import DataParse.AdmitCardP_JSON;
+import AdaptersList.DashboardPost_Adapter;
+import DataParse.DashboardPost_JSON;
 import HelperClasses.EConstants;
-import Model.AdmitCardPOJO;
+import HelperClasses.Helper;
+import Model.DashboardPostPOJO;
 
-/**
- * Created by kuush on 5/5/2016.
- */
-public class AdmitCardPDetails_List extends Activity {
+public class DashboardList_PostWise extends Activity {
+
+    private String Date_Service_From = null;
+   private  String Date_Service_To = null;
+    private String Reformated_From_Date,Reformated_To_Date = null;
+
+    private String Date_Service = null;
     ProgressBar pb;
     URL url_;
     HttpURLConnection conn_;
@@ -42,21 +42,29 @@ public class AdmitCardPDetails_List extends Activity {
 
     ListView listv;
     Context context;
-    List<GetAdmitCard> tasks;
-    List<AdmitCardPOJO> Admit_Card_Server;
 
-    String Name_Service ,DOB_Service, ApplicationID_Service = null;
+    List<GetPostwiseDashboard> tasks;
+    List<DashboardPostPOJO> DashboardPost_POJO_Server;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admit_card__list);
+        setContentView(R.layout.activity_dashboard_post_wise_list);
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+        Date_Service_From = bundle.getString(EConstants.Put_From_Date);
+        Date_Service_To = bundle.getString(EConstants.Put_To_Date);
 
-        Name_Service = bundle.getString(EConstants.Put_Name);
-        DOB_Service = bundle.getString(EConstants.Put_DOB);
-        ApplicationID_Service = bundle.getString(EConstants.Put_ApplicationID);
-
+        //Reformat the Dates as Desired
+        try {
+            Reformated_From_Date = Helper.ChangeDatesFormat(Date_Service_From);
+            Reformated_To_Date = Helper.ChangeDatesFormat(Date_Service_To);
+            //  Toast.makeText(getApplicationContext(), Reformated_From_Date +"@@@@@"+ Reformated_To_Date , Toast.LENGTH_LONG).show();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Something's Not Good.", Toast.LENGTH_SHORT).show();
+        }
 
         listv = (ListView) findViewById(R.id.list);
         context = this;
@@ -66,24 +74,11 @@ public class AdmitCardPDetails_List extends Activity {
         tasks = new ArrayList<>();
 
         if (isOnline()) {
-            GetAdmitCard asy_Get_AdmitCard_Aadhaar = new GetAdmitCard();
-            asy_Get_AdmitCard_Aadhaar.execute(Name_Service,DOB_Service,ApplicationID_Service);
+            GetPostwiseDashboard asy_Get_PD = new GetPostwiseDashboard();
+            asy_Get_PD.execute(Reformated_From_Date,Reformated_To_Date);
         } else {
             Toast.makeText(this, EConstants.Error_NoNetwork, Toast.LENGTH_LONG).show();
         }
-
-        listv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AdmitCardPOJO AdmitCard_Details = (AdmitCardPOJO) parent.getItemAtPosition(position);
-                Intent userSearch = new Intent();
-                userSearch.putExtra("Details", AdmitCard_Details);
-                userSearch.setClass(AdmitCardPDetails_List.this, AdmitCardDetails.class);
-                startActivity(userSearch);
-
-            }
-        });
     }
 
     protected boolean isOnline() {
@@ -96,17 +91,14 @@ public class AdmitCardPDetails_List extends Activity {
         }
     }
 
-
-
     protected void updateDisplay() {
 
-        AdmitCard_Adaptar adapter = new AdmitCard_Adaptar(this, R.layout.item_admitcard, Admit_Card_Server);
+        DashboardPost_Adapter adapter = new DashboardPost_Adapter(this, R.layout.item_flower, DashboardPost_POJO_Server);
         listv.setAdapter(adapter);
-
     }
 
-    class GetAdmitCard extends AsyncTask<String,String,String> {
-         String url = null;
+    class GetPostwiseDashboard extends AsyncTask<String,String,String> {
+        String url = null;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -115,40 +107,17 @@ public class AdmitCardPDetails_List extends Activity {
                 pb.setVisibility(View.VISIBLE);
             }
             tasks.add(this);
-
         }
-
         @Override
         protected String doInBackground(String... params) {
-
-
             try {
-                url_ =new URL(EConstants.url_Generic+EConstants.Delemeter+EConstants.function_getAdmitCardPersonalDetails);
+                url_ =new URL(EConstants.url_Generic+EConstants.Delemeter+EConstants.function_DashboardCReport+EConstants.Delemeter+params[0]+EConstants.Delemeter+params[1]);
                 conn_ = (HttpURLConnection)url_.openConnection();
-                conn_.setDoOutput(true);
-                conn_.setRequestMethod(EConstants.HTTP_Verb_post);
+                conn_.setRequestMethod(EConstants.HTTP_Verb_Get);
                 conn_.setUseCaches(false);
-                conn_.setConnectTimeout(10000);
-                conn_.setReadTimeout(10000);
-                conn_.setRequestProperty("Content-Type", "application/json");
+                conn_.setConnectTimeout(EConstants.Connection_TimeOut);
+                conn_.setReadTimeout(EConstants.Connection_TimeOut);
                 conn_.connect();
-
-                JSONStringer userJson = new JSONStringer()
-                        .object().key("details")
-                        .object()
-                        .key("Name_Service").value(params[0])
-                        .key("DOB_Service").value(params[1])
-                        .key("ApplicationID_Service").value(params[2])
-                        .endObject()
-                        .endObject();
-
-
-
-                System.out.println(userJson.toString());
-                OutputStreamWriter out = new OutputStreamWriter(conn_.getOutputStream());
-                out.write(userJson.toString());
-                out.close();
-
 
                 int HttpResult =conn_.getResponseCode();
                 if(HttpResult ==HttpURLConnection.HTTP_OK){
@@ -168,8 +137,6 @@ public class AdmitCardPDetails_List extends Activity {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
             } finally{
                 if(conn_!=null)
                     conn_.disconnect();
@@ -183,9 +150,9 @@ public class AdmitCardPDetails_List extends Activity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Admit_Card_Server = AdmitCardP_JSON.parseFeed(result);
-            if(Admit_Card_Server.isEmpty()){
-                Toast.makeText(getApplicationContext(),"Details not found.",Toast.LENGTH_LONG).show();
+            DashboardPost_POJO_Server = DashboardPost_JSON.parseFeed(result);
+            if(DashboardPost_POJO_Server.isEmpty()){
+                Toast.makeText(getApplicationContext(),"No record found.",Toast.LENGTH_LONG).show();
             }else
             {
                 updateDisplay();
@@ -196,4 +163,5 @@ public class AdmitCardPDetails_List extends Activity {
             }
         }
     }
+
 }

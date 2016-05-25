@@ -1,4 +1,4 @@
-package hp.dit.hpsssb.aadhaar.com.hpsssb;
+package hp.dit.hpsssb.aadhaar.com.hpssc;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,18 +22,17 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import AdaptersList.DashboardPost_Adapter;
-import DataParse.DashboardPost_JSON;
+import AdaptersList.DashboardForms_Adapter;
+import DataParse.DashboardForm_JSON;
 import HelperClasses.EConstants;
 import HelperClasses.Helper;
-import Model.DashboardPostPOJO;
+import Model.DashboardFormsPOJO;
 
-public class DashboardList_PostWise extends Activity {
+public class DashboardList_FormsReceived extends Activity {
 
     private String Date_Service_From = null;
-   private  String Date_Service_To = null;
+    private  String Date_Service_To = null;
     private String Reformated_From_Date,Reformated_To_Date = null;
-
     private String Date_Service = null;
     ProgressBar pb;
     URL url_;
@@ -43,28 +42,30 @@ public class DashboardList_PostWise extends Activity {
     ListView listv;
     Context context;
 
-    List<GetPostwiseDashboard> tasks;
-    List<DashboardPostPOJO> DashboardPost_POJO_Server;
+    List<GetFormWise> tasks;
+    List<DashboardFormsPOJO> Dashboard_Forms_Server;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard_post_wise_list);
-
+        setContentView(R.layout.activity_dashboard_list__forms_received);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        Date_Service_From = bundle.getString(EConstants.Put_From_Date);
-        Date_Service_To = bundle.getString(EConstants.Put_To_Date);
+        Date_Service_From = bundle.getString("DATE_TO_SEND_FROM");
+        Date_Service_To = bundle.getString("DATE_TO_SEND_TO");
+       // Toast.makeText(getApplicationContext(), Date_Service_From +"@@@@@"+ Date_Service_To , Toast.LENGTH_LONG).show();
 
         //Reformat the Dates as Desired
         try {
             Reformated_From_Date = Helper.ChangeDatesFormat(Date_Service_From);
-            Reformated_To_Date = Helper.ChangeDatesFormat(Date_Service_To);
-            //  Toast.makeText(getApplicationContext(), Reformated_From_Date +"@@@@@"+ Reformated_To_Date , Toast.LENGTH_LONG).show();
+           Reformated_To_Date = Helper.ChangeDatesFormat(Date_Service_To);
+          //  Toast.makeText(getApplicationContext(), Reformated_From_Date +"@@@@@"+ Reformated_To_Date , Toast.LENGTH_LONG).show();
         } catch (ParseException e) {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), "Something's Not Good.", Toast.LENGTH_SHORT).show();
         }
+
+
 
         listv = (ListView) findViewById(R.id.list);
         context = this;
@@ -74,8 +75,8 @@ public class DashboardList_PostWise extends Activity {
         tasks = new ArrayList<>();
 
         if (isOnline()) {
-            GetPostwiseDashboard asy_Get_PD = new GetPostwiseDashboard();
-            asy_Get_PD.execute(Reformated_From_Date,Reformated_To_Date);
+            GetFormWise asy_Get_FD = new GetFormWise();
+            asy_Get_FD.execute(Reformated_From_Date,Reformated_To_Date);
         } else {
             Toast.makeText(this, EConstants.Error_NoNetwork, Toast.LENGTH_LONG).show();
         }
@@ -93,12 +94,19 @@ public class DashboardList_PostWise extends Activity {
 
     protected void updateDisplay() {
 
-        DashboardPost_Adapter adapter = new DashboardPost_Adapter(this, R.layout.item_flower, DashboardPost_POJO_Server);
+        DashboardForms_Adapter adapter = new DashboardForms_Adapter(this, R.layout.item_dashboardforms, Dashboard_Forms_Server);
         listv.setAdapter(adapter);
+
     }
 
-    class GetPostwiseDashboard extends AsyncTask<String,String,String> {
+    /**
+     * Async Task Starts Here
+     */
+    class GetFormWise extends AsyncTask<String,String,String> {
+
+
         String url = null;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -107,11 +115,15 @@ public class DashboardList_PostWise extends Activity {
                 pb.setVisibility(View.VISIBLE);
             }
             tasks.add(this);
+
         }
+
         @Override
         protected String doInBackground(String... params) {
+
+
             try {
-                url_ =new URL(EConstants.url_Generic+EConstants.Delemeter+EConstants.function_DashboardCReport+EConstants.Delemeter+params[0]+EConstants.Delemeter+params[1]);
+                url_ =new URL(EConstants.url_Generic+EConstants.Delemeter+EConstants.function_Dashboard+EConstants.Delemeter+params[0]+EConstants.Delemeter+params[1]);
                 conn_ = (HttpURLConnection)url_.openConnection();
                 conn_.setRequestMethod(EConstants.HTTP_Verb_Get);
                 conn_.setUseCaches(false);
@@ -150,9 +162,9 @@ public class DashboardList_PostWise extends Activity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            DashboardPost_POJO_Server = DashboardPost_JSON.parseFeed(result);
-            if(DashboardPost_POJO_Server.isEmpty()){
-                Toast.makeText(getApplicationContext(),"No record found.",Toast.LENGTH_LONG).show();
+            Dashboard_Forms_Server = DashboardForm_JSON.parseFeed(result);
+            if(Dashboard_Forms_Server.isEmpty()){
+                Toast.makeText(getApplicationContext(),"No Record Found.",Toast.LENGTH_LONG).show();
             }else
             {
                 updateDisplay();
@@ -163,5 +175,4 @@ public class DashboardList_PostWise extends Activity {
             }
         }
     }
-
 }

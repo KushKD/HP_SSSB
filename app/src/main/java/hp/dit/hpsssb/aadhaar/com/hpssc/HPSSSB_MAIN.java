@@ -1,4 +1,4 @@
-package hp.dit.hpsssb.aadhaar.com.hpsssb;
+package hp.dit.hpsssb.aadhaar.com.hpssc;
 
 
 import android.app.AlertDialog;
@@ -76,7 +76,11 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                     case "Results":
                         ShowAlert(EConstants.Messages_Results);
                         break;
-                    case "Notifications":
+                    case "Ads":
+                        String dateString_Ads = (String) DateFormat.format("MM-dd-yyyy",new java.util.Date());
+                        Intent i_Ads = new Intent(HPSSSB_MAIN.this,Ads.class);
+                        i_Ads.putExtra("ADS_DATE",dateString_Ads);
+                        startActivity(i_Ads);
                         break;
                     case "Instructions":
                         //Check weather the file is present in the SDCARD
@@ -218,7 +222,10 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                 break;
 
             case R.id.main_notifications:
-
+                String dateString_Ads = (String) DateFormat.format("MM-dd-yyyy",new java.util.Date());
+                Intent i_Ads = new Intent(HPSSSB_MAIN.this,Ads.class);
+                i_Ads.putExtra("ADS_DATE",dateString_Ads);
+                startActivity(i_Ads);
                 break;
             case R.id.main_admitcard:
                  Intent i_Login = new Intent(HPSSSB_MAIN.this,LoginScreen.class);

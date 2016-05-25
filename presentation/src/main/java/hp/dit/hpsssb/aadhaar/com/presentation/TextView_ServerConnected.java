@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -59,7 +58,7 @@ public class TextView_ServerConnected extends TextView {
         super.onAttachedToWindow();
        // this.setText("I'm Attached");
       //  Log.d("I'm","Attached");
-        String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+        String date = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
         currentTask = new GetSmallNotification();
         currentTask.execute(date);
     }
@@ -91,9 +90,9 @@ public class TextView_ServerConnected extends TextView {
 
 
             StringBuilder sb = new StringBuilder();
-            sb.append("http://10.241.9.72/HPSSSB_Wep/HPSSSB_REST.svc");
+            sb.append("");
             sb.append("/");
-            sb.append("getLatestNotification_JSON");
+            sb.append("getLatestInfo_JSON");
             sb.append("/");
             sb.append(value);
 

@@ -1,4 +1,4 @@
-package hp.dit.hpsssb.aadhaar.com.hpsssb;
+package hp.dit.hpsssb.aadhaar.com.hpssc;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -56,7 +56,7 @@ public class LogInActivity extends Activity {
                 //Check weather Phone number is there or not
                 String PhoneNumber_Service = et_Mobile.getText().toString().trim();
 
-                if (PhoneNumber_Service.length() == 10) {
+                if (PhoneNumber_Service.length() == 10 && Integer.parseInt(PhoneNumber_Service.substring(0,1)) > 6) {
                     if (IMEI.length() != 0) {
                          Registration Register_me = new Registration();
                         Register_me.execute(PhoneNumber_Service,IMEI);
@@ -106,7 +106,7 @@ public class LogInActivity extends Activity {
             Phone_Service = params[0];
             IMEI_Service = params[1];
             StringBuilder sb = new StringBuilder();
-            sb.append("http://10.241.9.72/HPSSSB_Wep/HPSSSB_REST.svc");
+            sb.append(EConstants.url_Generic);
             sb.append(EConstants.Delemeter);
             sb.append(EConstants.function_Register);
             sb.append(EConstants.Delemeter);

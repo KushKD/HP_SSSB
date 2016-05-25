@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import Model.DashboardFormsPOJO;
-import hp.dit.hpsssb.aadhaar.com.hpsssb.R;
+import hp.dit.hpsssb.aadhaar.com.hpssc.R;
 
 /**
  * Created by kuush on 5/2/2016.

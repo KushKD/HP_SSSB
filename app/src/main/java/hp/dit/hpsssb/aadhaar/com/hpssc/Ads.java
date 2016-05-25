@@ -1,4 +1,4 @@
-package hp.dit.hpsssb.aadhaar.com.hpsssb;
+package hp.dit.hpsssb.aadhaar.com.hpssc;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -18,68 +21,61 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import AdaptersList.DashboardForms_Adapter;
-import DataParse.DashboardForm_JSON;
+import AdaptersList.AdsAdapter;
+import DataParse.Ads_JSON;
 import HelperClasses.EConstants;
-import HelperClasses.Helper;
-import Model.DashboardFormsPOJO;
+import Model.AdsPOJO;
 
-public class DashboardList_FormsReceived extends Activity {
+public class Ads extends Activity {
 
-    private String Date_Service_From = null;
-    private  String Date_Service_To = null;
-    private String Reformated_From_Date,Reformated_To_Date = null;
     private String Date_Service = null;
+    LinearLayout LGone;
+    Button refresh;
     ProgressBar pb;
     URL url_;
     HttpURLConnection conn_;
     StringBuilder sb = new StringBuilder();
-
     ListView listv;
     Context context;
-
-    List<GetFormWise> tasks;
-    List<DashboardFormsPOJO> Dashboard_Forms_Server;
+    List<GetAds> tasks;
+    List<AdsPOJO> ads_Server;
+    AdsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard_list__forms_received);
+        setContentView(R.layout.activity_ads);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        Date_Service_From = bundle.getString("DATE_TO_SEND_FROM");
-        Date_Service_To = bundle.getString("DATE_TO_SEND_TO");
-       // Toast.makeText(getApplicationContext(), Date_Service_From +"@@@@@"+ Date_Service_To , Toast.LENGTH_LONG).show();
-
-        //Reformat the Dates as Desired
-        try {
-            Reformated_From_Date = Helper.ChangeDatesFormat(Date_Service_From);
-           Reformated_To_Date = Helper.ChangeDatesFormat(Date_Service_To);
-          //  Toast.makeText(getApplicationContext(), Reformated_From_Date +"@@@@@"+ Reformated_To_Date , Toast.LENGTH_LONG).show();
-        } catch (ParseException e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Something's Not Good.", Toast.LENGTH_SHORT).show();
-        }
-
-
-
-        listv = (ListView) findViewById(R.id.list);
+        Date_Service = bundle.getString("ADS_DATE");
+        listv = (ListView) findViewById(R.id.list_ads);
         context = this;
         pb = (ProgressBar) findViewById(R.id.progressBar1);
         pb.setVisibility(View.INVISIBLE);
-
         tasks = new ArrayList<>();
 
         if (isOnline()) {
-            GetFormWise asy_Get_FD = new GetFormWise();
-            asy_Get_FD.execute(Reformated_From_Date,Reformated_To_Date);
+            GetAds asy_Get_Ads = new GetAds();
+            asy_Get_Ads.execute(Date_Service);
         } else {
-            Toast.makeText(this, EConstants.Error_NoNetwork, Toast.LENGTH_LONG).show();
+            Toast.makeText(this,EConstants.Error_NoNetwork, Toast.LENGTH_LONG).show();
         }
+
+        listv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AdsPOJO Ads_Details = (AdsPOJO) parent.getItemAtPosition(position);
+                Intent userSearch = new Intent();
+                userSearch.putExtra("ADS_Details", Ads_Details);
+                userSearch.setClass(Ads.this, Ads_Details.class);
+                startActivity(userSearch);
+
+            }
+        });
     }
 
     protected boolean isOnline() {
@@ -94,36 +90,27 @@ public class DashboardList_FormsReceived extends Activity {
 
     protected void updateDisplay() {
 
-        DashboardForms_Adapter adapter = new DashboardForms_Adapter(this, R.layout.item_dashboardforms, Dashboard_Forms_Server);
+       // LGone.setVisibility(View.VISIBLE);
+        adapter = new AdsAdapter(this, R.layout.item_ads, ads_Server);
         listv.setAdapter(adapter);
+       // listv.setTextFilterEnabled(true);
 
     }
 
-    /**
-     * Async Task Starts Here
-     */
-    class GetFormWise extends AsyncTask<String,String,String> {
-
-
+    class GetAds extends AsyncTask<String,String,String> {
         String url = null;
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
             if (tasks.size() == 0) {
                 pb.setVisibility(View.VISIBLE);
             }
             tasks.add(this);
-
         }
-
         @Override
         protected String doInBackground(String... params) {
-
-
             try {
-                url_ =new URL(EConstants.url_Generic+EConstants.Delemeter+EConstants.function_Dashboard+EConstants.Delemeter+params[0]+EConstants.Delemeter+params[1]);
+                url_ =new URL("/getInfo_JSON/"+params[0]);
                 conn_ = (HttpURLConnection)url_.openConnection();
                 conn_.setRequestMethod(EConstants.HTTP_Verb_Get);
                 conn_.setUseCaches(false);
@@ -139,10 +126,9 @@ public class DashboardList_FormsReceived extends Activity {
                         sb.append(line + "\n");
                     }
                     br.close();
-
+                    System.out.print(sb.toString());
 
                 }else{
-                    System.out.println(conn_.getResponseMessage());
                 }
 
             } catch (MalformedURLException e) {
@@ -154,17 +140,14 @@ public class DashboardList_FormsReceived extends Activity {
                     conn_.disconnect();
             }
             return sb.toString();
-
-
-
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Dashboard_Forms_Server = DashboardForm_JSON.parseFeed(result);
-            if(Dashboard_Forms_Server.isEmpty()){
-                Toast.makeText(getApplicationContext(),"No Record Found.",Toast.LENGTH_LONG).show();
+            ads_Server = Ads_JSON.parseFeed(result);
+            if(ads_Server.isEmpty()){
+                Toast.makeText(getApplicationContext(),EConstants.Messages_Vacancis,Toast.LENGTH_LONG).show();
             }else
             {
                 updateDisplay();
@@ -175,4 +158,5 @@ public class DashboardList_FormsReceived extends Activity {
             }
         }
     }
+
 }

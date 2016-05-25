@@ -1,4 +1,4 @@
-package hp.dit.hpsssb.aadhaar.com.hpsssb;
+package hp.dit.hpsssb.aadhaar.com.hpssc;
 
 import android.content.Context;
 import android.content.Intent;
@@ -166,7 +166,7 @@ public class Vacancies_List extends Activity {
         @Override
         protected String doInBackground(String... params) {
             try {
-                url_ =new URL("http://10.241.9.72/HPSSSB_Wep/HPSSSB_REST.svc/getVacancies_JSON/"+params[0]);
+                url_ =new URL("/getVacancies_JSON/"+params[0]);
                 conn_ = (HttpURLConnection)url_.openConnection();
                 conn_.setRequestMethod(EConstants.HTTP_Verb_Get);
                 conn_.setUseCaches(false);
