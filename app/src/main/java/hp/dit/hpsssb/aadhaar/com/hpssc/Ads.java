@@ -110,7 +110,7 @@ public class Ads extends Activity {
         @Override
         protected String doInBackground(String... params) {
             try {
-                url_ =new URL("/getInfo_JSON/"+params[0]);
+                url_ =new URL("http://hpsssb.hp.gov.in/hpsssbwebAPI/HPSSSB_REST.svc/getInfo_JSON/"+params[0]);
                 conn_ = (HttpURLConnection)url_.openConnection();
                 conn_.setRequestMethod(EConstants.HTTP_Verb_Get);
                 conn_.setUseCaches(false);

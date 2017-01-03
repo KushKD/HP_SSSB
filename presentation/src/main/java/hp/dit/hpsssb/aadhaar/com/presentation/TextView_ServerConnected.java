@@ -90,7 +90,7 @@ public class TextView_ServerConnected extends TextView {
 
 
             StringBuilder sb = new StringBuilder();
-            sb.append("");
+            sb.append("http://hpsssb.hp.gov.in/hpsssbwebAPI/HPSSSB_REST.svc");
             sb.append("/");
             sb.append("getLatestInfo_JSON");
             sb.append("/");
