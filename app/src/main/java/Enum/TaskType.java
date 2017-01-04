@@ -8,7 +8,9 @@ public enum TaskType {
 
     REGISTRATION(1),
     GET_PDF(2),
-    GET_VACANCIES(3);
+    GET_VACANCIES(3),
+    GET_FORMS_DASHBOARD(4),
+    GET_POSTWISE_DASHBOARD(5);
 
 
     int value;

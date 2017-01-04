@@ -7,43 +7,38 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 import AdaptersList.DashboardPost_Adapter;
 import DataParse.DashboardPost_JSON;
+import HelperClasses.AppStatus;
+import Interfaces.AsyncTaskListener;
+import Utils.Custom_Dialog;
 import Utils.EConstants;
 import HelperClasses.Helper;
 import Model.DashboardPostPOJO;
+import Enum.TaskType;
+import Utils.Generic_Async_Get;
 
-public class DashboardList_PostWise extends Activity {
+public class DashboardList_PostWise extends Activity implements AsyncTaskListener {
 
     private String Date_Service_From = null;
-   private  String Date_Service_To = null;
-    private String Reformated_From_Date,Reformated_To_Date = null;
-
-    private String Date_Service = null;
+    private String Date_Service_To = null;
+    private String Reformated_From_Date, Reformated_To_Date = null;
     ProgressBar pb;
-    URL url_;
-    HttpURLConnection conn_;
-    StringBuilder sb = new StringBuilder();
+
+    Custom_Dialog CD = new Custom_Dialog();
 
     ListView listv;
     Context context;
-
-    List<GetPostwiseDashboard> tasks;
     List<DashboardPostPOJO> DashboardPost_POJO_Server;
 
     @Override
@@ -60,10 +55,9 @@ public class DashboardList_PostWise extends Activity {
         try {
             Reformated_From_Date = Helper.ChangeDatesFormat(Date_Service_From);
             Reformated_To_Date = Helper.ChangeDatesFormat(Date_Service_To);
-            //  Toast.makeText(getApplicationContext(), Reformated_From_Date +"@@@@@"+ Reformated_To_Date , Toast.LENGTH_LONG).show();
         } catch (ParseException e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Something's Not Good.", Toast.LENGTH_SHORT).show();
+            CD.showDialog(DashboardList_PostWise.this, "Something's Not Good.");
         }
 
         listv = (ListView) findViewById(R.id.list);
@@ -71,25 +65,19 @@ public class DashboardList_PostWise extends Activity {
         pb = (ProgressBar) findViewById(R.id.progressBar1);
         pb.setVisibility(View.INVISIBLE);
 
-        tasks = new ArrayList<>();
 
-        if (isOnline()) {
-            GetPostwiseDashboard asy_Get_PD = new GetPostwiseDashboard();
-            asy_Get_PD.execute(Reformated_From_Date,Reformated_To_Date);
+        if (AppStatus.getInstance(DashboardList_PostWise.this).isOnline()) {
+
+            String URL = null;
+            URL = EConstants.url_Generic + EConstants.Delemeter + EConstants.function_Dashboard + EConstants.Delemeter + Reformated_From_Date + EConstants.Delemeter + Reformated_To_Date;
+
+            new Generic_Async_Get(DashboardList_PostWise.this, DashboardList_PostWise.this, TaskType.GET_POSTWISE_DASHBOARD).execute(URL);
+
         } else {
-            Toast.makeText(this, EConstants.Error_NoNetwork, Toast.LENGTH_LONG).show();
+            CD.showDialog(DashboardList_PostWise.this, EConstants.Error_NoNetwork);
         }
     }
 
-    protected boolean isOnline() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     protected void updateDisplay() {
 
@@ -97,71 +85,26 @@ public class DashboardList_PostWise extends Activity {
         listv.setAdapter(adapter);
     }
 
-    class GetPostwiseDashboard extends AsyncTask<String,String,String> {
-        String url = null;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
+    @Override
+    public void onTaskCompleted(String result, TaskType taskType) {
 
-            if (tasks.size() == 0) {
-                pb.setVisibility(View.VISIBLE);
-            }
-            tasks.add(this);
-        }
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-                url_ =new URL(EConstants.url_Generic+EConstants.Delemeter+EConstants.function_DashboardCReport+EConstants.Delemeter+params[0]+EConstants.Delemeter+params[1]);
-                conn_ = (HttpURLConnection)url_.openConnection();
-                conn_.setRequestMethod(EConstants.HTTP_Verb_Get);
-                conn_.setUseCaches(false);
-                conn_.setConnectTimeout(EConstants.Connection_TimeOut);
-                conn_.setReadTimeout(EConstants.Connection_TimeOut);
-                conn_.connect();
+        Log.e("Server Message", result);
 
-                int HttpResult =conn_.getResponseCode();
-                if(HttpResult ==HttpURLConnection.HTTP_OK){
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn_.getInputStream(),EConstants.UNICODE));
-                    String line = null;
-                    while ((line = br.readLine()) != null) {
-                        sb.append(line + "\n");
-                    }
-                    br.close();
+        String finalResult = null;
+        if (taskType == TaskType.GET_POSTWISE_DASHBOARD) {
 
-
-                }else{
-                    System.out.println(conn_.getResponseMessage());
-                }
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally{
-                if(conn_!=null)
-                    conn_.disconnect();
-            }
-            return sb.toString();
-
-
-
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
             DashboardPost_POJO_Server = DashboardPost_JSON.parseFeed(result);
-            if(DashboardPost_POJO_Server.isEmpty()){
-                Toast.makeText(getApplicationContext(),"No record found.",Toast.LENGTH_LONG).show();
-            }else
-            {
+            if (DashboardPost_POJO_Server.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "No record found.", Toast.LENGTH_LONG).show();
+            } else {
                 updateDisplay();
             }
-            tasks.remove(this);
-            if (tasks.size() == 0) {
-                pb.setVisibility(View.INVISIBLE);
-            }
+
+        } else {
+            CD.showDialog(DashboardList_PostWise.this, "Something bad happened.");
         }
+
     }
+
 
 }

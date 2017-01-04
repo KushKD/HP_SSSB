@@ -52,7 +52,7 @@ public class EConstants {
      */
     public static final String ErrorMobile = "Please enter a valid mobile number.";
     public static final String Messages_OTP = "Please wait , an OTP will be sent to this mobile number";
-    public static final String Date_Format = "MM-dd-yyyy";
+    public static final String Date_Format = "dd-MM-yyyy";
     public static final String Error_ValidDates = "Please input valid dates";
     public static final String  Put_From_Date="DATE_TO_SEND_FROM";
     public static final String  Put_To_Date="DATE_TO_SEND_TO";
