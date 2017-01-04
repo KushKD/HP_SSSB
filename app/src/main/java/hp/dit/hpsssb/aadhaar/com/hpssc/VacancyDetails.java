@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import HelperClasses.EConstants;
+import Utils.EConstants;
 import HelperClasses.EncryptData;
 import Model.VacancyPOJO;
 

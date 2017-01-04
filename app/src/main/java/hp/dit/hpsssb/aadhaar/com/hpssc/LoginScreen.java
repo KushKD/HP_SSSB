@@ -17,8 +17,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import DataParse.JSONParser;
-import HelperClasses.EConstants;
+import JsonManager.JsonParser;
+import Utils.EConstants;
 import hp.dit.hpsssb.aadhaar.com.presentation.BaseActivity;
 
 public class LoginScreen extends BaseActivity {
@@ -127,8 +127,8 @@ public class LoginScreen extends BaseActivity {
             sb.append(EConstants.Delemeter);
             sb.append(Server_Phone);
             url = sb.toString();
-            JSONParser jParser = new JSONParser();
-            String result  = jParser.getDataRest(url);
+            JsonParser jParser = new JsonParser();
+            String result  = jParser.ParseString(url);
             sb.delete(0, sb.length());
             Object json ;
             try {
@@ -198,8 +198,8 @@ if(s.length()==52){
             sb.append(EConstants.Delemeter);
             sb.append(Server_OTP);
             url = sb.toString();
-            JSONParser jParser = new JSONParser();
-            String result  = jParser.getDataRest(url);
+            JsonParser jParser = new JsonParser();
+            String result  = jParser.ParseString(url);
             sb.delete(0, sb.length());
             Object json ;
             try {

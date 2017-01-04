@@ -1,90 +1,66 @@
-package DataParse;
+package JsonManager;
 
-import org.json.JSONArray;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
 import org.json.JSONException;
-import android.util.Log;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 import java.io.InputStream;
+
+import Utils.EConstants;
 
 /**
- * Created by kush on 17/07/15.
+ * Created by kuush on 1/4/2017.
  */
-public class JSONParser {
+
+public class JsonParser {
 
     static InputStream is = null;
     static String verify = null;
-   public  String varification = "";
+    public  String varification = "";
     public String pdf_URL = "";
-    public JSONParser() {
 
-    }
 
-    public String getDataRest(String url) {
+    public String ParseString(String s) {
 
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpResponse response;
+        String g_Table = null;
         try {
-
-            response = httpclient.execute(new HttpGet(url));
-            StatusLine statusLine = response.getStatusLine();
-            if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
-                HttpEntity httpEntity = response.getEntity();
-                is = httpEntity.getContent();
+            Object json = new JSONTokener(s).nextValue();
+            if (json instanceof JSONObject) {
+                JSONObject obj = new JSONObject(s);
+                g_Table = obj.optString("JSON_GetRegistrationResult");
+                return g_Table;
             } else {
-                response.getEntity().getContent().close();
-                throw new IOException(statusLine.getReasonPhrase());
+                return null;
             }
-
-        } catch (UnsupportedEncodingException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            return null;
         }
-
-        try {
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "utf-8"), 32);
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
-            }
-            is.close();
-            varification = sb.toString();
-            System.out.println(varification);
-
-        } catch (Exception e) {
-            Log.e("Buffer Error", "Error converting result " + e.toString());
-            return "";
-        }
-
-        return varification;
     }
 
+    public String ParsePdfUrl(String s) {
 
+        String g_Table = null;
+        try {
+            Object json = new JSONTokener(s).nextValue();
+            if (json instanceof JSONObject) {
+                JSONObject obj = new JSONObject(s);
+                g_Table = obj.optString(EConstants.InstructionsResult);
+                return g_Table;
+            } else {
+                return null;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     /**
      *  Logout
      * @author Kush Kumar Dhawan
      */
 
-    public String getPdfURL(String url) {
+   /* public String getPdfURL(String url) {
 
         HttpClient httpclient = new DefaultHttpClient();
         HttpResponse response;
@@ -127,9 +103,9 @@ public class JSONParser {
         }
 
         return pdf_URL;
-    }
+    }*/
 
-
+/*
 
     public String checkLogin(String url) {
 
@@ -177,7 +153,5 @@ public class JSONParser {
         }
 
         return varification;
-    }
-
-
+    }*/
 }

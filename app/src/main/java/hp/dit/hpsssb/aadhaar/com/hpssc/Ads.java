@@ -26,7 +26,7 @@ import java.util.List;
 
 import AdaptersList.AdsAdapter;
 import DataParse.Ads_JSON;
-import HelperClasses.EConstants;
+import Utils.EConstants;
 import Model.AdsPOJO;
 
 public class Ads extends Activity {

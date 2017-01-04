@@ -8,9 +8,7 @@ import org.json.JSONTokener;
 import java.util.ArrayList;
 import java.util.List;
 
-import HelperClasses.EConstants;
 import Model.AdsPOJO;
-import Model.VacancyPOJO;
 
 /**
  * Created by kuush on 5/24/2016.

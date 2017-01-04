@@ -24,7 +24,7 @@ import java.util.List;
 
 import AdaptersList.DashboardPost_Adapter;
 import DataParse.DashboardPost_JSON;
-import HelperClasses.EConstants;
+import Utils.EConstants;
 import HelperClasses.Helper;
 import Model.DashboardPostPOJO;
 

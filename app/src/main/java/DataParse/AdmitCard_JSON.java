@@ -10,7 +10,7 @@ import org.json.JSONTokener;
 import java.util.ArrayList;
 import java.util.List;
 
-import HelperClasses.EConstants;
+import Utils.EConstants;
 import Model.AdmitCardPOJO;
 
 /**
@@ -32,6 +32,7 @@ public class AdmitCard_JSON {
             }
             JSONArray ar = new JSONArray(g_Table);
             List<AdmitCardPOJO>AdmiCardList = new ArrayList<>();
+
 
             for (int i = 0; i < ar.length(); i++) {
                 JSONObject obj = ar.getJSONObject(i);

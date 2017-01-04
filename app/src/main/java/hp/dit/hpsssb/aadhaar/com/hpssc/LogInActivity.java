@@ -1,32 +1,30 @@
 package hp.dit.hpsssb.aadhaar.com.hpssc;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
-import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
-import DataParse.JSONParser;
-import HelperClasses.EConstants;
+import HelperClasses.AppStatus;
+import Interfaces.AsyncTaskListener;
+import JsonManager.JsonParser;
+import Utils.Custom_Dialog;
+import Utils.EConstants;
 import HelperClasses.Helper;
+import Enum.TaskType;
+import Utils.Generic_Async_Get;
 
-public class LogInActivity extends Activity {
+public class LogInActivity extends Activity implements AsyncTaskListener {
 
     Button register, back;
     EditText et_Mobile;
     Helper helper = null;
     private String IMEI = null;
+    Custom_Dialog CD = new Custom_Dialog();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +36,8 @@ public class LogInActivity extends Activity {
         back = (Button) findViewById(R.id.back);
         et_Mobile = (EditText) findViewById(R.id.etmobile);
 
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        IMEI = telephonyManager.getDeviceId();
+
+        IMEI = AppStatus.GetIMEI(LogInActivity.this);
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -56,25 +54,53 @@ public class LogInActivity extends Activity {
                 //Check weather Phone number is there or not
                 String PhoneNumber_Service = et_Mobile.getText().toString().trim();
 
-                if (PhoneNumber_Service.length() == 10 && Integer.parseInt(PhoneNumber_Service.substring(0,1)) > 6) {
+                if (PhoneNumber_Service.length() == 10 && Integer.parseInt(PhoneNumber_Service.substring(0, 1)) > 6) {
                     if (IMEI.length() != 0) {
-                         Registration Register_me = new Registration();
-                        Register_me.execute(PhoneNumber_Service,IMEI);
+                        if (AppStatus.getInstance(LogInActivity.this).isOnline()) {
+                            try {
+                                String url = null;
+                                StringBuilder sb = new StringBuilder();
+                                sb.append(EConstants.url_Generic);
+                                sb.append(EConstants.Delemeter);
+                                sb.append(EConstants.function_Register);
+                                sb.append(EConstants.Delemeter);
+                                sb.append(PhoneNumber_Service);
+                                sb.append(EConstants.Delemeter);
+                                sb.append(IMEI);
+                                url = sb.toString();
+                                new Generic_Async_Get(LogInActivity.this, LogInActivity.this, TaskType.REGISTRATION).execute(url);
+                            } catch (Exception ex) {
+                                CD.showDialog(LogInActivity.this, ex.getLocalizedMessage().toString());
+                            }
+                        } else {
+                            CD.showDialog(LogInActivity.this, "Please connect to Internet.");
+                        }
+
                     } else {
-                        //Start Async Task with IMEI set to 0
-                        Registration Register_mee = new Registration();
-                        Register_mee.execute(PhoneNumber_Service,"000000000000");
+                        if (AppStatus.getInstance(LogInActivity.this).isOnline()) {
+                            try {
+                                String url = null;
+                                StringBuilder sb = new StringBuilder();
+                                sb.append(EConstants.url_Generic);
+                                sb.append(EConstants.Delemeter);
+                                sb.append(EConstants.function_Register);
+                                sb.append(EConstants.Delemeter);
+                                sb.append(PhoneNumber_Service);
+                                sb.append(EConstants.Delemeter);
+                                sb.append("000000000000");
+                                url = sb.toString();
+                                new Generic_Async_Get(LogInActivity.this, LogInActivity.this, TaskType.REGISTRATION).execute(url);
+                            } catch (Exception ex) {
+                                CD.showDialog(LogInActivity.this, ex.getLocalizedMessage().toString());
+                            }
+                        } else {
+                            CD.showDialog(LogInActivity.this, "Please connect to Internet.");
+                        }
                     }
 
                 } else {
-                    Toast.makeText(getApplicationContext(), "Please enter a valid 10 digit Mobile number", Toast.LENGTH_LONG).show();
+                    CD.showDialog(LogInActivity.this, "Please enter a valid 10 digit Mobile number");
                 }
-
-
-                //Start Service IMEI and Phone Number
-
-               // Toast.makeText(getBaseContext(), IMEI, Toast.LENGTH_LONG).show();
-
 
 
             }
@@ -83,81 +109,34 @@ public class LogInActivity extends Activity {
 
     }
 
-    class Registration extends AsyncTask<String, String,String>{
+    @Override
+    public void onTaskCompleted(String result, TaskType taskType) {
 
-        private String Phone_Service = null;
-        private String IMEI_Service = null;
-        private String Server_Value = null;
-        private ProgressDialog dialog;
-        String url = null;
+        Log.e("Server Message", result);
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            dialog = new ProgressDialog(LogInActivity.this);
-            this.dialog.setMessage("Please wait ..");
-            this.dialog.show();
-            this.dialog.setCancelable(false);
-        }
+        String finalResult = null;
 
-        @Override
-        protected String doInBackground(String... params) {
+        if(taskType == TaskType.REGISTRATION){
 
-            Phone_Service = params[0];
-            IMEI_Service = params[1];
-            StringBuilder sb = new StringBuilder();
-            sb.append(EConstants.url_Generic);
-            sb.append(EConstants.Delemeter);
-            sb.append(EConstants.function_Register);
-            sb.append(EConstants.Delemeter);
-            sb.append(Phone_Service);
-            sb.append(EConstants.Delemeter);
-            sb.append(IMEI_Service);
-            url = sb.toString();
-            JSONParser jParser = new JSONParser();
-            String result  = jParser.getDataRest(url);
-
-            sb.delete(0, sb.length());
-            Object json ;
-            try {
-                json = new JSONTokener(result).nextValue();
-                if (json instanceof JSONObject){
-                    JSONObject obj = new JSONObject(result);
-                    Server_Value = obj.getString("JSON_GetRegistrationResult");
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-                Server_Value = "error";
-            }
-            return Server_Value;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-            if(Server_Value.length()==22){
-
-                //User has successfully logged in, save this information
-                // We need an Editor object to make preference changes.
+            JsonParser JP = new JsonParser();
+            finalResult = JP.ParseString(result);
+            if (finalResult.length() == 22) {
                 SharedPreferences settings = getSharedPreferences(EConstants.PREFS_NAME, 0); // 0 - for private mode
                 SharedPreferences.Editor editor = settings.edit();
-                //Set "hasLoggedIn" to true
                 editor.putBoolean("hasLoggedIn", true);
-                // Commit the edits!
                 editor.commit();
                 Intent intent = new Intent();
                 intent.setClass(LogInActivity.this, HPSSSB_MAIN.class);
                 startActivity(intent);
                 LogInActivity.this.finish();
             }else{
-
-                Toast.makeText(getApplicationContext(),EConstants.Error_NoIdea,Toast.LENGTH_LONG).show();
-                dialog.dismiss();
-
+                CD.showDialog(LogInActivity.this,"Something not good.");
             }
         }
+
     }
+
+
 }
 
 

@@ -8,7 +8,7 @@ import org.json.JSONTokener;
 import java.util.ArrayList;
 import java.util.List;
 
-import HelperClasses.EConstants;
+import Utils.EConstants;
 import Model.VacancyPOJO;
 
 /**

@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import HelperClasses.EConstants;
+import Utils.EConstants;
 import hp.dit.hpsssb.aadhaar.com.presentation.BaseActivity;
 
 public class AdmitCard extends BaseActivity implements View.OnClickListener {

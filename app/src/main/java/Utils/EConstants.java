@@ -1,4 +1,4 @@
-package HelperClasses;
+package Utils;
 
 /**
  * Created by kuush on 5/10/2016.

@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
-import HelperClasses.EConstants;
+import Utils.EConstants;
 import hp.dit.hpsssb.aadhaar.com.presentation.BaseActivity;
 
 public class SplashScreen extends BaseActivity {

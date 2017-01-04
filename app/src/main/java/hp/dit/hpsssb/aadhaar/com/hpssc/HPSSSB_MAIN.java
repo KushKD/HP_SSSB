@@ -35,19 +35,30 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import DataParse.JSONParser;
-import HelperClasses.EConstants;
+import HelperClasses.AppStatus;
+import Enum.TaskType;
+import Interfaces.AsyncTaskListener;
+import JsonManager.JsonParser;
+import Utils.Custom_Dialog;
+import Utils.EConstants;
+import Utils.Generic_Async_Get;
 import hp.dit.hpsssb.aadhaar.com.presentation.CircleImageView;
 import hp.dit.hpsssb.aadhaar.com.presentation.CircleLayout;
 import hp.dit.hpsssb.aadhaar.com.presentation.BaseActivity;
 
 
-public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSelectedListener, CircleLayout.OnItemClickListener, CircleLayout.OnRotationFinishedListener, CircleLayout.OnCenterClickListener {
+public class HPSSSB_MAIN extends BaseActivity implements
+        CircleLayout.OnItemSelectedListener,
+        CircleLayout.OnItemClickListener,
+        CircleLayout.OnRotationFinishedListener,
+        CircleLayout.OnCenterClickListener,
+        AsyncTaskListener{
     private ProgressDialog pDialog;
     public static final int progress_bar_type = 0;
     private TextView selectedTextView;
     private  Button Proceed;
     final Context context = this;
+    Custom_Dialog CD = new Custom_Dialog();
 
 
     @Override
@@ -74,7 +85,7 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
 
                 switch (ButtonText){
                     case "Results":
-                        ShowAlert(EConstants.Messages_Results);
+                        CD.showDialog(HPSSSB_MAIN.this,EConstants.Messages_Results);
                         break;
                     case "Ads":
                         String dateString_Ads = (String) DateFormat.format("MM-dd-yyyy",new java.util.Date());
@@ -100,8 +111,11 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                                 Toast.makeText(getApplicationContext(),EConstants.Error_NoPDF_Viewer,Toast.LENGTH_SHORT).show();
                             }
                         }else{
-                            if(isOnline()){
-                                new get_URL_InstructionsPDF().execute(EConstants.url_Generic+"/"+EConstants.function_Instructions);
+                            if(AppStatus.getInstance(HPSSSB_MAIN.this).isOnline()){
+                                String URL_Instructions = null;
+                                URL_Instructions = EConstants.url_Generic+"/"+EConstants.function_Instructions;
+                                new Generic_Async_Get(HPSSSB_MAIN.this, HPSSSB_MAIN.this, TaskType.GET_PDF).execute(URL_Instructions);
+
                             }else{
                                 Toast.makeText(getApplicationContext(),EConstants.Error_NoNetwork,Toast.LENGTH_LONG).show();
                             }
@@ -119,7 +133,7 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                         startActivity(i_dashboard);
                         break;
                     case "Interview Schedule":
-                        ShowAlert(EConstants.Messages_Interview);
+                        CD.showDialog(HPSSSB_MAIN.this,EConstants.Messages_Interview);
 
                         break;
                     case "Admit Card":
@@ -127,7 +141,7 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                         startActivity(i_Login);
                         break;
                     default:
-                        Toast.makeText(getApplicationContext(),EConstants.Error_NoIdea,Toast.LENGTH_LONG).show();
+                        CD.showDialog(HPSSSB_MAIN.this,EConstants.Error_NoIdea);
                         break;
                 }
             }
@@ -190,7 +204,7 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
 
         switch (view.getId()) {
             case R.id.main_interviews:
-               ShowAlert(EConstants.Messages_Interview);
+               CD.showDialog(HPSSSB_MAIN.this,EConstants.Messages_Interview);
                 break;
             case R.id.main_dashboard:
                 Intent i_dashboard = new Intent(HPSSSB_MAIN.this, Dashboard.class);
@@ -213,8 +227,11 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                         Toast.makeText(getApplicationContext(),EConstants.Error_NoPDF_Viewer,Toast.LENGTH_SHORT).show();
                     }
                 }else{
-                    if(isOnline()){
-                        new get_URL_InstructionsPDF().execute(EConstants.url_Generic+"/"+EConstants.function_Instructions);
+                    if(AppStatus.getInstance(HPSSSB_MAIN.this).isOnline()){
+                        String URL_Instructions = null;
+                        URL_Instructions = EConstants.url_Generic+"/"+EConstants.function_Instructions;
+                        new Generic_Async_Get(HPSSSB_MAIN.this, HPSSSB_MAIN.this, TaskType.GET_PDF).execute(URL_Instructions);
+
                     }else{
                         Toast.makeText(getApplicationContext(),EConstants.Error_NoNetwork,Toast.LENGTH_LONG).show();
                     }
@@ -240,37 +257,14 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
                 break;
 
             case R.id.main_results:
-                ShowAlert(EConstants.Messages_Results);
+                CD.showDialog(HPSSSB_MAIN.this,EConstants.Messages_Results);
                 break;
         }
     }
 
-    private void ShowAlert(String s) {
-        final Dialog dialog = new Dialog(HPSSSB_MAIN.this);
-        dialog.setContentView(R.layout.dialog_demo);
-        dialog.setTitle("Notification");
-        dialog.setCancelable(false);
-        dialog.show();
-        TextView DialogInfo = (TextView)dialog.findViewById(R.id.dialog_info);
-        DialogInfo.setText(s);
-        Button agree = (Button)dialog.findViewById(R.id.dialog_ok);
-        agree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-    }
 
-    protected boolean isOnline() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
+
 
     @Override
     public void onRotationFinished(View view, String name) {
@@ -302,57 +296,34 @@ public class HPSSSB_MAIN extends BaseActivity implements CircleLayout.OnItemSele
         }
     }
 
-    class get_URL_InstructionsPDF extends AsyncTask<String,String,String>{
+    @Override
+    public void onTaskCompleted(String result, TaskType taskType) {
 
-        String url = null;
-        private ProgressDialog dialog;
-        String Server_value = null;
+        Log.e("Server Message", result);
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            dialog = new ProgressDialog(HPSSSB_MAIN.this);
-            this.dialog.setMessage(EConstants.progress_Dialog_Message);
-            this.dialog.show();
-            this.dialog.setCancelable(false);
-        }
-        @Override
-        protected String doInBackground(String... params) {
-            url = params[0];
-            JSONParser jParser = new JSONParser();
-            String result  = jParser.getPdfURL(url);
-            Object json ;
-            try {
-                json = new JSONTokener(result).nextValue();
-                if (json instanceof JSONObject){
-                    JSONObject obj = new JSONObject(result);
-                     Server_value = obj.optString(EConstants.InstructionsResult);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-               return null;
-            }
-            return Server_value ;
-        }
+        String finalResult = null;
+        if(taskType == TaskType.GET_PDF){
+            JsonParser JP = new JsonParser();
+            finalResult = JP.ParsePdfUrl(result);
 
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            this.dialog.dismiss();
-          // System.out.println(s.length());
-            if(s.length()>=57){
-                if(isOnline()) {
-                    new DownloadFileFromURL().execute(s);
+            // System.out.println(s.length());
+            if(finalResult.length()>=57){
+                if(AppStatus.getInstance(HPSSSB_MAIN.this).isOnline()) {
+                    new DownloadFileFromURL().execute(finalResult);
                 }else{
-                    Toast.makeText(getApplicationContext(),EConstants.Error_NoNetwork,Toast.LENGTH_LONG).show();
+                    CD.showDialog(HPSSSB_MAIN.this,EConstants.Error_NoNetwork);
                 }
             }else{
-                Toast.makeText(getApplicationContext(),EConstants.Error_NoIdea,Toast.LENGTH_LONG).show();
+                CD.showDialog(HPSSSB_MAIN.this,EConstants.Error_NoIdea);
             }
+
+        }else{
+            CD.showDialog(HPSSSB_MAIN.this,"Something not good.");
         }
 
-
     }
+
+
 
     class DownloadFileFromURL extends AsyncTask<String, String, String> {
 

@@ -29,7 +29,7 @@ import java.util.List;
 
 import AdaptersList.Vacancies_Adapter;
 import DataParse.Vacancy_JSON;
-import HelperClasses.EConstants;
+import Utils.EConstants;
 import Model.VacancyPOJO;
 
 public class Vacancies_List extends Activity {

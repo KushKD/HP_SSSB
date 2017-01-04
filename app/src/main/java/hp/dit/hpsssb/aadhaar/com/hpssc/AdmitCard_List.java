@@ -24,7 +24,7 @@ import java.util.List;
 
 import AdaptersList.AdmitCard_Adaptar;
 import DataParse.AdmitCard_JSON;
-import HelperClasses.EConstants;
+import Utils.EConstants;
 import Model.AdmitCardPOJO;
 
 public class AdmitCard_List extends Activity {
