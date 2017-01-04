@@ -7,7 +7,8 @@ package Enum;
 public enum TaskType {
 
     REGISTRATION(1),
-    GET_PDF(2);
+    GET_PDF(2),
+    GET_VACANCIES(3);
 
 
     int value;

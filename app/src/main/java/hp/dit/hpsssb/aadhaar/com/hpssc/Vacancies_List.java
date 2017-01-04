@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -29,10 +30,15 @@ import java.util.List;
 
 import AdaptersList.Vacancies_Adapter;
 import DataParse.Vacancy_JSON;
+import HelperClasses.AppStatus;
+import Interfaces.AsyncTaskListener;
+import Utils.Custom_Dialog;
 import Utils.EConstants;
 import Model.VacancyPOJO;
+import Enum.TaskType;
+import Utils.Generic_Async_Get;
 
-public class Vacancies_List extends Activity {
+public class Vacancies_List extends Activity implements AsyncTaskListener {
 
     private String Date_Service = null;
     LinearLayout LGone;
@@ -43,10 +49,10 @@ public class Vacancies_List extends Activity {
     StringBuilder sb = new StringBuilder();
     ListView listv;
     Context context;
-    List<GetVacancies> tasks;
     List<VacancyPOJO> vacancies_Server;
     EditText Search_EditText;
     Vacancies_Adapter adapter;
+    Custom_Dialog CD = new Custom_Dialog();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,28 +68,31 @@ public class Vacancies_List extends Activity {
         context = this;
         pb = (ProgressBar) findViewById(R.id.progressBar1);
         pb.setVisibility(View.INVISIBLE);
-        tasks = new ArrayList<>();
 
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isOnline()) {
+                if (AppStatus.getInstance(Vacancies_List.this).isOnline()) {
                     Search_EditText.setText("");
-                    GetVacancies asy_Get_Vacancy = new GetVacancies();
-                    asy_Get_Vacancy.execute(Date_Service);
+                    String url_ = null;
+                    url_ = EConstants.url_Generic+"/getVacancies_JSON/"+Date_Service;
+                    new Generic_Async_Get(Vacancies_List.this, Vacancies_List.this, TaskType.GET_VACANCIES).execute(url_);
                 } else {
-                    Toast.makeText(getApplicationContext(),EConstants.Error_NoNetwork, Toast.LENGTH_LONG).show();
+                    CD.showDialog(Vacancies_List.this,EConstants.Error_NoNetwork);
                 }
             }
         });
 
 
 
-        if (isOnline()) {
-            GetVacancies asy_Get_Vacancy = new GetVacancies();
-            asy_Get_Vacancy.execute(Date_Service);
+        if (AppStatus.getInstance(Vacancies_List.this).isOnline()) {
+
+            String url_ = null;
+            url_ = EConstants.url_Generic+"/getVacancies_JSON/"+Date_Service;
+            new Generic_Async_Get(Vacancies_List.this, Vacancies_List.this, TaskType.GET_VACANCIES).execute(url_);
+
         } else {
-            Toast.makeText(this,EConstants.Error_NoNetwork, Toast.LENGTH_LONG).show();
+            CD.showDialog(Vacancies_List.this,EConstants.Error_NoNetwork);
         }
 
         listv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -135,15 +144,7 @@ public class Vacancies_List extends Activity {
 
 
 
-        protected boolean isOnline() {
-            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = cm.getActiveNetworkInfo();
-            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                return true;
-            } else {
-                return false;
-            }
-        }
+
 
     protected void updateDisplay() {
 
@@ -153,67 +154,28 @@ public class Vacancies_List extends Activity {
         listv.setTextFilterEnabled(true);
 
     }
-    class GetVacancies extends AsyncTask<String,String,String> {
-        String url = null;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            if (tasks.size() == 0) {
-                pb.setVisibility(View.VISIBLE);
-            }
-            tasks.add(this);
-        }
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-                url_ =new URL("http://hpsssb.hp.gov.in/hpsssbwebAPI/HPSSSB_REST.svc/getVacancies_JSON/"+params[0]);
-                conn_ = (HttpURLConnection)url_.openConnection();
-                conn_.setRequestMethod(EConstants.HTTP_Verb_Get);
-                conn_.setUseCaches(false);
-                conn_.setConnectTimeout(EConstants.Connection_TimeOut);
-                conn_.setReadTimeout(EConstants.Connection_TimeOut);
-                conn_.connect();
 
-                int HttpResult =conn_.getResponseCode();
-                if(HttpResult ==HttpURLConnection.HTTP_OK){
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn_.getInputStream(),EConstants.UNICODE));
-                    String line = null;
-                    while ((line = br.readLine()) != null) {
-                        sb.append(line + "\n");
-                    }
-                    br.close();
-                   System.out.print(sb.toString());
+    @Override
+    public void onTaskCompleted(String result, TaskType taskType) {
 
-                }else{
-                }
+        Log.e("Server Message", result);
+        if(taskType == TaskType.GET_VACANCIES){
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally{
-                if(conn_!=null)
-                    conn_.disconnect();
-            }
-            return sb.toString();
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
             vacancies_Server = Vacancy_JSON.parseFeed(result);
-            if(vacancies_Server.isEmpty()){
-                Toast.makeText(getApplicationContext(),EConstants.Messages_Vacancis,Toast.LENGTH_LONG).show();
+            if(!vacancies_Server.isEmpty()){
+                updateDisplay();
+
             }else
-        {
-            updateDisplay();
-        }
-            tasks.remove(this);
-            if (tasks.size() == 0) {
-                pb.setVisibility(View.INVISIBLE);
+            {
+                CD.showDialog(Vacancies_List.this,EConstants.Messages_Vacancis);
             }
+
+        }else{
+            CD.showDialog(Vacancies_List.this,"Something bad happened");
         }
+
     }
+
 }
 
 
