@@ -1,4 +1,4 @@
-package DataParse;
+package JsonManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;

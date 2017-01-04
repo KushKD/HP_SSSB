@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -16,7 +15,7 @@ import java.text.ParseException;
 import java.util.List;
 
 import AdaptersList.DashboardForms_Adapter;
-import DataParse.DashboardForm_JSON;
+import JsonManager.DashboardForm_JSON;
 import Enum.TaskType;
 import HelperClasses.AppStatus;
 import HelperClasses.Helper;
@@ -37,7 +36,7 @@ public class DashboardList_FormsReceived extends Activity implements AsyncTaskLi
     HttpURLConnection conn_;
     StringBuilder sb = new StringBuilder();
 
-    Custom_Dialog CD = new Custom_Dialog();
+    Custom_Dialog CD = new Custom_Dialog(DashboardList_FormsReceived.this);
 
     ListView listv;
     Context context;

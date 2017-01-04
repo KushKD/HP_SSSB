@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import AdaptersList.AdsAdapter;
-import DataParse.Ads_JSON;
+import JsonManager.Ads_JSON;
 import Utils.EConstants;
 import Model.AdsPOJO;
 

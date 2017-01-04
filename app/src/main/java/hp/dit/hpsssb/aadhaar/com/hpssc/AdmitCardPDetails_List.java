@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import AdaptersList.AdmitCard_Adaptar;
-import DataParse.AdmitCardP_JSON;
+import JsonManager.AdmitCardP_JSON;
 import Utils.EConstants;
 import Model.AdmitCardPOJO;
 

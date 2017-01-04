@@ -24,7 +24,7 @@ public class LogInActivity extends Activity implements AsyncTaskListener {
     EditText et_Mobile;
     Helper helper = null;
     private String IMEI = null;
-    Custom_Dialog CD = new Custom_Dialog();
+    Custom_Dialog CD = new Custom_Dialog(LogInActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

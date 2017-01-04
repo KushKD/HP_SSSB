@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen">
         <activity
-            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.SplashScreen"
+            android:name=".SplashScreen"
             android:label="@string/app_name"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait">
@@ -27,68 +27,69 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.AdmitCard"
+            android:name=".AdmitCard"
             android:label="@string/title_activity_admit_card"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.Vacancies_List"
+            android:name=".Vacancies_List"
             android:label="@string/title_activity_vacancies__list"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.VacancyDetails"
+            android:name=".VacancyDetails"
             android:label="@string/title_activity_vacancy_details"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.HPSSSB_MAIN"
+            android:name=".HPSSSB_MAIN"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.Dashboard"
+            android:name=".Dashboard"
             android:label="@string/title_activity_dashboard"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.DashboardList_PostWise"
+            android:name=".JsonManager.DashboardList_PostWise"
             android:label="@string/title_activity_dashboard_list"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.DashboardList_FormsReceived"
+            android:name=".DashboardList_FormsReceived"
             android:label="@string/title_activity_dashboard_list__forms_received"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.AdmitCard_List"
+            android:name=".AdmitCard_List"
             android:label="@string/title_activity_admit_card__list"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.AdmitCardPDetails_List"
+            android:name=".AdmitCardPDetails_List"
             android:label="@string/title_activity_admit_card__list"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.AdmitCardDetails"
+            android:name=".AdmitCardDetails"
             android:label="@string/title_activity_admit_card_details"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.LoginScreen"
+            android:name=".LoginScreen"
             android:label="@string/title_activity_login_screen"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <activity
-            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.LogInActivity"
+            android:name=".LogInActivity"
             android:label="@string/title_activity_log_in" />
         <activity
-            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.Ads"
+            android:name=".Ads"
             android:label="@string/title_activity_ads" />
         <activity
-            android:name="hp.dit.hpsssb.aadhaar.com.hpssc.Ads_Details"
-            android:label="@string/title_activity_ads__details"></activity>
+            android:name=".Ads_Details"
+            android:label="@string/title_activity_ads__details" />
+        <activity android:name=".Schedule_Exams_Interview"></activity>
     </application>
 
 </manifest>

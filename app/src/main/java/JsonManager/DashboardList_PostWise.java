@@ -1,24 +1,20 @@
-package hp.dit.hpsssb.aadhaar.com.hpssc;
+package JsonManager;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.List;
 
 import AdaptersList.DashboardPost_Adapter;
-import DataParse.DashboardPost_JSON;
 import HelperClasses.AppStatus;
 import Interfaces.AsyncTaskListener;
 import Utils.Custom_Dialog;
@@ -27,6 +23,7 @@ import HelperClasses.Helper;
 import Model.DashboardPostPOJO;
 import Enum.TaskType;
 import Utils.Generic_Async_Get;
+import hp.dit.hpsssb.aadhaar.com.hpssc.R;
 
 public class DashboardList_PostWise extends Activity implements AsyncTaskListener {
 
@@ -38,7 +35,7 @@ public class DashboardList_PostWise extends Activity implements AsyncTaskListene
     HttpURLConnection conn_;
     StringBuilder sb = new StringBuilder();
 
-    Custom_Dialog CD = new Custom_Dialog();
+    Custom_Dialog CD = new Custom_Dialog(DashboardList_PostWise.this);
 
     ListView listv;
     Context context;

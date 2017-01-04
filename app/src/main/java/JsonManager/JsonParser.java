@@ -1,10 +1,16 @@
 package JsonManager;
 
+import android.util.Log;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
+import Model.PostsPOJO;
 import Utils.EConstants;
 
 /**
@@ -55,103 +61,34 @@ public class JsonParser {
         }
     }
 
-    /**
-     *  Logout
-     * @author Kush Kumar Dhawan
-     */
-
-   /* public String getPdfURL(String url) {
-
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpResponse response;
-        try {
-
-            response = httpclient.execute(new HttpGet(url));
-            StatusLine statusLine = response.getStatusLine();
-            if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
-                HttpEntity httpEntity = response.getEntity();
-                is = httpEntity.getContent();
-            } else {
-                response.getEntity().getContent().close();
-                throw new IOException(statusLine.getReasonPhrase());
-            }
-
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static List<PostsPOJO> parseFeedNotifications(String content) {
 
         try {
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "utf-8"), 32);
-            //    BufferedReader reader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"), 16);
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
+            String g_Table = null;
+            Log.e("Error:", content );
+            Object json = new JSONTokener(content).nextValue();
+            if (json instanceof JSONObject){
+                JSONObject obj = new JSONObject(content);
+                g_Table = obj.optString("JSON_PostDetailsResult");
             }
-            is.close();
-            pdf_URL = sb.toString();
-            System.out.println(pdf_URL);
+            else if (json instanceof JSONArray){
+            }
+            JSONArray ar = new JSONArray(g_Table);
+            List<PostsPOJO> notifications = new ArrayList<>();
 
-        } catch (Exception e) {
-            Log.e("Buffer Error", "Error converting result " + e.toString());
-            return "";
+            for (int i = 0; i < ar.length(); i++) {
+                JSONObject obj = ar.getJSONObject(i);
+                PostsPOJO pojo_ads = new PostsPOJO();
+                pojo_ads.setPostId(obj.getString("PostId").trim());
+                pojo_ads.setPostName(obj.getString("PostName").trim());
+                notifications.add(pojo_ads);
+            }
+            return notifications;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
         }
 
-        return pdf_URL;
-    }*/
+    }
 
-/*
-
-    public String checkLogin(String url) {
-
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpResponse response;
-        try {
-
-            response = httpclient.execute(new HttpGet(url));
-
-            StatusLine statusLine = response.getStatusLine();
-            if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
-                HttpEntity httpEntity = response.getEntity();
-                is = httpEntity.getContent();
-
-            } else {
-                response.getEntity().getContent().close();
-                throw new IOException(statusLine.getReasonPhrase());
-            }
-
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "utf-8"), 32);
-            //    BufferedReader reader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"), 16);
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
-
-            }
-            is.close();
-            varification = sb.toString();
-            System.out.println("varification is" + varification);
-
-        } catch (Exception e) {
-            Log.e("Buffer Error", "Error converting result " + e.toString());
-            return "";
-        }
-
-        return varification;
-    }*/
 }

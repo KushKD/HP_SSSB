@@ -5,7 +5,8 @@ package Utils;
  */
 public class EConstants {
 
-    public static final String url_Generic = "http://hpsssb.hp.gov.in/hpsssbwebAPI/HPSSSB_REST.svc" ;
+   // public static final String url_Generic = "http://hpsssb.hp.gov.in/hpsssbwebAPI/HPSSSB_REST.svc" ; // Main Server
+   public static final String url_Generic = "http://192.168.1.103/hpssbapi/HPSSSB_REST.svc"; //JIO Amit
     public static final String function_Instructions = "getInstructions_JSON" ;
     public static final String function_Vacancies = "getVacancies_JSON" ;
     public static final String function_GetOTP = "getLogin_JSON";
@@ -36,7 +37,7 @@ public class EConstants {
     public static final String Error_NoPDF_Viewer = "No Application Available to View PDF";
     public static final String Error_DownloadFile = "The downloaded file is not a valid format.";
     public static final String Messages_Results = "No pending results in pipeline.";
-    public static final String Messages_Interview="Currently there is no Interview Scheduled.";
+    public static final String Messages_Interview="Please select relevant option.";
 
     /**
      * HPSSSB Vacancies Page

@@ -58,7 +58,7 @@ public class HPSSSB_MAIN extends BaseActivity implements
     private TextView selectedTextView;
     private  Button Proceed;
     final Context context = this;
-    Custom_Dialog CD = new Custom_Dialog();
+    Custom_Dialog CD = new Custom_Dialog(HPSSSB_MAIN.this);
 
 
     @Override
@@ -133,7 +133,7 @@ public class HPSSSB_MAIN extends BaseActivity implements
                         startActivity(i_dashboard);
                         break;
                     case "Interview Schedule":
-                        CD.showDialog(HPSSSB_MAIN.this,EConstants.Messages_Interview);
+                        CD.showInterview_ExamsSchedule(HPSSSB_MAIN.this,EConstants.Messages_Interview);
 
                         break;
                     case "Admit Card":
@@ -204,7 +204,7 @@ public class HPSSSB_MAIN extends BaseActivity implements
 
         switch (view.getId()) {
             case R.id.main_interviews:
-               CD.showDialog(HPSSSB_MAIN.this,EConstants.Messages_Interview);
+               CD.showInterview_ExamsSchedule(HPSSSB_MAIN.this,EConstants.Messages_Interview);
                 break;
             case R.id.main_dashboard:
                 Intent i_dashboard = new Intent(HPSSSB_MAIN.this, Dashboard.class);

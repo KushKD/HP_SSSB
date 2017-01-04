@@ -10,7 +10,8 @@ public enum TaskType {
     GET_PDF(2),
     GET_VACANCIES(3),
     GET_FORMS_DASHBOARD(4),
-    GET_POSTWISE_DASHBOARD(5);
+    GET_POSTWISE_DASHBOARD(5),
+    GET_DIFFERENT_POSTS(6);
 
 
     int value;

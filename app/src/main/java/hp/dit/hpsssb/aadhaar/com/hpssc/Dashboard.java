@@ -3,19 +3,18 @@ package hp.dit.hpsssb.aadhaar.com.hpssc;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import JsonManager.DashboardList_PostWise;
 import Utils.Custom_Dialog;
 import Utils.EConstants;
 import HelperClasses.Helper;
@@ -33,7 +32,7 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
     private String GetFromDate = null;
     private String GetToDate = null;
 
-    Custom_Dialog CD = new Custom_Dialog();
+    Custom_Dialog CD = new Custom_Dialog(Dashboard.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +74,7 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                     Boolean IsValid ;
                      IsValid = Helper.CheckDates(GetFromDate,GetToDate);
                     if(IsValid){
-                    Intent i_postwise= new Intent(Dashboard.this,DashboardList_PostWise.class);
+                    Intent i_postwise= new Intent(Dashboard.this, DashboardList_PostWise.class);
                     i_postwise.putExtra(EConstants.Put_From_Date,GetFromDate);
                     i_postwise.putExtra(EConstants.Put_To_Date,GetToDate);
                     startActivity(i_postwise);

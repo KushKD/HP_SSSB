@@ -2,9 +2,6 @@ package hp.dit.hpsssb.aadhaar.com.hpssc;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.text.Editable;
@@ -17,19 +14,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import AdaptersList.Vacancies_Adapter;
-import DataParse.Vacancy_JSON;
+import JsonManager.Vacancy_JSON;
 import HelperClasses.AppStatus;
 import Interfaces.AsyncTaskListener;
 import Utils.Custom_Dialog;
@@ -52,7 +43,7 @@ public class Vacancies_List extends Activity implements AsyncTaskListener {
     List<VacancyPOJO> vacancies_Server;
     EditText Search_EditText;
     Vacancies_Adapter adapter;
-    Custom_Dialog CD = new Custom_Dialog();
+    Custom_Dialog CD = new Custom_Dialog(Vacancies_List.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

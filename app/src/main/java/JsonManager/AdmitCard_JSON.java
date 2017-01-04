@@ -1,4 +1,4 @@
-package DataParse;
+package JsonManager;
 
 import android.util.Base64;
 
@@ -14,9 +14,9 @@ import Utils.EConstants;
 import Model.AdmitCardPOJO;
 
 /**
- * Created by kuush on 5/6/2016.
+ * Created by kuush on 5/3/2016.
  */
-public class AdmitCardP_JSON {
+public class AdmitCard_JSON {
     public static List<AdmitCardPOJO> parseFeed(String content) {
 
         try {
@@ -25,14 +25,14 @@ public class AdmitCardP_JSON {
             Object json = new JSONTokener(content).nextValue();
             if (json instanceof JSONObject){
                 JSONObject obj = new JSONObject(content);
-                g_Table = obj.optString(EConstants.AdmitCardPersonalDetails_Result);
-            }
-            //you have an object
-            else if (json instanceof JSONArray){
+                g_Table = obj.optString(EConstants.AdmitCardAadhaar_Result);
             }
 
+            else if (json instanceof JSONArray){
+            }
             JSONArray ar = new JSONArray(g_Table);
             List<AdmitCardPOJO>AdmiCardList = new ArrayList<>();
+
 
             for (int i = 0; i < ar.length(); i++) {
                 JSONObject obj = ar.getJSONObject(i);
