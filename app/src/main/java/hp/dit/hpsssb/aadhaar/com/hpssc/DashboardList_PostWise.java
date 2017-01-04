@@ -34,6 +34,9 @@ public class DashboardList_PostWise extends Activity implements AsyncTaskListene
     private String Date_Service_To = null;
     private String Reformated_From_Date, Reformated_To_Date = null;
     ProgressBar pb;
+    URL url_;
+    HttpURLConnection conn_;
+    StringBuilder sb = new StringBuilder();
 
     Custom_Dialog CD = new Custom_Dialog();
 
@@ -69,7 +72,7 @@ public class DashboardList_PostWise extends Activity implements AsyncTaskListene
         if (AppStatus.getInstance(DashboardList_PostWise.this).isOnline()) {
 
             String URL = null;
-            URL = EConstants.url_Generic + EConstants.Delemeter + EConstants.function_Dashboard + EConstants.Delemeter + Reformated_From_Date + EConstants.Delemeter + Reformated_To_Date;
+            URL = EConstants.url_Generic + EConstants.Delemeter + EConstants.function_DashboardCReport + EConstants.Delemeter + Reformated_From_Date + EConstants.Delemeter + Reformated_To_Date;
 
             new Generic_Async_Get(DashboardList_PostWise.this, DashboardList_PostWise.this, TaskType.GET_POSTWISE_DASHBOARD).execute(URL);
 
@@ -89,13 +92,11 @@ public class DashboardList_PostWise extends Activity implements AsyncTaskListene
     public void onTaskCompleted(String result, TaskType taskType) {
 
         Log.e("Server Message", result);
-
-        String finalResult = null;
         if (taskType == TaskType.GET_POSTWISE_DASHBOARD) {
 
             DashboardPost_POJO_Server = DashboardPost_JSON.parseFeed(result);
             if (DashboardPost_POJO_Server.isEmpty()) {
-                Toast.makeText(getApplicationContext(), "No record found.", Toast.LENGTH_LONG).show();
+                CD.showDialog(DashboardList_PostWise.this, "No record found.");
             } else {
                 updateDisplay();
             }

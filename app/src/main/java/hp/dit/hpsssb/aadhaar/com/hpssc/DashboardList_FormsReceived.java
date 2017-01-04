@@ -29,11 +29,13 @@ import Utils.Generic_Async_Get;
 public class DashboardList_FormsReceived extends Activity implements AsyncTaskListener {
 
     private String Date_Service_From = null;
-    private String Date_Service_To = null;
-    private String Reformated_From_Date, Reformated_To_Date = null;
+    private  String Date_Service_To = null;
+    private String Reformated_From_Date,Reformated_To_Date = null;
 
     ProgressBar pb;
-
+    URL url_;
+    HttpURLConnection conn_;
+    StringBuilder sb = new StringBuilder();
 
     Custom_Dialog CD = new Custom_Dialog();
 
@@ -53,11 +55,12 @@ public class DashboardList_FormsReceived extends Activity implements AsyncTaskLi
 
         try {
             Reformated_From_Date = Helper.ChangeDatesFormat(Date_Service_From);
-            Reformated_To_Date = Helper.ChangeDatesFormat(Date_Service_To);
-        } catch (ParseException e) {
+           Reformated_To_Date = Helper.ChangeDatesFormat(Date_Service_To);
+          } catch (ParseException e) {
             e.printStackTrace();
             CD.showDialog(DashboardList_FormsReceived.this, "Something's Not Good.");
         }
+
 
 
         listv = (ListView) findViewById(R.id.list);
@@ -69,7 +72,7 @@ public class DashboardList_FormsReceived extends Activity implements AsyncTaskLi
         if (AppStatus.getInstance(DashboardList_FormsReceived.this).isOnline()) {
 
             String URL = null;
-            URL = EConstants.url_Generic + EConstants.Delemeter + EConstants.function_Dashboard + EConstants.Delemeter + Reformated_From_Date + EConstants.Delemeter + Reformated_To_Date;
+            URL = EConstants.url_Generic+EConstants.Delemeter+EConstants.function_Dashboard+EConstants.Delemeter+Reformated_From_Date+EConstants.Delemeter+Reformated_To_Date;
 
             new Generic_Async_Get(DashboardList_FormsReceived.this, DashboardList_FormsReceived.this, TaskType.GET_FORMS_DASHBOARD).execute(URL);
 
@@ -77,6 +80,7 @@ public class DashboardList_FormsReceived extends Activity implements AsyncTaskLi
             CD.showDialog(DashboardList_FormsReceived.this, EConstants.Error_NoNetwork);
         }
     }
+
 
 
     protected void updateDisplay() {
@@ -90,17 +94,17 @@ public class DashboardList_FormsReceived extends Activity implements AsyncTaskLi
     public void onTaskCompleted(String result, TaskType taskType) {
 
         Log.e("Server Message", result);
-        String finalResult = null;
 
-        if (taskType == TaskType.GET_FORMS_DASHBOARD) {
+        if(taskType == TaskType.GET_FORMS_DASHBOARD){
             Dashboard_Forms_Server = DashboardForm_JSON.parseFeed(result);
-            if (Dashboard_Forms_Server.isEmpty()) {
-                Toast.makeText(getApplicationContext(), "No Record Found.", Toast.LENGTH_LONG).show();
-            } else {
+            if(Dashboard_Forms_Server.isEmpty()){
+                CD.showDialog(DashboardList_FormsReceived.this,"No Record Found.");
+            }else
+            {
                 updateDisplay();
             }
-        } else {
-            CD.showDialog(DashboardList_FormsReceived.this, "Something bad happened.");
+        }else{
+            CD.showDialog(DashboardList_FormsReceived.this,"Something bad happened.");
         }
 
     }
