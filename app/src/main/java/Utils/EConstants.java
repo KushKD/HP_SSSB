@@ -6,7 +6,7 @@ package Utils;
 public class EConstants {
 
    // public static final String url_Generic = "http://hpsssb.hp.gov.in/hpsssbwebAPI/HPSSSB_REST.svc" ; // Main Server
-   public static final String url_Generic = "http://192.168.1.103/hpssbapi/HPSSSB_REST.svc"; //JIO Amit
+   public static final String url_Generic = "http://192.168.1.100/hpssbapi/HPSSSB_REST.svc"; //JIO Amit
     public static final String function_Instructions = "getInstructions_JSON" ;
     public static final String function_Vacancies = "getVacancies_JSON" ;
     public static final String function_GetOTP = "getLogin_JSON";

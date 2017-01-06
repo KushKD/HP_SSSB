@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.ExamScheduleResult;
 import Model.PostsPOJO;
 import Utils.EConstants;
 
@@ -84,6 +85,40 @@ public class JsonParser {
                 notifications.add(pojo_ads);
             }
             return notifications;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+
+    public static List<ExamScheduleResult> parseExamSchedule(String content) {
+
+        try {
+            String g_Table = null;
+            Log.e("Error:", content );
+            Object json = new JSONTokener(content).nextValue();
+            if (json instanceof JSONObject){
+                JSONObject obj = new JSONObject(content);
+                g_Table = obj.optString("JSON_ExamScheduleResult");
+            }
+            else if (json instanceof JSONArray){
+            }
+            JSONArray ar = new JSONArray(g_Table);
+            List<ExamScheduleResult> ExamScheduleResult = new ArrayList<>();
+
+            for (int i = 0; i < ar.length(); i++) {
+                JSONObject obj = ar.getJSONObject(i);
+                ExamScheduleResult pojo_ads = new ExamScheduleResult();
+                pojo_ads.setEndRollNo(obj.getString("EndRollNo").trim());
+                pojo_ads.setExamCentre(obj.getString("ExamCentre").trim());
+                pojo_ads.setExamDate(obj.getString("ExamDate").trim());
+                pojo_ads.setPostName(obj.getString("PostName").trim());
+                pojo_ads.setStartRollNo(obj.getString("StartRollNo").trim());
+                ExamScheduleResult.add(pojo_ads);
+            }
+            return ExamScheduleResult;
         } catch (JSONException e) {
             e.printStackTrace();
             return null;

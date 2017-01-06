@@ -13,6 +13,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import Model.ExamScheduleResult;
 import hp.dit.hpsssb.aadhaar.com.hpssc.R;
 import hp.dit.hpsssb.aadhaar.com.hpssc.Schedule_Exams_Interview;
 import hp.dit.hpsssb.aadhaar.com.hpssc.SplashScreen;
@@ -41,6 +42,34 @@ public class Custom_Dialog {
 
         TextView text = (TextView) dialog.findViewById(R.id.dialog_result);
         text.setText(msg);
+
+        Button dialog_ok = (Button)dialog.findViewById(R.id.dialog_ok);
+
+        dialog_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // activity.finish();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+
+    public void showDialogExamSchedule(final Activity activity, ExamScheduleResult ExamScheduleResult){
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dialog_custom_exam_schedule);
+
+        TextView text = (TextView) dialog.findViewById(R.id.dialog_result);
+        TextView startrollnumber = (TextView) dialog.findViewById(R.id.startrollnumber);
+        TextView endrollnumber = (TextView) dialog.findViewById(R.id.endrollnumber);
+        text.setText(ExamScheduleResult.getExamCentre());
+        startrollnumber.setText("Starting Roll Number:- "+ExamScheduleResult.getStartRollNo() );
+        endrollnumber.setText("Ending Roll Number:-   "+ExamScheduleResult.getEndRollNo() );
 
         Button dialog_ok = (Button)dialog.findViewById(R.id.dialog_ok);
 
